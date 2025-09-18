@@ -5120,6 +5120,657 @@ onCharacterAdded(char)
 
 player.CharacterAdded:Connect(onCharacterAdded)
 
+local ws = workspace
+local vfx = ws:FindFirstChild("VFX") or Instance.new("Folder", ws)
+vfx.Name = "VFX"
+
+local snake = Instance.new("Folder", vfx)
+snake.Name = "Snake"
+
+local P = game:GetService("Players")
+local R = game:GetService("RunService")
+local plr = P.LocalPlayer
+
+local t = {
+    ["Flash Strike"] = "?",
+    ["Whirlwind Kick"] = "Solar Smite",
+    ["Scatter"] = "Celestial Edge",
+    ["Explosive Shuriken"] = "Lumina Detonation"
+}
+
+local function u()
+    local h = plr.PlayerGui:WaitForChild("Hotbar"):WaitForChild("Backpack"):WaitForChild("Hotbar")
+    for _, s in ipairs(h:GetChildren()) do
+        local b = s:FindFirstChild("Base")
+        if b and b:FindFirstChild("ToolName") then
+            local n = t[b.ToolName.Text]
+            if n then
+                if s:FindFirstChild("CustomName") then
+                    s.CustomName.Text = n
+                else
+                    b.ToolName.Visible = false
+                    local c = b.ToolName:Clone()
+                    c.Name = "CustomName"
+                    c.Text = n
+                    c.Visible = true
+                    c.Parent = s
+                end
+            end
+        end
+    end
+end
+
+local function o(c)
+    if c:GetAttribute("Character") ~= "Ninja" then return end
+    local con
+    con = R.Heartbeat:Connect(function()
+        if not c.Parent then
+            con:Disconnect()
+            return
+        end
+        u()
+    end)
+end
+
+plr.CharacterAdded:Connect(o)
+if plr.Character then
+    o(plr.Character)
+end
+
+spawn(function()
+    local player = game:GetService("Players").LocalPlayer
+    local baldFrame = player:WaitForChild("PlayerGui"):WaitForChild("TopbarPlus"):WaitForChild("TopbarContainer"):WaitForChild("UnnamedIcon"):WaitForChild("DropdownContainer"):WaitForChild("DropdownFrame"):WaitForChild("Ninja"):WaitForChild("IconButton")
+    
+    while task.wait(1) do
+        baldFrame.IconImage.Image = "rbxassetid://121866195258257"
+        baldFrame.IconLabel.Text = "Golden Head"
+        baldFrame.IconLabel.TextColor3 = Color3.fromRGB(255, 216, 19)
+    end
+end)
+
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+local function checkAttribute()
+    if player:GetAttribute("Character") == "Ninja" then
+
+local player = game:GetService("Players").LocalPlayer
+local bar = player.PlayerGui.Bar.MagicHealth.Health.Bar
+local targetColor = Color3.fromRGB(255, 215, 0)
+
+for _, obj in ipairs(bar:GetDescendants()) do
+    if obj:IsA("ImageLabel") or obj:IsA("ImageButton") then
+        obj.ImageColor3 = targetColor
+    elseif obj:IsA("Frame") then
+        obj.BackgroundColor3 = targetColor
+    end
+end
+
+local p=game.Players.LocalPlayer
+local h=p:WaitForChild("PlayerGui"):WaitForChild("Bar"):WaitForChild("MagicHealth")
+h.TextLabel.Text="GOLDEN WARRIOR"
+h.TextLabel.Visible=true
+for _,v in pairs({h:FindFirstChild("Health")})do
+    if v:FindFirstChild("Bar")then v.Bar.Image="rbxassetid://18511971561" end
+    if v:FindFirstChild("Glow")then v.Glow.Image="rbxassetid://18512475689" end
+    if v.Bar:FindFirstChild("Bar")then v.Bar.Bar.Image="rbxassetid://18511971561" end
+end
+
+local rs = game:GetService("ReplicatedStorage")
+local db = game:GetService("Debris")
+local ts = game:GetService("TweenService")
+local lp = game.Players.LocalPlayer
+
+local function grab_hit(a, b)
+    if not a or not b then return end
+    if not a.Parent or not b.Parent then return end
+    local hrp = a:FindFirstChild("HumanoidRootPart")
+    if not hrp then return end
+    local c = rs.Assets.VFX["Dragon Throw Use"].grab:Clone()
+    c.Parent = hrp
+    db:AddItem(c, 1)
+end
+
+local function wind(a, b)
+    if not a or not b then return end
+    if not a.Parent or not b.Parent then return end
+    local hrp = a:FindFirstChild("HumanoidRootPart")
+    if not hrp then return end
+    local c = rs.Assets.VFX["Dragon Throw Use"].spin:Clone()
+    c.Parent = hrp
+    for _, v in pairs(c:GetDescendants()) do
+        if v:IsA("ParticleEmitter") then
+            v.Enabled = true
+        end
+    end
+    db:AddItem(c, 3)
+    task.wait(1)
+    for _, v in pairs(c:GetDescendants()) do
+        if v:IsA("ParticleEmitter") then
+            v.Enabled = false
+        end
+    end
+end
+
+local function grab_launch(a, b)
+    if not a or not b then return end
+    if not a.Parent or not b.Parent then return end
+    local hrp = a:FindFirstChild("HumanoidRootPart")
+    if not hrp then return end
+    local c = rs.Assets.VFX["Dragon Throw Use"].throw:Clone()
+    c.Parent = hrp
+    db:AddItem(c, 2)
+end
+
+local function Finisher_PunchVFX(a)
+    if not a then return end
+    if not a.Parent then return end
+    local hrp = a:FindFirstChild("HumanoidRootPart")
+    if not hrp then return end
+    local c = rs.Assets.VFX.DragonThrow_Finisher:Clone()
+    c.Parent = workspace.VFX
+    c.CFrame = hrp.CFrame * CFrame.Angles(0, math.pi, 0)
+    db:AddItem(c, 6)
+end
+
+local function Finisher_VictimPush(a, b)
+    if not a or not b then return end
+    if not a.Parent then return end
+    local hrp = a:FindFirstChild("HumanoidRootPart")
+    if not hrp then return end
+    local hum = a:FindFirstChild("Humanoid")
+    if not hum then return end
+    local t = ts:Create(hrp, TweenInfo.new(0.5, Enum.EasingStyle.Sine), {CFrame = b})
+    t.Completed:Connect(function()
+        local t2 = ts:Create(hrp, TweenInfo.new(2.25, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {
+            CFrame = b * CFrame.new(0,0,5) + Vector3.new(0,15,0)
+        })
+        hum:GetPropertyChangedSignal("Health"):Connect(function()
+            if hum.Health <= 0 and t2.PlaybackState == Enum.PlaybackState.Playing then
+                t2:Cancel()
+            end
+        end)
+        t2:Play()
+    end)
+    t:Play()
+end
+
+local function Finisher_JumpTween(a, b)
+    if not a or not b then return end
+    if not a.Parent then return end
+    local hrp = a:FindFirstChild("HumanoidRootPart")
+    if not hrp then return end
+    local rp = RaycastParams.new()
+    rp.FilterType = Enum.RaycastFilterType.Include
+    rp.FilterDescendantsInstances = {workspace.Map.Parts}
+    local r = workspace:Raycast(hrp.Position + Vector3.new(0,1,0), Vector3.new(0,-8,0), rp)
+    if r then
+        task.spawn(function()
+            for _ = 1, 10 do
+                local p = Instance.new("Part")
+                p.Size = Vector3.new(1,1,1)
+                p.Position = r.Position + Vector3.new(0,1,0)
+                p.Anchored = false
+                p.Parent = workspace
+                p.Velocity = Vector3.new(0,-7,0)
+                db:AddItem(p, 2)
+            end
+        end)
+        local crater = Instance.new("Part")
+        crater.Size = Vector3.new(10,1,10)
+        crater.Anchored = true
+        crater.Position = r.Position
+        crater.Parent = workspace
+        db:AddItem(crater, 3)
+    end
+    ts:Create(hrp, TweenInfo.new(0.2, Enum.EasingStyle.Linear), {CFrame = b}):Play()
+end
+
+local AnimTarget = "13501296372"
+local AnimationPlayed = false
+
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+local function onAnimationPlayed(animationTrack)
+    if AnimationPlayed then return end
+
+    if animationTrack.Animation.AnimationId == "rbxassetid://" .. AnimTarget then
+        AnimationPlayed = true
+animationTrack:Stop()
+local cam = workspace.CurrentCamera
+local TweenService = game:GetService("TweenService")
+
+local info1 = TweenInfo.new(0.7, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+local info2 = TweenInfo.new(0.6, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+local info3 = TweenInfo.new(1.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+
+local tween1 = TweenService:Create(cam, info1, {FieldOfView = 60})
+local tween2 = TweenService:Create(cam, info2, {FieldOfView = 80})
+local tween3 = TweenService:Create(cam, info3, {FieldOfView = 70})
+
+tween1:Play()
+tween1.Completed:Connect(function()
+    tween2:Play()
+    tween2.Completed:Connect(function()
+        tween3:Play()
+    end)
+end)
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Debris = game:GetService("Debris")
+local KiKicks = ReplicatedStorage.Assets.VFX.Goku.KiKicks
+local LocalPlayer = game.Players.LocalPlayer
+local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+
+local function Velocity1()
+    local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+    if not character or not character.Parent then return end
+    local hrp = character:FindFirstChild("HumanoidRootPart")
+    if not hrp then return end
+
+    local NumberValue = Instance.new("NumberValue")
+    NumberValue.Value = 50
+    TweenService:Create(NumberValue, TweenInfo.new(0.15, Enum.EasingStyle.Quad), {Value = 7.5}):Play()
+
+    local connection
+    connection = RunService.RenderStepped:Connect(function()
+        if not hrp.Parent then
+            connection:Disconnect()
+            return
+        end
+        hrp.Velocity = hrp.CFrame.LookVector * NumberValue.Value
+        if NumberValue.Value <= 7.6 then
+            connection:Disconnect()
+            NumberValue:Destroy()
+        end
+    end)
+end
+
+local function Hit(target, hitIndex)
+    local clone = KiKicks:Clone()
+    Debris:AddItem(clone, 10)
+    local hrp = target:FindFirstChild("HumanoidRootPart")
+    if not hrp then return end
+    clone.CFrame = hrp.CFrame * CFrame.Angles(0, math.pi, 0)
+    clone.Parent = workspace.VFX
+    if hitIndex <= 2 then
+        for _, emitter in ipairs(clone.hit1:GetDescendants()) do
+            if emitter:IsA("ParticleEmitter") then
+                emitter:Emit(emitter:GetAttribute("EmitCount") or 1)
+            end
+        end
+    else
+        for _, emitter in ipairs(clone.hit2:GetDescendants()) do
+            if emitter:IsA("ParticleEmitter") then
+                emitter:Emit(emitter:GetAttribute("EmitCount") or 1)
+            end
+        end
+    end
+end
+
+local function Final(target)
+    local clone = KiKicks:Clone()
+    Debris:AddItem(clone, 10)
+    local hrp = target:FindFirstChild("HumanoidRootPart")
+    if not hrp then return end
+    clone.CFrame = hrp.CFrame * CFrame.Angles(0, math.pi, 0)
+    clone.Parent = workspace.VFX
+    for _, emitter in ipairs(clone.hit3:GetDescendants()) do
+        if emitter:IsA("ParticleEmitter") then
+            emitter:Emit(emitter:GetAttribute("EmitCount") or 1)
+        end
+    end
+end
+
+local Test = game.ReplicatedStorage.Assets.VFX.Emotes.HollowPurple.PurplePart.ChargeUp
+
+local test = Test:Clone()
+test.Parent = game.Players.LocalPlayer.Character:WaitForChild("Right Arm")
+
+for _, child in ipairs(test:GetChildren()) do
+    if child:IsA("ParticleEmitter") then
+        child.Color = ColorSequence.new(Color3.fromRGB(255, 255, 0))
+        child:Emit(1)
+        child.Enabled = true
+    end
+end
+
+local p = game.Players.LocalPlayer
+local c = p.Character or p.CharacterAdded:Wait()
+local h = c:WaitForChild("Humanoid")
+local a = Instance.new("Animation")
+a.AnimationId = "rbxassetid://12618271998"
+local l = h:LoadAnimation(a)
+l:Play()
+wait(0.6)
+test:Destroy()
+Final(LocalPlayer.Character)
+
+local s = Instance.new("Sound")
+s.SoundId = "rbxassetid://94056164859889"
+s.Volume = 0.5
+s.Parent = workspace
+s:Play()
+
+local Players = game:GetService("Players")
+local Lighting = game:GetService("Lighting")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local player = Players.LocalPlayer
+
+task.spawn(function()
+    local FiveSeasonsFX = ReplicatedStorage.Resources.FiveSeasonsFX
+    local FSWhite = FiveSeasonsFX.FSWhite:Clone()
+    local FSBlack = FiveSeasonsFX.FSBlack:Clone()
+    FSWhite.Parent = Lighting
+    FSBlack.Parent = Lighting
+
+    for _, child in pairs(player.PlayerGui:GetChildren()) do
+        if child.Name == "FXUi" then
+            child:Destroy()
+        end
+    end
+
+    FSWhite.Enabled = true
+    task.wait(0.035)
+    FSWhite.Enabled = false
+
+    FSBlack.Enabled = true
+    task.wait(0.035)
+    FSBlack.Enabled = false
+
+    FSWhite:Destroy()
+    FSBlack:Destroy()
+end)
+
+        task.wait(1.6)
+        AnimationPlayed = false
+    end
+end
+
+humanoid.AnimationPlayed:Connect(onAnimationPlayed)
+local p = game.Players.LocalPlayer
+local c = p.Character or p.CharacterAdded:Wait()
+local h = c:WaitForChild("Humanoid")
+
+local t = Instance.new("Tool")
+t.Name = "Hop"
+t.RequiresHandle = false
+t.Parent = p.Backpack
+
+local anim = Instance.new("Animation")
+anim.AnimationId = "rbxassetid://91353107056596"
+local track = h:LoadAnimation(anim)
+
+t.Equipped:Connect(function()
+    if track.IsPlaying then
+        track:Stop()
+s:Stop()
+    end
+    track:Play()
+
+local s = Instance.new("Sound")
+s.SoundId = "rbxassetid://117371670839286"
+s.Volume = 1
+s.Name = "Sound"
+s.Parent = workspace
+s:Play()
+
+local Test = game.ReplicatedStorage.Emotes.VFX.VfxMods.Max2Events.vfx.JJ.Jump.Attachment
+
+local test = Test:Clone()
+test.Parent = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")
+
+for _, child in ipairs(test:GetChildren()) do
+    if child:IsA("ParticleEmitter") then
+        child:Emit(15)
+        child.Enabled = false
+    end
+end
+
+grab_launch(lp.Character, lp.Character)
+grab_hit(lp.Character, lp.Character)
+wind(lp.Character, lp.Character)
+grab_launch(lp.Character, lp.Character)
+Finisher_PunchVFX(lp.Character)
+end)
+local AnimTarget = "13376962659"
+local AnimationPlayed = false
+
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+local RS = game:GetService("ReplicatedStorage")
+local RunService = game:GetService("RunService")
+local TweenService = game:GetService("TweenService")
+local Lighting = game:GetService("Lighting")
+local Atmosphere = Lighting:FindFirstChildOfClass("Atmosphere")
+local Clouds = workspace.Terrain:FindFirstChildOfClass("Clouds")
+local Assets = RS:WaitForChild("Assets")
+local Debris = game:GetService("Debris")
+local lp = Players.LocalPlayer
+
+local function Recolor(p)
+	for _, v in pairs(p:GetDescendants()) do
+		if v:IsA("ParticleEmitter") then
+			v.Color = ColorSequence.new(Color3.fromRGB(255, 255, 0))
+		end
+	end
+end
+
+local function VisualsStart(arg1)
+	if arg1.Parent then
+		local conn
+		local c = Assets.VFX.ultthukuna:Clone()
+		Recolor(c)
+		task.delay(0.4, function()
+			if arg1.Parent then
+				for _, v in pairs(arg1:GetDescendants()) do
+					if v.Name ~= "HumanoidRootPart" and (v:IsA("Part") or v:IsA("BasePart") or v:IsA("Decal")) then
+						v:SetAttribute("OldTransparency", v.Transparency)
+						TweenService:Create(v, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {Transparency = 1}):Play()
+					end
+				end
+				c.Parent = workspace:WaitForChild("VFX")
+				c.CFrame = arg1:WaitForChild("HumanoidRootPart").CFrame
+				for _, v in pairs(c:GetDescendants()) do
+					if v:IsA("ParticleEmitter") and not string.find(v.Name, "EMIT") then
+						v.Enabled = true
+					end
+				end
+				conn = RunService.RenderStepped:Connect(function()
+					if arg1.Parent and arg1:FindFirstChild("HumanoidRootPart") and c.Parent then
+						c.CFrame = arg1.HumanoidRootPart.CFrame
+					else
+						if conn then conn:Disconnect() end
+					end
+				end)
+			end
+		end)
+		task.delay(2, function()
+			if arg1.Parent then
+				for _, v in pairs(arg1:GetDescendants()) do
+					if v.Name ~= "HumanoidRootPart" and (v:IsA("Part") or v:IsA("BasePart") or v:IsA("Decal")) then
+						TweenService:Create(v, TweenInfo.new(0.15, Enum.EasingStyle.Linear), {
+							Transparency = v:GetAttribute("OldTransparency") or 0
+						}):Play()
+					end
+				end
+				if conn and conn.Connected then conn:Disconnect() end
+				Debris:AddItem(c, 2)
+				for _, v in pairs(c:GetDescendants()) do
+					if v:IsA("ParticleEmitter") then
+						if string.find(v.Name, "EMIT") then
+							v:Emit(v:GetAttribute("EmitCount"))
+						end
+						v.Enabled = false
+					end
+				end
+			end
+		end)
+	end
+end
+
+local function onAnimationPlayed(animationTrack)
+    if AnimationPlayed then return end
+    if animationTrack.Animation.AnimationId == "rbxassetid://" .. AnimTarget then
+        AnimationPlayed = true
+        animationTrack:Stop()
+        local char = lp.Character or lp.CharacterAdded:Wait()
+        VisualsStart(char)
+
+local p = game.Players.LocalPlayer
+local c = p.Character or p.CharacterAdded:Wait()
+local h = c:WaitForChild("Humanoid")
+
+local a = Instance.new("Animation")
+a.AnimationId = "rbxassetid://13499771836"
+local track = h:LoadAnimation(a)
+
+track:Play(0) 
+track.TimePosition = 1.5
+track:AdjustSpeed(1.5)
+
+        task.wait(1.6)
+        AnimationPlayed = false
+    end
+end
+
+humanoid.AnimationPlayed:Connect(onAnimationPlayed)
+local v17001 = game.ReplicatedStorage.Resources.FSSlash
+v17001.Color = Color3.new(1, 1, 0)
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Debris = game:GetService("Debris")
+local Players = game:GetService("Players")
+local FALLINGSERPENT = ReplicatedStorage.Assets.VFX.Minos.FALLINGSERPENT
+local workspaceVFX = workspace:FindFirstChild("VFX") or Instance.new("Folder", workspace)
+workspaceVFX.Name = "VFX"
+
+local function doEmitCount(obj)
+	for _, v in pairs(obj:GetDescendants()) do
+		if v:IsA("ParticleEmitter") then
+			v:Emit(v:GetAttribute("EmitCount") or 10)
+		end
+	end
+end
+
+local function Hit(target)
+	local clone = FALLINGSERPENT.Hit:Clone()
+	clone.Parent = workspaceVFX
+	Debris:AddItem(clone, 5)
+	if clone:IsA("BasePart") or clone:IsA("Model") then
+		clone.CFrame = target.CFrame + Vector3.new(0, 1.21, 0)
+	end
+	doEmitCount(clone)
+end
+
+local function Jump(target)
+	local clone = FALLINGSERPENT.Jump:Clone()
+	clone.Parent = workspaceVFX
+	Debris:AddItem(clone, 5)
+	if clone:IsA("BasePart") or clone:IsA("Model") then
+		clone.CFrame = target.CFrame + Vector3.new(0, 0.662, 0)
+	end
+	doEmitCount(clone)
+end
+
+local function Kick(target, serpentModel)
+	local clone = FALLINGSERPENT.Kick:Clone()
+	clone.Parent = workspaceVFX
+	Debris:AddItem(clone, 10)
+	if clone:IsA("BasePart") then
+		clone.CFrame = (target.CFrame + Vector3.new(0, 72, 0)) * CFrame.Angles(0.7853981633974483, 0, 0) * CFrame.new(0, 0, -3)
+	end
+	doEmitCount(clone)
+
+	task.delay(0.1, function()
+		if serpentModel and serpentModel.Parent then
+			local var18 = serpentModel
+			for _, v in pairs(FALLINGSERPENT.Snake.SnakeAttachments:GetChildren()) do
+				if v:IsA("Attachment") then
+					v:Clone().Parent = var18.Snake["Bone.006"]
+				end
+			end
+			for _, v in pairs(FALLINGSERPENT.Snake.Trails:GetChildren()) do
+				if v:IsA("Trail") then
+					local cloneV = v:Clone()
+					cloneV.Parent = var18.Snake
+					cloneV.Attachment0 = var18.Snake["Bone.006"]:FindFirstChild("Attachment0")
+					cloneV.Attachment1 = var18.Snake["Bone.006"]:FindFirstChild("Attachment1")
+					cloneV.Enabled = true
+				end
+			end
+			for _, v in pairs(var18:GetDescendants()) do
+				if v:IsA("Beam") or v:IsA("ParticleEmitter") then
+					v.Enabled = true
+				end
+			end
+		end
+	end)
+end
+
+local function Impact(target)
+	local clone = FALLINGSERPENT.Ground:Clone()
+	clone.Parent = workspaceVFX
+	Debris:AddItem(clone, 10)
+	if clone:IsA("BasePart") then
+		clone.Position = target.Position - Vector3.new(0, 0.1, 0)
+	end
+	doEmitCount(clone)
+end
+
+local AnimTarget = "13294790250"
+local AnimationPlayed = false
+
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+local humanoidRoot = character:WaitForChild("HumanoidRootPart")
+local serpent = FALLINGSERPENT.Snake:Clone()
+serpent.Parent = workspaceVFX
+
+local function onAnimationPlayed(animationTrack)
+	if AnimationPlayed then return end
+
+	if animationTrack.Animation.AnimationId == "rbxassetid://" .. AnimTarget then
+		AnimationPlayed = true
+		animationTrack:Stop()
+
+		local anim = Instance.new("Animation")
+		anim.AnimationId = "rbxassetid://16719107050"
+
+		local animTrack = humanoid:LoadAnimation(anim)
+		animTrack:Play()
+		animTrack.TimePosition = 1
+
+		task.wait(0.4)
+		Kick(humanoidRoot, serpent)
+		task.wait(0.6)
+		Impact(humanoidRoot)
+
+		task.wait(1.6)
+		AnimationPlayed = false
+	end
+end
+
+humanoid.AnimationPlayed:Connect(onAnimationPlayed)
+
+    end
+end
+
+local function setup()
+    checkAttribute()
+    player:GetAttributeChangedSignal("Character"):Connect(checkAttribute)
+end
+
+player.CharacterAdded:Connect(setup)
+setup()
 
 local Player = game.Players.LocalPlayer
 local Character = Player.Character or Player.CharacterAdded:Wait()
