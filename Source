@@ -1978,79 +1978,19 @@ local hrp = character:WaitForChild("HumanoidRootPart")
 local humanoid = character:WaitForChild("Humanoid")
 local camera = workspace.CurrentCamera
 task.spawn(function()
-wait(2.3)
+local f = "MySound.mp3"
+local url = "https://us-east.storage.cloudconvert.com/tasks/940ed110-f746-44f6-9aef-906a555c802e/copy_27860D55-CCEE-4DE6-8DD1-84C32C2EC7E0.mp3?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=cloudconvert-production%2F20250920%2Fva%2Fs3%2Faws4_request&X-Amz-Date=20250920T152012Z&X-Amz-Expires=86400&X-Amz-Signature=e370f85fb86ef173dabc5ade3896090a402b924e4156f33ad19dc1c60992282f&X-Amz-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%3D%22copy_27860D55-CCEE-4DE6-8DD1-84C32C2EC7E0.mp3%22&response-content-type=audio%2Fmpeg&x-id=GetObject"
 
-local sound = Instance.new("Sound")
-sound.SoundId = "rbxassetid://138652743378976"
-sound.Volume = 1
-sound.Parent = workspace
-sound:Play()
+if not isfile(f) then
+    writefile(f, game:HttpGet(url))
+end
 
-local sound = Instance.new("Sound")
-sound.SoundId = "rbxassetid://6859643048"
-sound.Volume = 1
-sound.Parent = workspace
-sound:Play()
-
-wait(0.2)
-
-local sound = Instance.new("Sound")
-sound.SoundId = "rbxassetid://138652743378976"
-sound.Volume = 1
-sound.Parent = workspace
-sound:Play()
-
-local sound = Instance.new("Sound")
-sound.SoundId = "rbxassetid://6859643048"
-sound.Volume = 1
-sound.Parent = workspace
-sound:Play()
-
-wait(0.2)
-
-local sound = Instance.new("Sound")
-sound.SoundId = "rbxassetid://142665235"
-sound.Volume = 0.5
-sound.Parent = workspace
-sound:Play()
-task.delay(4.7, function()
-sound:Stop()
-wait(0.01)
-
-local sound = Instance.new("Sound")
-sound.SoundId = "rbxassetid://75481314032066"
-sound.Volume = 1
-sound.Parent = workspace
-sound:Play()
-
-end)
-
-local sound = Instance.new("Sound")
-sound.SoundId = "rbxassetid://138652743378976"
-sound.Volume = 1
-sound.Parent = workspace
-sound:Play()
-
-local sound = Instance.new("Sound")
-sound.SoundId = "rbxassetid://6859643048"
-sound.Volume = 1
-sound.Parent = workspace
-sound:Play()
-
-wait(0.2)
-
-local sound = Instance.new("Sound")
-sound.SoundId = "rbxassetid://138652743378976"
-sound.Volume = 1
-sound.Parent = workspace
-sound:Play()
-
-local sound = Instance.new("Sound")
-sound.SoundId = "rbxassetid://6859643048"
-sound.Volume = 1
-sound.Parent = workspace
-sound:Play()
-
+local s = Instance.new("Sound")
+s.SoundId = (getsynasset or getcustomasset)(f)
+s.Volume = 1
+s.Looped = false
+s.Parent = workspace
+s:Play()
 end)
 wait(2.3)
 track:Stop()
