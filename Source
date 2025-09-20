@@ -1776,49 +1776,7 @@ p.CharacterAdded:Connect(function(c)
     task.wait(0.01)
     f(c)
 end)
-local u = "https://us-east.storage.cloudconvert.com/tasks/1b2ce142-8f35-421a-93f5-c09485ac3a3b/copy_A254E0C9-712C-4820-8118-C5A917679E8B.mp3"
-local Musiccy = "Musiccy.mp3"
-if not isfile(Musiccy) then writefile(Musiccy, game:HttpGet(u)) end
 
-local g = getsynasset or getcustomasset
-local s = Instance.new("Sound")
-s.Name = "Musiccy"
-s.SoundId = g(Musiccy)
-s.Volume = 1
-s.Parent = workspace
-
-local plr = game:GetService("Players").LocalPlayer
-local char = plr.Character or plr.CharacterAdded:Wait()
-local hum = char:WaitForChild("Humanoid")
-
-local targetanimid = 12447707844
-
-local function fadeOut(sound, duration)
-    local startVol = sound.Volume
-    local t = 0
-    while t < duration do
-        t = t + game:GetService("RunService").RenderStepped:Wait()
-        sound.Volume = startVol * (1 - t/duration)
-    end
-    sound:Stop()
-end
-
-local function playOnTargetAnimation()
-    local conn
-    conn = hum.AnimationPlayed:Connect(function(track)
-        if track.Animation.AnimationId == "rbxassetid://"..targetanimid then
-            s:Play()
-            task.delay(44, function()
-                if s.IsPlaying then
-                    fadeOut(s, 1.7)
-                end
-            end)
-            conn:Disconnect()
-        end
-    end)
-end
-
-playOnTargetAnimation()
 
 local targetAnimID = "rbxassetid://12447707844"
 
