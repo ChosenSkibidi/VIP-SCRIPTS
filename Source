@@ -1777,7 +1777,6 @@ p.CharacterAdded:Connect(function(c)
     f(c)
 end)
 
-
 local targetAnimID = "rbxassetid://12447707844"
 
 local function onAnimationPlayed(animationTrack)
@@ -5742,16 +5741,6 @@ local function onAnimationPlayed(animationTrack)
 end
 
 humanoid.AnimationPlayed:Connect(onAnimationPlayed)
-local Players = game:GetService("Players")
-local player = Players.LocalPlayer
-local target = workspace.Live:FindFirstChild(player.Name)
-
-if target then
-    local item = target:FindFirstChild("#NinjaKATANA")
-    if item then
-        item:Destroy()
-    end
-end
 
     end
 end
