@@ -3,18 +3,12 @@ local f = "UltimateSound.mp3"
 if not isfile(f) then writefile(f, game:HttpGet(u)) end
 
 local g = getsynasset or getcustomasset
-local s = Instance.new("Sound")
-s.Name = "UltimateSound"
-s.SoundId = g(f)
-s.Volume = 1
-s.Parent = workspace
 
 local plr = game:GetService("Players").LocalPlayer
 local char = plr.Character or plr.CharacterAdded:Wait()
 local hum = char:WaitForChild("Humanoid")
 
 local targetAnimId = "rbxassetid://12447707844"
-local played = false
 
 local function fadeOut(sound, duration)
     local startVol = sound.Volume
@@ -28,10 +22,13 @@ local function fadeOut(sound, duration)
 end
 
 hum.AnimationPlayed:Connect(function(animTrack)
-    if played then return end
     if animTrack.Animation and animTrack.Animation.AnimationId == targetAnimId then
+        local s = Instance.new("Sound")
+        s.Name = "UltimateSound"
+        s.SoundId = g(f)
+        s.Volume = 0.6
+        s.Parent = workspace
         s:Play()
-        played = true
         task.spawn(function()
             wait(40)
             fadeOut(s, 1.7)
