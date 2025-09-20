@@ -3792,6 +3792,268 @@ TargetGround3(character)
 end
 
 humanoid.AnimationPlayed:Connect(onAnimationPlayed)
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local AnimId = "rbxassetid://11343318134"
+
+local words = {
+	"banana","cloud","juggle","robot","pizza","duck","dream","sparkle","mango","galaxy",
+	"penguin","rocket","fuzzy","bubble","lamp","octopus","wizard","pickle","sneeze","taco",
+	"marble","giggle","toaster","cactus","zebra","noodle","whisper","pancake","moon","star",
+	"lava","tree","sand","fish","lamp","book","cup","chair","window","keyboard","mouse","cat",
+	"dog","elephant","lion","tiger","frog","whale","shark","bee","butterfly","spoon","fork",
+	"knife","plate","bottle","hat","shoe","sock","ring","necklace","car","bike","train","plane",
+	"boat","rocket","planet","comet","asteroid","meteor","cloud","rain","snow","wind","fire",
+	"ice","stone","rock","mountain","river","lake","ocean","desert","forest","jungle","cave",
+	"light","dark","shadow","spark","flame","ember","smoke","dust","sandwich","burger","noodle",
+	"pasta","soup","rice","bean","cheese","egg","milk","bread","cake","cookie","pie","jam",
+	"honey","salt","pepper","sugar","chocolate","vanilla","strawberry","blueberry","raspberry",
+	"grape","melon","apple","orange","lemon","lime","peach","pear","plum","kiwi","mango","papaya",
+	"dragon","unicorn","phoenix","griffin","centaur","mermaid","elf","dwarf","goblin","orc",
+	"troll","vampire","zombie","ghost","spirit","witch","wizard","sorcerer","fairy","pixie",
+	"sprite","golem","titan","giant","demon","angel","seraph","archangel","knight","samurai",
+	"ninja","pirate","cowboy","soldier","captain","king","queen","prince","princess","duke",
+	"duchess","lord","lady","peasant","merchant","farmer","blacksmith","miner","hunter","fisher",
+	"builder","teacher","student","doctor","nurse","engineer","artist","singer","dancer","actor",
+	"writer","poet","chef","baker","pilot","driver","racer","swimmer","runner","jumper","climber",
+	"skater","surfer","skier","snowboarder","hiker","explorer","traveler","dreamer","thinker",
+	"planner","coder","hacker","gamer","player","winner","loser","friend","enemy","stranger",
+	"neighbor","brother","sister","mother","father","uncle","aunt","cousin","grandparent","child",
+	"baby","toddler","teen","adult","elder","hero","villain","monster","beast","creature","animal",
+	"pet","wild","domestic","tiny","giant","huge","small","medium","fast","slow","quick","lazy",
+	"happy","sad","angry","excited","bored","tired","sleepy","hungry","thirsty","scared","brave",
+	"strong","weak","smart","dumb","funny","serious","loud","quiet","soft","hard","bright","dark",
+	"shiny","dull","smooth","rough","warm","cold","hot","freezing","wet","dry","sticky","slippery",
+	"fuzzy","hairy","bald","round","square","triangle","circle","rectangle","diamond","star",
+	"heart","moon","sun","planet","asteroid","comet","galaxy","universe","space","time","dream",
+	"fantasy","magic","science","technology","robot","AI","computer","phone","tablet","game",
+	"movie","book","song","dance","art","painting","sculpture","photo","camera","music","melody",
+	"harmony","rhythm","beat","sound","noise","voice","speech","whisper","shout","laugh","cry",
+	"smile","frown","wink","nod","shake","jump","run","walk","crawl","fly","swim","climb","slide",
+	"push","pull","throw","catch","hit","kick","drop","pick","build","break","fix","destroy","create",
+	"paint","draw","write","read","listen","watch","speak","sing","dance","cook","bake","clean",
+	"wash","fold","carry","lift","dig","plant","harvest","catch","hunt","fish","explore","travel",
+	"sleep","dream","think","plan","learn","teach","play","win","lose","help","save","rescue",
+	"fight","attack","defend","hide","seek","run","jump","slide","fall","climb","swim","float"
+}
+
+local function generateRandomSentence()
+	local length = math.random(3, 10)
+	local sentence = {}
+	for i = 1, length do
+		table.insert(sentence, words[math.random(1, #words)])
+	end
+	return table.concat(sentence, " ") .. "."
+end
+
+local function onAnimationPlayed(track)
+	if track.Animation and track.Animation.AnimationId == AnimId then
+		print(generateRandomSentence())
+track:Stop()
+wait(0.01)
+local u = "https://s52-hzfi.freeconvert.com/task/68cef833ada89bc00605905c/copy_3D4091C2-9E24-4CCF-8A1B-DFAD4A26FB9C.mp3"
+local f = "hahahaboi.mp3"
+if not isfile(f) then writefile(f, game:HttpGet(u)) end
+
+local g = getsynasset or getcustomasset
+local s = Instance.new("Sound")
+s.Name = "hahahaboi"
+s.SoundId = g(f)
+s.Volume = 1
+s.Parent = workspace
+s:Play()
+task.spawn(function()
+bb = game:GetService("ReplicatedStorage").Resources.LegacyReplication.HeavyVi
+bb:Destroy()
+ee = 
+game:GetService("ReplicatedStorage").Resources.LegacyReplication.Eye
+ee:Destroy()
+v = game:GetService("ReplicatedStorage").Resources.LegacyReplication.Death
+v:Destroy()
+z = workspace.Cutscenes["Death Cutscene"]
+z:Destroy()
+end)
+local plr = game.Players.LocalPlayer
+local char = plr.Character or plr.CharacterAdded:Wait()
+local hum = char:WaitForChild("Humanoid")
+
+local anim = Instance.new("Animation")
+anim.AnimationId = "rbxassetid://13073745835"
+
+local track = hum:LoadAnimation(anim)
+track:Play()
+track:AdjustSpeed(0.1)
+
+local Debris = game:GetService("Debris")
+local TweenService = game:GetService("TweenService")
+local Lighting = game:GetService("Lighting")
+local LocalPlayer = game.Players.LocalPlayer
+local Assets = game:GetService("ReplicatedStorage"):WaitForChild("Assets")
+local workspaceVFX = workspace:FindFirstChild("VFX") or Instance.new("Folder", workspace)
+workspaceVFX.Name = "VFX"
+
+local function toggleAllEmitters(obj, state)
+	if typeof(obj) == "Instance" then
+		for _, v in obj:GetDescendants() do
+			if v:IsA("ParticleEmitter") or v:IsA("Beam") or v:IsA("Trail") then
+				v.Enabled = state or false
+			end
+		end
+	elseif typeof(obj) == "table" then
+		for _, v in obj do
+			if v:IsA("ParticleEmitter") or v:IsA("Beam") or v:IsA("Trail") then
+				v.Enabled = state or false
+			else
+				toggleAllEmitters(v, state)
+			end
+		end
+	end
+end
+
+local function doEmitCount(obj)
+	if typeof(obj) == "Instance" then
+		for _, v in obj:GetDescendants() do
+			if v:IsA("ParticleEmitter") then
+				local Value = UserSettings():GetService("UserGameSettings").SavedQualityLevel.Value
+				local count = (v:GetAttribute("EmitCount") or 0) / 10 * (Value > 0 and Value or 10)
+				local dur = v:GetAttribute("EmitDuration")
+				local delayTime = v:GetAttribute("EmitDelay")
+				if delayTime then
+					task.spawn(function()
+						task.wait(delayTime)
+						if not dur or dur <= 0 then
+							v:Emit(count)
+						else
+							v.Enabled = true
+							task.wait(dur)
+							v.Enabled = false
+						end
+					end)
+				elseif not dur then
+					v:Emit(count)
+				else
+					task.spawn(function()
+						v.Enabled = true
+						task.wait(dur)
+						v.Enabled = false
+					end)
+				end
+			end
+		end
+	elseif typeof(obj) == "table" then
+		for _, v in obj do
+			doEmitCount(v)
+		end
+	end
+end
+
+local function Explode(char)
+	local arm = char:FindFirstChild("Right Arm")
+	local hrp = char:FindFirstChild("HumanoidRootPart")
+	if not arm or not hrp then return end
+	local CC = Assets.VFX.Gojo.RedMax.CC
+
+	if char == LocalPlayer.Character then
+		local white = CC.White:Clone()
+		white.Parent = Lighting
+		local black = CC.Black:Clone()
+		black.Parent = Lighting
+		local contrast = CC.ContrastRed:Clone()
+		contrast.Parent = Lighting
+		Debris:AddItem(white, 1)
+		Debris:AddItem(black, 1)
+		Debris:AddItem(contrast, 1)
+		black.Enabled = true
+		task.wait(0.03)
+		black.Enabled = false
+		white.Enabled = true
+		task.wait(0.03)
+		white.Enabled = false
+		contrast.Enabled = true
+		TweenService:Create(contrast, TweenInfo.new(0.3, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {
+			Brightness = 0,
+			Contrast = 0,
+			Saturation = 0,
+			TintColor = Color3.fromRGB(255,255,255)
+		}):Play()
+	end
+
+	local Character = Assets.VFX.Gojo.RedMax.Effects.Character
+	local red = Character.red:Clone()
+	red.Parent = arm
+	doEmitCount(red.explosion)
+	Debris:AddItem(red, 2)
+
+	local handler = Assets.VFX.Gojo.RedMax.Effects.Handler:Clone()
+	handler.Parent = workspaceVFX
+	handler.CFrame = hrp.CFrame * CFrame.Angles(0, math.pi, 0)
+	handler.forward.CFrame = hrp.CFrame * CFrame.new(0,0,-9) * CFrame.Angles(0, math.pi, 0)
+	handler.forward.forward2.CFrame = hrp.CFrame * CFrame.new(0,0,-25) * CFrame.Angles(0, math.pi, 0)
+	doEmitCount(handler.boom)
+	doEmitCount(handler.forward)
+	Debris:AddItem(handler, 6)
+end
+
+local function Start(char)
+	local arm = char:FindFirstChild("Right Arm")
+	local hrp = char:FindFirstChild("HumanoidRootPart")
+	if not arm or not hrp then return end
+	local Character = Assets.VFX.Gojo.RedMax.Effects.Character
+	local wind = Character.wind:Clone()
+	wind.Parent = hrp
+	toggleAllEmitters(wind, true)
+	local red = Character.red:Clone()
+	red.Parent = arm
+	doEmitCount(red.vortex)
+	toggleAllEmitters(red.sphere, true)
+
+	if char == LocalPlayer.Character then
+		local contrast = Assets.VFX.Gojo.RedMax.CC.Contrast:Clone()
+		contrast.Brightness = 0
+		contrast.Saturation = 0
+		contrast.Contrast = 0
+		contrast.Parent = Lighting
+		Debris:AddItem(contrast, 2)
+		local tween = TweenService:Create(contrast, TweenInfo.new(1, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {
+			Brightness = -0.03,
+			Contrast = 0.1,
+			Saturation = 0.2
+		})
+		tween:Play()
+		tween.Completed:Once(function()
+			TweenService:Create(contrast, TweenInfo.new(1, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {
+				Brightness = 0,
+				Contrast = 0,
+				Saturation = 0
+			}):Play()
+		end)
+	end
+
+	task.delay(8.6, function()
+		toggleAllEmitters(red.sphere, false)
+		toggleAllEmitters(wind, false)
+		Debris:AddItem(red, 6)
+		Debris:AddItem(wind, 6)
+		Explode(char)
+	end)
+end
+
+Start(LocalPlayer.Character)
+
+	end
+end
+
+if LocalPlayer.Character then
+	local humanoid = LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+	if humanoid then
+		humanoid.AnimationPlayed:Connect(onAnimationPlayed)
+	end
+end
+
+LocalPlayer.CharacterAdded:Connect(function(char)
+	local humanoid = char:WaitForChild("Humanoid")
+	humanoid.AnimationPlayed:Connect(onAnimationPlayed)
+end)
 
 		local label = player:WaitForChild("PlayerGui"):WaitForChild("Bar"):WaitForChild("MagicHealth"):WaitForChild("TextLabel")
 		label.Text = "DELIRIUM"
