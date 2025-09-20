@@ -66,7 +66,7 @@ local toolNameMap = {
     ["Uppercut"] = "?",
     ["Serious Punch"] = "Lapse Blue Max",
     ["Omni Directional Punch"] = "?",
-    ["Death Counter"] = "?",
+    ["Death Counter"] = "Reversal Red Max",
     ["Table Flip"] = "Hollow Purple"
 }
 
