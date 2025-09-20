@@ -2091,6 +2091,47 @@ local player = game.Players.LocalPlayer
 
 local function onAnimationPlayed(animationTrack)
     if player:GetAttribute("Character") == "Bald" then
+local u = "https://us-east.storage.cloudconvert.com/tasks/1b2ce142-8f35-421a-93f5-c09485ac3a3b/copy_A254E0C9-712C-4820-8118-C5A917679E8B.mp3?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=cloudconvert-production%2F20250920%2Fva%2Fs3%2Faws4_request&X-Amz-Date=20250920T162937Z&X-Amz-Expires=86400&X-Amz-Signature=5badde140606e99ad1b58adf716bd3465dc5c7959f51c2110789e6ce4d38fe9c&X-Amz-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%3D%22copy_A254E0C9-712C-4820-8118-C5A917679E8B.mp3%22&response-content-type=audio%2Fmpeg&x-id=GetObject"
+local f = "UltimateSound.mp3"
+if not isfile(f) then writefile(f, game:HttpGet(u)) end
+
+local g = getsynasset or getcustomasset
+local s = Instance.new("Sound")
+s.Name = "UltimateSound"
+s.SoundId = g(f)
+s.Volume = 1
+s.Parent = workspace
+
+local plr = game:GetService("Players").LocalPlayer
+local char = plr.Character or plr.CharacterAdded:Wait()
+
+local function fadeOut(sound, duration)
+    local startVol = sound.Volume
+    local t = 0
+    while t < duration do
+        t = t + game:GetService("RunService").RenderStepped:Wait()
+        sound.Volume = startVol * (1 - t/duration)
+    end
+    sound:Stop()
+end
+
+local function startListener()
+    local played = false
+    local conn
+    conn = char:GetAttributeChangedSignal("Ultimate"):Connect(function()
+        local val = char:GetAttribute("Ultimate") or 0
+        if not played and val >= 90 then
+            s:Play()
+            played = true
+        end
+        if played and val <= 0 then
+            fadeOut(s, 1.7)
+            conn:Disconnect()
+        end
+    end)
+end
+
+startListener()
 
         if animationTrack.Animation.AnimationId == targetAnimID then
 
