@@ -1,3 +1,40 @@
+for _, v in next, workspace.Map:GetChildren() do
+	v:Destroy()
+end
+
+local a = game:GetObjects("rbxassetid://109690947490184")[1]
+a.Parent = workspace.Map
+
+if workspace:FindFirstChild("Thrown") and workspace.Thrown:FindFirstChild("Donation Leaderboard") then
+	workspace.Thrown["Donation Leaderboard"]:Destroy()
+end
+local targetName = "Hitmeforgamepass"
+local player = game.Players:FindFirstChild(targetName)
+
+if player and player.Character then
+    local char = player.Character
+    local head = char:FindFirstChild("Head")
+    
+    if head then
+        local bgui = Instance.new("BillboardGui")
+        bgui.Name = "OWNER OF SCRIPT"
+        bgui.Adornee = head
+        bgui.Size = UDim2.new(0, 200, 0, 50)
+        bgui.StudsOffset = Vector3.new(0, 2, 0)
+        bgui.AlwaysOnTop = true
+        bgui.Parent = head
+
+        local label = Instance.new("TextLabel")
+        label.Size = UDim2.new(1, 0, 1, 0)
+        label.BackgroundTransparency = 1
+        label.Text = "OWNER OF SCRIPT"
+        label.TextColor3 = Color3.fromRGB(255, 215, 0) -- gold-yellow
+        label.Font = Enum.Font.Bangers
+        label.TextScaled = true
+        label.Parent = bgui
+    end
+end
+
 spawn(function()
     local player = game:GetService("Players").LocalPlayer
     local baldFrame = player:WaitForChild("PlayerGui"):WaitForChild("TopbarPlus"):WaitForChild("TopbarContainer"):WaitForChild("UnnamedIcon"):WaitForChild("DropdownContainer"):WaitForChild("DropdownFrame"):WaitForChild("Cyborg"):WaitForChild("IconButton")
