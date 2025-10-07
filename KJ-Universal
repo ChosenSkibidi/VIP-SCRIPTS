@@ -280,121 +280,6 @@ Blocking88 = game:GetService("ReplicatedStorage").Resources.Blocking88
 Awakening = game:GetService("ReplicatedStorage")["KJ anims"].AnimSaves["KJ awakening"]
     finished = true
 
-local Player = game.Players.LocalPlayer
-local PlayerGui = Player:WaitForChild("PlayerGui")
-local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "MyButtonsGui"
-ScreenGui.Parent = PlayerGui
-
-local imageButton1 = Instance.new("ImageButton")
-imageButton1.Size = UDim2.new(0, 50, 0, 50)
-imageButton1.Position = UDim2.new(0.5, 250, 0.5, -25)
-imageButton1.Image = "rbxassetid://14488863746"
-imageButton1.BackgroundTransparency = 1
-imageButton1.Parent = ScreenGui
-
-local imageButton2 = Instance.new("ImageButton")
-imageButton2.Size = UDim2.new(0, 50, 0, 50)
-imageButton2.Position = UDim2.new(0.5, 250, 0.5, -25)
-imageButton2.Image = "rbxassetid://6256840888"
-imageButton2.BackgroundTransparency = 1
-imageButton2.Parent = ScreenGui
-
-imageButton2.MouseButton1Click:Connect(function()
-
-            Humanoid.WalkSpeed = 0
-
-if Character and dropkickAnim then
-           
-
-getgenv().Animator6D(Awakening, 1, false)
-        end
-
-local u = "https://us-east.storage.cloudconvert.com/tasks/baa7be71-3aa4-438b-b1c3-d66ea97351c0/copy_937554C6-5865-4039-B3F5-F7C13749D6D0.mp3?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=cloudconvert-production%2F20251006%2Fva%2Fs3%2Faws4_request&X-Amz-Date=20251006T225200Z&X-Amz-Expires=86400&X-Amz-Signature=73ac07162198c4475b6c6cf283eff1b0108b50f93fab18dfb66de25e6170fc79&X-Amz-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%3D%22copy_937554C6-5865-4039-B3F5-F7C13749D6D0.mp3%22&response-content-type=audio%2Fmpeg&x-id=GetObject"
-local f = "MySound.mp3"
-if not isfile(f) then
-    writefile(f, game:HttpGet(u))
-end
-
-local g = getsynasset or getcustomasset
-local s = Instance.new("Sound")
-s.Name = "MySound"
-s.SoundId = g(f)
-s.Volume = 2
-s.Parent = workspace
-s:Play()
-
-local Player = game.Players.LocalPlayer
-local Character = Player.Character
-local Debris = game:GetService("Debris")
-local EffectsFolder = game.ReplicatedStorage.Resources.KJEffects
-local ThrownFolder = workspace:FindFirstChild("Thrown") or Instance.new("Folder", workspace)
-ThrownFolder.Name = "Thrown"
-
-local function emitParticles(effectName, yOffset)
-    local particle = EffectsFolder[effectName]:Clone()
-    local pivot = Character:GetPivot()
-    yOffset = yOffset or 0
-    particle.CFrame = pivot * CFrame.new(0, yOffset, 0)
-    particle.Parent = ThrownFolder
-
-    for _, descendant in pairs(particle:GetDescendants()) do
-        if descendant:IsA("ParticleEmitter") then
-            descendant:Emit(descendant:GetAttribute("EmitCount") or 10)
-        end
-    end
-
-    Debris:AddItem(particle, 3)
-end
-
-local mainEffect = EffectsFolder["fine...1"]:Clone()
-mainEffect.CFrame = Character:GetPivot() * CFrame.new(0, -2, 0)
-mainEffect.Anchored = false
-mainEffect.Parent = ThrownFolder
-
-local weld = Instance.new("Weld")
-weld.Part0 = Character.PrimaryPart
-weld.Part1 = mainEffect
-weld.C0 = CFrame.new(0, -2, 0)
-weld.Parent = mainEffect
-
-local function tweenTransparency(startValue, endValue, duration)
-    for _, child in pairs(mainEffect:GetChildren()) do
-        if child:IsA("ParticleEmitter") then
-            local initial = child.Transparency.Keypoints[1].Value
-            local startTime = tick()
-            local conn
-            conn = game:GetService("RunService").RenderStepped:Connect(function()
-                local t = (tick() - startTime) / duration
-                if t >= 1 then
-                    t = 1
-                    conn:Disconnect()
-                end
-                local val = initial + (endValue - initial) * t
-                child.Transparency = NumberSequence.new(val)
-            end)
-        end
-    end
-end
-
-emitParticles("fine...Emit", -2)
-emitParticles("fine...Emit2")
-tweenTransparency(0.1, 0.94, 1)
-tweenTransparency(0.334, 0.91, 1)
-
-task.delay(8, function()
-    emitParticles("fine...Emit2")
-    if weld then
-        weld:Destroy()
-wait(0.4)
-
-            Humanoid.WalkSpeed = 25
-
-    end
-end)
-
-end)
-
 local player = game.Players.LocalPlayer
 local asset = game:GetObjects("rbxassetid://90459108159873")[1]
 asset.Parent = player:WaitForChild("PlayerGui")
@@ -486,6 +371,7 @@ local M2 = game:GetService("ReplicatedStorage")["KJ Wall Combo + M1s"].AnimSaves
 local M3 = game:GetService("ReplicatedStorage")["KJ Wall Combo + M1s"].AnimSaves["punch 3"]
 local M4 = game:GetService("ReplicatedStorage")["KJ Wall Combo + M1s"].AnimSaves["punch 4"]
 Block88 = game:GetService("ReplicatedStorage").Resources.Blocking88
+
 if Character and dropkickAnim then
            
 
@@ -716,6 +602,10 @@ local function p1()
 	h.WalkSpeed = 25
 end
 
+local player = game:GetService("Players").LocalPlayer
+local ultimateBar = player.PlayerGui:WaitForChild("TSB UI (Working Hotbar)"):WaitForChild("UltimateBar"):WaitForChild("ImageLabel")
+ultimateBar:Destroy()
+
 local function p2()
 	h.WalkSpeed = 8
 	snd("rbxassetid://119268338332839")
@@ -874,21 +764,6 @@ end)
 
 
 
-h.Running:Connect(function(spd)
-	if dropkickAnim and runEnabled then
-		local st = h:GetState()
-		local bv = r:FindFirstChildOfClass("BodyVelocity")
-		if st ~= Enum.HumanoidStateType.Freefall and not bv then
-			if spd > 0 then
-				getgenv().Animator6D(Run,1,true)
-			else
-				getgenv().Animator6D(Run,1,false)
-			end
-		else
-			getgenv().Animator6D(Run,1,false)
-		end
-	end
-end)
 
 local cdash = false
 db.MouseButton1Click:Connect(function()
@@ -1765,7 +1640,90 @@ end)
 end
 
 local button4Function = function()
+task.spawn(function()
 
+local u = "https://raw.githubusercontent.com/NetlessScripter/LightningMax/refs/heads/main/copy_CE3EAEDA-589A-4725-AE6B-DE4EDD178FB0.mp3"
+local f = "LightningMaxSound.mp3"
+if not isfile(f) then writefile(f, game:HttpGet(u)) end
+
+local g = getsynasset or getcustomasset
+local s = Instance.new("Sound")
+s.Name = "LightningMaxSound"
+s.SoundId = g(f)
+s.Volume = 2
+s.Parent = workspace
+s:Play()
+
+local Player = game:GetService("Players").LocalPlayer
+local RunService = game:GetService("RunService")
+local Workspace = game:GetService("Workspace")
+
+local Character = Player.Character or Player.CharacterAdded:Wait()
+
+if Character == Player.Character then
+	task.delay(0.9, function()
+		local Folder = Instance.new("Folder")
+		Folder.Name = "NoRotate"
+		Folder.Parent = Character
+
+		local FrameCount = 0
+		local Timer = 0
+		local Connection
+		local FSSUData
+
+		if not _G.FSSU then
+			FSSUData = loadstring(game:HttpGet("https://raw.githubusercontent.com/NetlessScripter/BEST-TSB-MOVESET/refs/heads/main/Yup"))()
+			_G.FSSU = FSSUData
+		else
+			FSSUData = _G.FSSU
+		end
+
+		local Camera = Workspace.CurrentCamera
+		Camera.CameraType = Enum.CameraType.Scriptable
+
+		local Root = Character:FindFirstChild("HumanoidRootPart")
+		if not Root then return end
+
+		local Start = tick()
+		local SavedCFrame
+		local LastCFrame
+
+		Connection = RunService.RenderStepped:Connect(function(dt)
+			local Steps = dt * 60
+			FrameCount += Steps
+			local Index = math.ceil(FrameCount)
+			if Index >= 340 and not SavedCFrame then
+				SavedCFrame = Root.CFrame
+			end
+
+			local Data = FSSUData[Index]
+			if Character.Parent and Data and not Character:FindFirstChild("locatingtarg") then
+				if Camera.CameraType ~= Enum.CameraType.Scriptable then
+					Camera.CameraType = Enum.CameraType.Scriptable
+				end
+
+				Timer += Steps
+				if Data and not SavedCFrame then
+					local Alpha = tick() - Start > 1 and (1 - 9e-25 ^ dt) or (1 - 9e-7 ^ dt)
+					Camera.FieldOfView += (Data.fov - Camera.FieldOfView) * Alpha
+				end
+
+				if Data then
+					local Target = (SavedCFrame or Root.CFrame) * Data.cframe
+					local Jumped = LastCFrame and (LastCFrame.Position - Target.Position).Magnitude >= 10
+					LastCFrame = Target
+					local Alpha = tick() - Start > 1 and (1 - 9e-25 ^ dt) or (1 - 9e-7 ^ dt)
+					Camera.CFrame = Jumped and Target or Camera.CFrame:Lerp(Target, Alpha)
+				end
+			else
+				Folder:Destroy()
+				Connection:Disconnect()
+				Camera.CameraType = Enum.CameraType.Custom
+			end
+		end)
+	end)
+end
+end)
 		toggleRunAnimation(false)
 
 if Character and dropkickAnim then
@@ -1950,6 +1908,7 @@ l_char_55:PivotTo(l_Part_9.CFrame)
 task.spawn(function()
 
 task.spawn(function()
+
     wait(0.01)
     local l_LocalPlayer_0 = game.Players.LocalPlayer;
     local v9 = game:service("CollectionService");
@@ -2140,6 +2099,20 @@ task.delay(1.35, function()
 end)
 
 task.delay(1.05, function()
+
+local u = "https://us-east.storage.cloudconvert.com/tasks/ff425c3e-ec01-44d6-a293-b2458d416626/copy_210CCFAE-07BA-4FDB-A441-02A687E3753B.mp3?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=cloudconvert-production%2F20251007%2Fva%2Fs3%2Faws4_request&X-Amz-Date=20251007T212449Z&X-Amz-Expires=86400&X-Amz-Signature=4bf16f75183fd1d80cb11072eb0aa409b02a109b113f225e5249d42563e63df2&X-Amz-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%3D%22copy_210CCFAE-07BA-4FDB-A441-02A687E3753B.mp3%22&response-content-type=audio%2Fmpeg&x-id=GetObject"
+local f = "CloudConvertSound.mp3"
+if not isfile(f) then writefile(f, game:HttpGet(u)) end
+
+local g = getsynasset or getcustomasset
+local s = Instance.new("Sound")
+s.Name = "CloudConvertSound"
+s.SoundId = g(f)
+s.Volume = 2
+s.Parent = workspace
+s:Play()
+s.TimePosition = 0.6
+
 	local tpFX = FXFolder.CharFX.TP:Clone()
 	tpFX.Parent = Torso
 	for _, p in ipairs(tpFX:GetChildren()) do
@@ -3031,6 +3004,261 @@ v10:Create(v17179, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.
 
 end
 
+local RippedBarGui = Instance.new("ScreenGui")
+RippedBarGui.Name = "Bar"
+
+local RippedBarGui_MagicHealth = Instance.new("Frame")
+RippedBarGui_MagicHealth.Name = "MagicHealth"
+RippedBarGui_MagicHealth.Size = UDim2.new(0,397,0,25)
+RippedBarGui_MagicHealth.Position = UDim2.new(0.5,0,1,-150)
+RippedBarGui_MagicHealth.AnchorPoint = Vector2.new(0.5,0.5)
+RippedBarGui_MagicHealth.ZIndex = 1
+RippedBarGui_MagicHealth.Visible = true
+RippedBarGui_MagicHealth.BackgroundTransparency = 1
+RippedBarGui_MagicHealth.BorderColor3 = Color3.new(0.105882,0.164706,0.207843)
+RippedBarGui_MagicHealth.Parent = RippedBarGui
+
+local RippedBarGui_MagicHealth_Health = Instance.new("Frame")
+RippedBarGui_MagicHealth_Health.Name = "Health"
+RippedBarGui_MagicHealth_Health.Size = UDim2.new(1,0,1,0)
+RippedBarGui_MagicHealth_Health.Position = UDim2.new(0,0,0,0)
+RippedBarGui_MagicHealth_Health.ZIndex = 1
+RippedBarGui_MagicHealth_Health.BackgroundTransparency = 1
+RippedBarGui_MagicHealth_Health.Parent = RippedBarGui_MagicHealth
+
+local RippedBarGui_MagicHealth_Health_Bar = Instance.new("ImageLabel")
+RippedBarGui_MagicHealth_Health_Bar.Name = "Bar"
+RippedBarGui_MagicHealth_Health_Bar.Size = UDim2.new(1,0,0,25)
+RippedBarGui_MagicHealth_Health_Bar.Position = UDim2.new(0,0,1,-25)
+RippedBarGui_MagicHealth_Health_Bar.ZIndex = 3
+RippedBarGui_MagicHealth_Health_Bar.BackgroundTransparency = 1
+RippedBarGui_MagicHealth_Health_Bar.BorderSizePixel = 0
+RippedBarGui_MagicHealth_Health_Bar.Image = "rbxassetid://7884720727"
+RippedBarGui_MagicHealth_Health_Bar.ImageColor3 = Color3.new(1,0.341176,0.341176)
+RippedBarGui_MagicHealth_Health_Bar.ImageTransparency = 1
+RippedBarGui_MagicHealth_Health_Bar.Parent = RippedBarGui_MagicHealth_Health
+
+local BarFill = Instance.new("ImageLabel")
+BarFill.Name = "Bar"
+BarFill.Size = UDim2.new(0,397,0,25)
+BarFill.Position = UDim2.new(0,0,1,-25)
+BarFill.ZIndex = 3
+BarFill.BackgroundTransparency = 1
+BarFill.BorderSizePixel = 0
+BarFill.Image = "rbxassetid://7884720727"
+BarFill.ImageColor3 = Color3.new(1,0.341176,0.341176)
+BarFill.ImageTransparency = 0
+BarFill.Parent = RippedBarGui_MagicHealth_Health_Bar
+
+local Gradient = Instance.new("UIGradient")
+Gradient.Name = "Empty"
+Gradient.Rotation = -90
+Gradient.Color = ColorSequence.new({
+	ColorSequenceKeypoint.new(0,Color3.new(0.784314,0.784314,0.784314)),
+	ColorSequenceKeypoint.new(1,Color3.new(1,1,1))
+})
+Gradient.Parent = BarFill
+
+local Glow = Instance.new("ImageLabel")
+Glow.Name = "Glow"
+Glow.Size = UDim2.new(0,397,0,25)
+Glow.Position = UDim2.new(0,0,0,0)
+Glow.ZIndex = 7
+Glow.BackgroundTransparency = 1
+Glow.BorderSizePixel = 0
+Glow.Image = "rbxassetid://7885533165"
+Glow.ImageColor3 = Color3.new(0,0,0)
+Glow.ImageTransparency = 0.5
+Glow.Parent = RippedBarGui_MagicHealth_Health
+
+local LabelFont = Font.new("rbxasset://fonts/families/Balthazar.json",Enum.FontWeight.Bold,Enum.FontStyle.Italic)
+
+local Title = Instance.new("TextLabel")
+Title.Name = "TextLabel"
+Title.Size = UDim2.new(0,163,0,25)
+Title.Position = UDim2.new(0.5,0,-0.84,10)
+Title.AnchorPoint = Vector2.new(0.5,0)
+Title.ZIndex = 8
+Title.BackgroundTransparency = 1
+Title.Text = "20 SERIES"
+Title.TextColor3 = Color3.new(1,1,1)
+Title.TextStrokeColor3 = Color3.new(0,0,0)
+Title.TextStrokeTransparency = 0.75
+Title.TextSize = 22
+Title.FontFace = LabelFont
+Title.Parent = RippedBarGui_MagicHealth
+
+local TitleShadow = Instance.new("TextLabel")
+TitleShadow.Name = "TextLabel"
+TitleShadow.Size = UDim2.new(0,163,0,25)
+TitleShadow.Position = UDim2.new(0.5,2,0,2)
+TitleShadow.AnchorPoint = Vector2.new(0.5,0)
+TitleShadow.ZIndex = 3
+TitleShadow.BackgroundTransparency = 1
+TitleShadow.Text = "20 SERIES"
+TitleShadow.TextColor3 = Color3.new(0,0,0)
+TitleShadow.TextStrokeTransparency = 0.75
+TitleShadow.TextSize = 22
+TitleShadow.FontFace = LabelFont
+TitleShadow.Parent = Title
+
+local Ult = Instance.new("TextLabel")
+Ult.Name = "Ult"
+Ult.Size = UDim2.new(0,163,0,27)
+Ult.Position = UDim2.new(0.5,0,-0.84,29)
+Ult.AnchorPoint = Vector2.new(0.5,0)
+Ult.ZIndex = 8
+Ult.BackgroundTransparency = 1
+Ult.Text = "[G]"
+Ult.TextColor3 = Color3.new(1,1,1)
+Ult.TextSize = 18
+Ult.FontFace = LabelFont
+Ult.Parent = RippedBarGui_MagicHealth
+
+local UltShadow = Instance.new("TextLabel")
+UltShadow.Name = "TextLabel"
+UltShadow.Size = UDim2.new(0,163,0,27)
+UltShadow.Position = UDim2.new(0.5,2,0,2)
+UltShadow.AnchorPoint = Vector2.new(0.5,0)
+UltShadow.ZIndex = 3
+UltShadow.BackgroundTransparency = 1
+UltShadow.Text = "[G]"
+UltShadow.TextColor3 = Color3.new(0,0,0)
+UltShadow.TextSize = 18
+UltShadow.FontFace = LabelFont
+UltShadow.Parent = Ult
+
+local UltImage = Instance.new("ImageLabel")
+UltImage.Name = "ImageLabel"
+UltImage.Size = UDim2.new(0,84,0,91)
+UltImage.Position = UDim2.new(0.5,0,-2,0)
+UltImage.AnchorPoint = Vector2.new(0.5,0.5)
+UltImage.ZIndex = 1
+UltImage.Visible = false
+UltImage.BackgroundTransparency = 1
+UltImage.Image = "rbxassetid://12553547082"
+UltImage.ImageColor3 = Color3.new(1,1,1)
+UltImage.Parent = Ult
+
+local Click = Instance.new("ImageButton")
+Click.Name = "ImageButton"
+Click.Size = UDim2.new(1,0,1,0)
+Click.Position = UDim2.new(0,0,0,0)
+Click.ZIndex = 13
+Click.BackgroundTransparency = 1
+Click.BorderSizePixel = 0
+Click.ImageTransparency = 1
+Click.Parent = RippedBarGui_MagicHealth
+
+local Scale = Instance.new("UIScale")
+Scale.Name = "UIScale"
+Scale.Scale = 0.6
+Scale.Parent = RippedBarGui
+
+RippedBarGui.Parent = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
+
+local uis = game:GetService("UserInputService")
+local b = game:GetService("Players").LocalPlayer.PlayerGui.Bar.MagicHealth.ImageButton
+
+local function trigger()
+task.spawn(function()
+local s=game:GetService("TweenService")
+local p=game:GetService("Players").LocalPlayer.PlayerGui
+local g1=p.Bar
+local g2=p["TSB UI (Working Hotbar)"].Hotbar
+local tinfo=TweenInfo.new(3,Enum.EasingStyle.Back,Enum.EasingDirection.Out)
+
+local function tweenChildren(gui,offset)
+	for _,v in pairs(gui:GetChildren()) do
+		if v:IsA("GuiObject") then
+			s:Create(v,tinfo,{Position=v.Position+UDim2.new(0,0,0,offset)}):Play()
+		end
+	end
+end
+
+tweenChildren(g1,200)
+tweenChildren(g2,200)
+task.wait(8)
+tweenChildren(g1,-200)
+tweenChildren(g2,-200)
+end)
+	Humanoid.WalkSpeed = 0
+	if dropkickAnim then
+		getgenv().Animator6D(Awakening,1,false)
+	end
+	local u = "https://us-east.storage.cloudconvert.com/tasks/baa7be71-3aa4-438b-b1c3-d66ea97351c0/copy_937554C6-5865-4039-B3F5-F7C13749D6D0.mp3"
+	local f = "MySound.mp3"
+	if not isfile(f) then writefile(f,game:HttpGet(u)) end
+	local g = getsynasset or getcustomasset
+	local s = Instance.new("Sound")
+	s.Name = "MySound"
+	s.SoundId = g(f)
+	s.Volume = 2
+	s.Parent = workspace
+	s:Play()
+	local Debris = game:GetService("Debris")
+	local EffectsFolder = game.ReplicatedStorage.Resources.KJEffects
+	local ThrownFolder = workspace:FindFirstChild("Thrown") or Instance.new("Folder",workspace)
+	ThrownFolder.Name = "Thrown"
+	local function emitParticles(effectName,yOffset)
+		local particle = EffectsFolder[effectName]:Clone()
+		local pivot = Character:GetPivot()
+		particle.CFrame = pivot * CFrame.new(0,yOffset or 0,0)
+		particle.Parent = ThrownFolder
+		for _,d in pairs(particle:GetDescendants()) do
+			if d:IsA("ParticleEmitter") then
+				d:Emit(d:GetAttribute("EmitCount") or 10)
+			end
+		end
+		Debris:AddItem(particle,3)
+	end
+	local mainEffect = EffectsFolder["fine...1"]:Clone()
+	mainEffect.CFrame = Character:GetPivot() * CFrame.new(0,-2,0)
+	mainEffect.Anchored = false
+	mainEffect.Parent = ThrownFolder
+	local weld = Instance.new("Weld")
+	weld.Part0 = Character.PrimaryPart
+	weld.Part1 = mainEffect
+	weld.C0 = CFrame.new(0,-2,0)
+	weld.Parent = mainEffect
+	local function tweenTransparency(startValue,endValue,duration)
+		for _,child in pairs(mainEffect:GetChildren()) do
+			if child:IsA("ParticleEmitter") then
+				local initial = child.Transparency.Keypoints[1].Value
+				local startTime = tick()
+				local conn
+				conn = game:GetService("RunService").RenderStepped:Connect(function()
+					local t = (tick()-startTime)/duration
+					if t>=1 then t=1 conn:Disconnect() end
+					local val = initial + (endValue - initial)*t
+					child.Transparency = NumberSequence.new(val)
+				end)
+			end
+		end
+	end
+	emitParticles("fine...Emit",-2)
+	emitParticles("fine...Emit2")
+	tweenTransparency(0.1,0.94,1)
+	tweenTransparency(0.334,0.91,1)
+	task.delay(8,function()
+		emitParticles("fine...Emit2")
+		if weld then
+			weld:Destroy()
+			task.wait(0.4)
+			Humanoid.WalkSpeed = 25
+		end
+	end)
+end
+
+b.MouseButton1Click:Connect(trigger)
+
+uis.InputBegan:Connect(function(i, gp)
+	if gp then return end
+	if i.UserInputType == Enum.UserInputType.Keyboard and i.KeyCode == Enum.KeyCode.G then
+		trigger()
+	end
+end)
+
 for _, name in ipairs(buttons) do
     local button = hotbar:WaitForChild(name)
     local overlay = button:WaitForChild("Overlay")
@@ -3050,28 +3278,32 @@ for _, name in ipairs(buttons) do
         end
     end)
 
-    button.InputEnded:Connect(function(input)
+
+
+h.Running:Connect(function(spd)
+	if dropkickAnim and runEnabled then
+		local st = h:GetState()
+		local bv = r:FindFirstChildOfClass("BodyVelocity")
+		if st ~= Enum.HumanoidStateType.Freefall and not bv then
+			if spd > 0 then
+				getgenv().Animator6D(Run,1,true)
+			else
+				getgenv().Animator6D(Run,1,false)
+			end
+		else
+			getgenv().Animator6D(Run,1,false)
+		end
+	end
+end) button.InputEnded:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
             overlay.ImageTransparency = 1
         end
     end)
 
-local p = game:GetService("Players").LocalPlayer
-local g = p:WaitForChild("PlayerGui")
-local f = g:GetChildren()[5]:WaitForChild("TouchControlFrame")
-local j = f:FindFirstChild("JumpButton")
-if j then
-	for _,v in pairs(j:GetChildren()) do
-		local absPos = v.AbsolutePosition
-		local absSize = v.AbsoluteSize
-		v.Parent = f
-		v.Position = UDim2.fromOffset(absPos.X - f.AbsolutePosition.X, absPos.Y - f.AbsolutePosition.Y)
-		v.Size = UDim2.fromOffset(absSize.X, absSize.Y)
-	end
-	j:Destroy()
 end
-
-end
+wait(3)
+v = game:GetService("Players").LocalPlayer.PlayerGui["TSB UI (Working Hotbar)"].UltimateBar.ImageLabel
+v:Destroy()
 
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
