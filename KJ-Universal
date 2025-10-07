@@ -1,0 +1,3158 @@
+local Workspace = game:GetService("Workspace")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local StarterGui = game:GetService("StarterGui")
+
+local thrownFolder = Workspace:FindFirstChild("Thrown")
+if not thrownFolder then
+    thrownFolder = Instance.new("Folder")
+    thrownFolder.Name = "Thrown"
+    thrownFolder.Parent = Workspace
+end
+
+local function downloadFile(path, url)
+    if not isfile(path) then
+        writefile(path, game:HttpGet(url))
+    end
+end
+
+local localFileName = "RobTop"
+local githubRawUrl = "https://raw.githubusercontent.com/NetlessScripter/Game-Setup/refs/heads/main/bad.rbxm"
+downloadFile(localFileName, githubRawUrl)
+
+local model = game:GetObjects(getcustomasset(localFileName))[1]
+model.Name = "blobtop"
+
+local resourcesFolder = ReplicatedStorage:FindFirstChild("Resources")
+if not resourcesFolder then
+    resourcesFolder = Instance.new("Folder")
+    resourcesFolder.Name = "Resources"
+    resourcesFolder.Parent = ReplicatedStorage
+end
+
+model.Parent = resourcesFolder
+
+local localFileName = "startup2"
+local githubRawUrl = "https://raw.githubusercontent.com/NetlessScripter/BEST-TSB-MOVESET/refs/heads/main/startup.rbxm"
+downloadFile(localFileName, githubRawUrl)
+
+local model = game:GetObjects(getcustomasset(localFileName))[1]
+model.Name = "startup2"
+model.Parent = resourcesFolder
+
+local localFileName = "ready5"
+local githubRawUrl = "https://raw.githubusercontent.com/NetlessScripter/BEST-TSB-MOVESET/refs/heads/main/ready.rbxm"
+downloadFile(localFileName, githubRawUrl)
+
+local model = game:GetObjects(getcustomasset(localFileName))[1]
+model.Name = "ready5"
+model.Parent = resourcesFolder
+
+local localFileName = "startup2"
+local githubRawUrl = "https://raw.githubusercontent.com/NetlessScripter/BEST-TSB-MOVESET/refs/heads/main/startup.rbxm"
+downloadFile(localFileName, githubRawUrl)
+
+local model = game:GetObjects(getcustomasset(localFileName))[1]
+model.Name = "startup2"
+model.Parent = resourcesFolder
+
+local localFileName = "GhostBusters"
+local githubRawUrl = "https://raw.githubusercontent.com/NetlessScripter/Game-Setup/refs/heads/main/Imported_Animation_Clip.rbxm"
+downloadFile(localFileName, githubRawUrl)
+
+local model = game:GetObjects(getcustomasset(localFileName))[1]
+model.Name = "GhostBusters"
+model.Parent = resourcesFolder
+
+local mapFolder = workspace:FindFirstChild("Map")
+if not mapFolder then
+    mapFolder = Instance.new("Folder")
+    mapFolder.Name = "Map"
+    mapFolder.Parent = workspace
+end
+
+local localFileName = "startup2"
+local githubRawUrl = "https://raw.githubusercontent.com/NetlessScripter/BEST-TSB-MOVESET/refs/heads/main/startup.rbxm"
+downloadFile(localFileName, githubRawUrl)
+
+local model = game:GetObjects(getcustomasset(localFileName))[1]
+model.Name = "startup2"
+model.Parent = resourcesFolder
+
+local localFileName = "BlockAnimation"
+local githubRawUrl = "https://raw.githubusercontent.com/NetlessScripter/LightningMax/refs/heads/main/BlockAnimation.rbxm"
+downloadFile(localFileName, githubRawUrl)
+
+local model = game:GetObjects(getcustomasset(localFileName))[1]
+model.Name = "Blocking88"
+model.Parent = resourcesFolder
+
+task.spawn(function()
+
+local clouds = Instance.new("Clouds")
+clouds.Name = "Clouds"
+clouds.Color = Color3.new(0.752941, 0.752941, 0.752941)
+clouds.Cover = 0.7139999866485596
+clouds.Density = 0.2930000126361847
+clouds.Enabled = true
+clouds.Parent = workspace.Terrain
+end)
+local l_fromRGB_0 = Color3.fromRGB
+local lighting = game:GetService("Lighting")
+
+lighting.Ambient = l_fromRGB_0(138, 138, 138)
+lighting.Brightness = 2
+lighting.ColorShift_Bottom = l_fromRGB_0(53, 53, 53)
+lighting.ColorShift_Top = l_fromRGB_0(90, 90, 90)
+lighting.EnvironmentDiffuseScale = 0
+lighting.EnvironmentSpecularScale = 0
+lighting.GlobalShadows = true
+lighting.OutdoorAmbient = l_fromRGB_0(128, 128, 128)
+lighting.ClockTime = 12.302
+lighting.GeographicLatitude = -0.41
+lighting.ShadowSoftness = 0.2
+lighting.ExposureCompensation = 0
+
+task.delay(0.5, function() --[[ Line: 15 ]]
+    if lighting:FindFirstChild("Atmosphere") then
+        lighting.Atmosphere.Density = 0.213
+end
+end)
+
+
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local camera = workspace.CurrentCamera
+
+camera.FieldOfView = 70
+player.CameraMaxZoomDistance = 128
+player.CameraMinZoomDistance = 0.5
+
+local Lighting = game:GetService("Lighting")
+
+for _, child in ipairs(Lighting:GetChildren()) do
+    if child:IsA("Sky") then
+        child:Destroy()
+    end
+end
+
+local sky = Instance.new("Sky")
+sky.Name = "CustomSkybox"
+sky.SkyboxFt = "http://www.roblox.com/asset/?id=91458024"
+sky.SkyboxUp = "http://www.roblox.com/asset/?id=91458002"
+sky.SkyboxLf = "http://www.roblox.com/asset/?id=91458024"
+sky.SkyboxRt = "http://www.roblox.com/asset/?id=91458024"
+sky.SkyboxDn = "http://www.roblox.com/asset/?id=91457980"
+sky.SkyboxBk = "http://www.roblox.com/asset/?id=91458024"
+sky.Parent = Lighting
+
+local Workspace = game:GetService("Workspace")
+
+local thrownFolder = Workspace:FindFirstChild("Thrown")
+if not thrownFolder then
+    thrownFolder = Instance.new("Folder")
+    thrownFolder.Name = "Thrown"
+    thrownFolder.Parent = Workspace
+end
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local function downloadFile(path, url)
+    if not isfile(path) then
+        print("Downloading: "..path)
+        local content = game:HttpGet(url)
+        writefile(path, content)
+    end
+end
+
+local localFileName = "DCNew"
+local githubRawUrl = "https://raw.githubusercontent.com/NetlessScripter/TSB-TO-ANY-GAME/refs/heads/main/DC.rbxm"
+
+downloadFile(localFileName, githubRawUrl)
+
+local model = game:GetObjects(getcustomasset(localFileName))[1]
+model.Name = "ExtraAnims"
+
+local resourcesFolder = ReplicatedStorage:FindFirstChild("Resources")
+if not resourcesFolder then
+    resourcesFolder = Instance.new("Folder")
+    resourcesFolder.Name = "Resources"
+    resourcesFolder.Parent = ReplicatedStorage
+end
+
+model.Parent = resourcesFolder
+
+-- Limb Reanim V2
+local a = game:GetObjects("rbxassetid://90416990661717")[1]
+a.Parent = ReplicatedStorage
+
+game:GetService("StarterGui"):SetCore("SendNotification", { 
+    Title = "Limb Reanim V2";
+    Text = "ENJOY!";
+    Icon = "rbxthumb://type=Asset&id=13775452736&w=150&h=150";
+    Duration = 15;
+})
+
+local settings = _G
+settings["Use default animations"] = true
+settings["Fake character transparency level"] = 1
+settings["Disable character scripts"] = true
+settings["Fake character should collide"] = true
+settings["Parent real character to fake character"] = false
+settings["Respawn character"] = true
+settings["Instant respawn"] = true
+settings["Hide HumanoidRootPart"] = false
+settings["PermaDeath fake character"] = false
+settings["Names to exclude from transparency"] = {}
+
+(function() if getgenv then return getgenv() else return _G end end)().fling = nil
+local finished = false
+
+task.spawn(function()
+    loadstring(game:HttpGet("https://gist.githubusercontent.com/lolidkwhy678/1f92d0894e3304be9882126819d54a6d/raw/bd10c958192386ea7db0f8711c865f6fb7faf8c1/CA%2520testing"))()
+
+    game:GetService("StarterGui"):SetCore("SendNotification", { 
+        Title = "Infinite Studios";
+        Text = "Enjoy!";
+        Icon = "rbxtHumanoidb://type=Asset&id=126389658690593&w=150&h=150";
+        Duration = 15;
+    })
+
+    local Players = game:GetService("Players")
+    local Player = Players.LocalPlayer
+    local Character = Player.Character
+    local Humanoid = Character:FindFirstChildOfClass("Humanoid")
+    local Backpack = Player.Backpack
+    local RootPart = Character:WaitForChild("HumanoidRootPart")
+    local Mouse = Player:GetMouse()
+    local IT = Instance.new
+    local V3 = Vector3.new
+    local CF = CFrame.new
+    local RAD = math.rad
+
+    local RunService = game:GetService('RunService')
+    local Camera = workspace.CurrentCamera
+    local IsR6 = (Humanoid.RigType == Enum.HumanoidRigType.R6)
+    local Head = Character:WaitForChild('Head')
+    local Torso = if IsR6 then Character:WaitForChild('Torso') else Character:WaitForChild('UpperTorso')
+    local Neck = if IsR6 then Torso:WaitForChild('Neck') else Head:WaitForChild('Neck')
+    local Waist = if IsR6 then nil else Torso:WaitForChild('Waist')
+    local NeckOriginC0 = Neck.C0
+    local WaistOriginC0 = if Waist then Waist.C0 else nil
+
+    RunService.RenderStepped:Connect(function(deltaTime: number)
+        local function Alpha(n)
+            return math.clamp(n * deltaTime * 60, 0, 1)
+        end
+        Humanoid.CameraOffset = Humanoid.CameraOffset:Lerp(
+            (RootPart.CFrame * CF(0, 1.5, 0)):PointToObjectSpace(Head.Position),
+            Alpha(0.15)
+        )
+    end)
+
+    local EffectFolder = Character:FindFirstChild("EffectFolder")
+    if not EffectFolder then
+        EffectFolder = IT("Folder")
+        EffectFolder.Name = "EffectFolder"
+        EffectFolder.Parent = Character
+    end
+
+    if not getgenv().Animator6D then
+       loadstring(game:HttpGet("https://raw.githubusercontent.com/gObl00x/Stuff/refs/heads/main/Animator6D.lua"))()
+    end
+
+local bb = game:GetObjects("rbxassetid://18864217452")[1]
+bb.Parent = game.ReplicatedStorage
+
+    local dropkickAnim = game:GetService("ReplicatedStorage")["FULL KJ ANIMS"].AnimSaves:FindFirstChild("Ravage Start")
+
+local RavageSuccess = game:GetService("ReplicatedStorage")["FULL KJ ANIMS"].AnimSaves:FindFirstChild("Ravage Succsess")
+local KJSpawn = game:GetService("ReplicatedStorage")["FULL KJ ANIMS"].AnimSaves["KJ Spawn"]
+local SwiftSweep = game:GetService("ReplicatedStorage")["FULL KJ ANIMS"].AnimSaves.Sweep_Kick
+local Collat = game:GetService("ReplicatedStorage").Resources.blobtop
+local Run = game:GetService("ReplicatedStorage")["FULL KJ ANIMS"].AnimSaves.Run
+Startup = game:GetService("ReplicatedStorage").Resources.startup2
+Ready = game:GetService("ReplicatedStorage").Resources.ready5
+Dash = game:GetService("ReplicatedStorage")["FULL KJ ANIMS"].AnimSaves.FrontDash
+Run = game:GetService("ReplicatedStorage").Resources.GhostBusters
+Blocking88 = game:GetService("ReplicatedStorage").Resources.Blocking88
+Awakening = game:GetService("ReplicatedStorage")["KJ anims"].AnimSaves["KJ awakening"]
+    finished = true
+
+local Player = game.Players.LocalPlayer
+local PlayerGui = Player:WaitForChild("PlayerGui")
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "MyButtonsGui"
+ScreenGui.Parent = PlayerGui
+
+local imageButton1 = Instance.new("ImageButton")
+imageButton1.Size = UDim2.new(0, 50, 0, 50)
+imageButton1.Position = UDim2.new(0.5, 250, 0.5, -25)
+imageButton1.Image = "rbxassetid://14488863746"
+imageButton1.BackgroundTransparency = 1
+imageButton1.Parent = ScreenGui
+
+local imageButton2 = Instance.new("ImageButton")
+imageButton2.Size = UDim2.new(0, 50, 0, 50)
+imageButton2.Position = UDim2.new(0.5, 250, 0.5, -25)
+imageButton2.Image = "rbxassetid://6256840888"
+imageButton2.BackgroundTransparency = 1
+imageButton2.Parent = ScreenGui
+
+imageButton2.MouseButton1Click:Connect(function()
+
+            Humanoid.WalkSpeed = 0
+
+if Character and dropkickAnim then
+           
+
+getgenv().Animator6D(Awakening, 1, false)
+        end
+
+local u = "https://us-east.storage.cloudconvert.com/tasks/baa7be71-3aa4-438b-b1c3-d66ea97351c0/copy_937554C6-5865-4039-B3F5-F7C13749D6D0.mp3?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=cloudconvert-production%2F20251006%2Fva%2Fs3%2Faws4_request&X-Amz-Date=20251006T225200Z&X-Amz-Expires=86400&X-Amz-Signature=73ac07162198c4475b6c6cf283eff1b0108b50f93fab18dfb66de25e6170fc79&X-Amz-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%3D%22copy_937554C6-5865-4039-B3F5-F7C13749D6D0.mp3%22&response-content-type=audio%2Fmpeg&x-id=GetObject"
+local f = "MySound.mp3"
+if not isfile(f) then
+    writefile(f, game:HttpGet(u))
+end
+
+local g = getsynasset or getcustomasset
+local s = Instance.new("Sound")
+s.Name = "MySound"
+s.SoundId = g(f)
+s.Volume = 2
+s.Parent = workspace
+s:Play()
+
+local Player = game.Players.LocalPlayer
+local Character = Player.Character
+local Debris = game:GetService("Debris")
+local EffectsFolder = game.ReplicatedStorage.Resources.KJEffects
+local ThrownFolder = workspace:FindFirstChild("Thrown") or Instance.new("Folder", workspace)
+ThrownFolder.Name = "Thrown"
+
+local function emitParticles(effectName, yOffset)
+    local particle = EffectsFolder[effectName]:Clone()
+    local pivot = Character:GetPivot()
+    yOffset = yOffset or 0
+    particle.CFrame = pivot * CFrame.new(0, yOffset, 0)
+    particle.Parent = ThrownFolder
+
+    for _, descendant in pairs(particle:GetDescendants()) do
+        if descendant:IsA("ParticleEmitter") then
+            descendant:Emit(descendant:GetAttribute("EmitCount") or 10)
+        end
+    end
+
+    Debris:AddItem(particle, 3)
+end
+
+local mainEffect = EffectsFolder["fine...1"]:Clone()
+mainEffect.CFrame = Character:GetPivot() * CFrame.new(0, -2, 0)
+mainEffect.Anchored = false
+mainEffect.Parent = ThrownFolder
+
+local weld = Instance.new("Weld")
+weld.Part0 = Character.PrimaryPart
+weld.Part1 = mainEffect
+weld.C0 = CFrame.new(0, -2, 0)
+weld.Parent = mainEffect
+
+local function tweenTransparency(startValue, endValue, duration)
+    for _, child in pairs(mainEffect:GetChildren()) do
+        if child:IsA("ParticleEmitter") then
+            local initial = child.Transparency.Keypoints[1].Value
+            local startTime = tick()
+            local conn
+            conn = game:GetService("RunService").RenderStepped:Connect(function()
+                local t = (tick() - startTime) / duration
+                if t >= 1 then
+                    t = 1
+                    conn:Disconnect()
+                end
+                local val = initial + (endValue - initial) * t
+                child.Transparency = NumberSequence.new(val)
+            end)
+        end
+    end
+end
+
+emitParticles("fine...Emit", -2)
+emitParticles("fine...Emit2")
+tweenTransparency(0.1, 0.94, 1)
+tweenTransparency(0.334, 0.91, 1)
+
+task.delay(8, function()
+    emitParticles("fine...Emit2")
+    if weld then
+        weld:Destroy()
+wait(0.4)
+
+            Humanoid.WalkSpeed = 25
+
+    end
+end)
+
+end)
+
+local player = game.Players.LocalPlayer
+local asset = game:GetObjects("rbxassetid://90459108159873")[1]
+asset.Parent = player:WaitForChild("PlayerGui")
+
+local ui = player.PlayerGui:WaitForChild("TSB UI (Working Hotbar)")
+local ultimateButton = ui:WaitForChild("UltimateBar"):WaitForChild("ImageLabel"):WaitForChild("TextButton")
+ultimateButton.Text = "20 SERIES"
+
+for _, child in pairs(ultimateButton:GetDescendants()) do
+    if child:IsA("TextLabel") or child:IsA("TextButton") then
+        child.Text = "20 SERIES"
+    end
+end
+
+local ultimateImageLabel = ui:WaitForChild("UltimateBar"):WaitForChild("ImageLabel")
+if ultimateImageLabel:FindFirstChild("TextLabel") then
+    ultimateImageLabel.TextLabel:Destroy()
+end
+if ultimateImageLabel:FindFirstChild("TextLabel2") then
+    ultimateImageLabel.TextLabel2:Destroy()
+end
+
+local hotbar = player.PlayerGui["TSB UI (Working Hotbar)"].Hotbar.Backpack.Hotbar
+hotbar["1"].ToolName.Text = "Ravage"
+hotbar["2"].ToolName.Text = "Swift Sweep"
+hotbar["3"].ToolName.Text = "Collateral Ruin"
+hotbar["4"].ToolName.Text = "Five Seasons"
+
+ local l_Thrown_40 = Workspace:FindFirstChild("Thrown")
+if not thrownFolder then
+    thrownFolder = Instance.new("Folder")
+    thrownFolder.Name = "Thrown"
+    thrownFolder.Parent = Workspace
+end
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local function downloadFile(path, url)
+    if not isfile(path) then
+        local content = game:HttpGet(url)
+        writefile(path, content)
+    end
+end
+
+local localFileName = "tariiscute"
+local githubRawUrl = "https://raw.githubusercontent.com/NetlessScripter/TSB-TO-ANY-GAME/refs/heads/main/TsbResources.rbxm"
+
+downloadFile(localFileName, githubRawUrl)
+
+local model = game:GetObjects(getcustomasset(localFileName))[1]
+
+local resourcesFolder = ReplicatedStorage:FindFirstChild("Resources") or Instance.new("Folder")
+resourcesFolder.Name = "Resources"
+resourcesFolder.Parent = ReplicatedStorage
+
+model.Parent = resourcesFolder
+
+local tsbResources = resourcesFolder:FindFirstChild("TsbResources")
+if tsbResources then
+    for _, child in ipairs(tsbResources:GetChildren()) do
+        child.Parent = resourcesFolder
+    end
+    tsbResources:Destroy()
+end
+
+local nestedResources = resourcesFolder:FindFirstChild("resources")
+if nestedResources then
+    for _, child in ipairs(nestedResources:GetChildren()) do
+        child.Parent = resourcesFolder
+    end
+    nestedResources:Destroy()
+end
+
+local player = game.Players.LocalPlayer
+local hotbar = player.PlayerGui["TSB UI (Working Hotbar)"].Hotbar.Backpack.Hotbar
+local buttons = {"1", "2", "3", "4", "5"}
+
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local char = player.Character or player.CharacterAdded:Wait()
+local hrp = char:WaitForChild("HumanoidRootPart")
+
+            Humanoid.WalkSpeed = 25
+
+local EEBC = game:GetObjects("rbxassetid://18524790561")[1]
+EEBC.Parent = game:GetService("ReplicatedStorage")
+local M1 = game:GetService("ReplicatedStorage")["KJ Wall Combo + M1s"].AnimSaves["punch 1"]
+local M2 = game:GetService("ReplicatedStorage")["KJ Wall Combo + M1s"].AnimSaves["punch 2"]
+local M3 = game:GetService("ReplicatedStorage")["KJ Wall Combo + M1s"].AnimSaves["punch 3"]
+local M4 = game:GetService("ReplicatedStorage")["KJ Wall Combo + M1s"].AnimSaves["punch 4"]
+Block88 = game:GetService("ReplicatedStorage").Resources.Blocking88
+if Character and dropkickAnim then
+           
+
+getgenv().Animator6D(KJSpawn, 1, false)
+        end
+
+local p = game.Players.LocalPlayer
+local c = p.Character or p.CharacterAdded:Wait()
+local h = c:WaitForChild("Humanoid")
+local r = c:WaitForChild("HumanoidRootPart")
+
+local function s(id)
+	local a = Instance.new("Sound")
+	a.SoundId = id
+	a.Volume = 0.3
+	a.Parent = r
+	a:Play()
+	game.Debris:AddItem(a, 2)
+end
+
+local l = false
+
+h.StateChanged:Connect(function(o, n)
+	if n == Enum.HumanoidStateType.Jumping then
+		s("rbxassetid://7005105940")
+	elseif n == Enum.HumanoidStateType.Landed then
+		s("rbxassetid://7005105964")
+	end
+end)
+
+
+local u = "rbxassetid://76501364530453"
+local s = Instance.new("Sound")
+s.Name = "Sound"
+s.SoundId = u
+s.Volume = 1
+s.Parent = workspace
+s:Play()
+
+local player = game.Players.LocalPlayer
+
+local function setupPhone(character)
+    local rs = game:GetService("ReplicatedStorage")
+    local resources = rs:FindFirstChild("Resources")
+    if not resources then return end
+
+    local phoneModel = resources:FindFirstChild("le phone")
+    if not phoneModel then return end
+
+    local phoneClone = phoneModel:Clone()
+    local rightArm = character:FindFirstChild("Right Arm")
+    if not rightArm then return end
+
+    phoneClone.Parent = character
+    if not phoneClone.PrimaryPart then
+        local part = phoneClone:FindFirstChildWhichIsA("BasePart")
+        if not part then return end
+        phoneClone.PrimaryPart = part
+    end
+
+    local joint = Instance.new("Motor6D")
+    joint.Part0 = rightArm
+    joint.Part1 = phoneClone.PrimaryPart
+    joint.C0 = CFrame.new(0, -1, 0)
+    joint.Name = "PhoneJoint"
+    joint.Parent = rightArm
+
+    local torso = character:FindFirstChild("Torso") or character:FindFirstChild("UpperTorso")
+
+    local sound1 = Instance.new("Sound")
+    sound1.SoundId = "rbxassetid://17325174223"
+    sound1.Parent = torso
+    sound1:Play()
+
+    local sound2 = Instance.new("Sound")
+    sound2.SoundId = "rbxassetid://17325206534"
+    sound2.Parent = torso
+    sound2:Play()
+
+    local sound3 = Instance.new("Sound")
+    sound3.SoundId = "rbxassetid://17325211957"
+    sound3.Parent = torso
+    task.delay(1.34, function()
+        sound3:Play()
+    end)
+
+    task.delay(1.34, function()
+        joint:Destroy()
+        if phoneClone.Handle then
+            if phoneClone.Handle:FindFirstChild("Meshes/testmodel_Cube.002") then
+                phoneClone.Handle["Meshes/testmodel_Cube.002"]:Destroy()
+            end
+            phoneClone.Handle:Destroy()
+        end
+        task.wait(5)
+        phoneClone:Destroy()
+    end)
+
+    local function cleanup()
+        joint:Destroy()
+        phoneClone:Destroy()
+        if torso then
+            for _, c in pairs(torso:GetChildren()) do
+                if c:IsA("Sound") then
+                    c:Destroy()
+                end
+            end
+        end
+    end
+
+    local humanoid = character:FindFirstChildOfClass("Humanoid")
+    if humanoid then
+        humanoid.Running:Connect(cleanup)
+        humanoid.Jumping:Connect(cleanup)
+    end
+end
+
+player.CharacterAdded:Connect(setupPhone)
+if player.Character then
+    setupPhone(player.Character)
+end
+
+-- Highlight effect
+task.spawn(function()
+    local char = player.Character or player.CharacterAdded:Wait()
+    local highlight = Instance.new("Highlight")
+    highlight.Name = "Marking"
+    highlight.Parent = char
+    highlight.Adornee = char
+    highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+    highlight.OutlineTransparency = 0.5
+    highlight.FillColor = Color3.fromRGB(255, 255, 255)
+    highlight.FillTransparency = 0.5
+
+    task.wait(1.5)
+
+    local ts = game:GetService("TweenService")
+    local info = TweenInfo.new(2.4, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)
+    local goal = {OutlineTransparency = 1, FillTransparency = 1}
+
+    local tween = ts:Create(highlight, info, goal)
+    tween:Play()
+end)
+
+
+local p = game:GetService("Players").LocalPlayer
+local rs = game:GetService("RunService")
+
+local g = Instance.new("ScreenGui")
+g.Name = "TouchGui"
+
+local f = Instance.new("Frame")
+f.Name = "TouchControlFrame"
+f.Size = UDim2.new(1,0,1,0)
+f.BackgroundTransparency = 1
+f.Parent = g
+
+local jb = Instance.new("ImageButton")
+jb.Name = "JumpButton"
+jb.Size = UDim2.new(0,70,0,70)
+jb.Position = UDim2.new(1,-95,1,-90)
+jb.BackgroundTransparency = 1
+jb.ImageTransparency = 1
+jb.Parent = f
+
+local function btn(n, y, i)
+	local b = Instance.new("ImageButton")
+	b.Name = n
+	b.Size = UDim2.new(0,54,0,54)
+	b.Position = UDim2.new(0.5,0,0.5,y)
+	b.AnchorPoint = Vector2.new(0.5,0.5)
+	b.BackgroundTransparency = 1
+	b.Image = i
+	b.ImageColor3 = Color3.new(1,1,1)
+	b.ImageTransparency = 0
+	b.Parent = jb
+	return b
+end
+
+local bb = btn("BlockButton",-198,"rbxassetid://12252418253")
+local pb = btn("PunchButton",-134,"rbxassetid://12252402662")
+local db = btn("DashButton",-70,"rbxassetid://12252434969")
+local sb = btn("ShiftLockButton",-262,"rbxassetid://79605996519245")
+
+local shift = false
+local function sl()
+	shift = not shift
+	p.DevEnableMouseLock = shift
+	p.DevComputerMovementMode = shift and Enum.DevComputerMovementMode.Scriptable or Enum.DevComputerMovementMode.Default
+	sb.ImageColor3 = shift and Color3.fromRGB(27,42,53) or Color3.new(1,1,1)
+end
+
+rs.RenderStepped:Connect(function()
+	if shift and p.Character and p.Character:FindFirstChild("HumanoidRootPart") then
+		local r = p.Character.HumanoidRootPart
+		local c = workspace.CurrentCamera
+		local lv = Vector3.new(c.CFrame.LookVector.X, 0, c.CFrame.LookVector.Z)
+		if lv.Magnitude > 0 then
+			r.CFrame = CFrame.new(r.Position, r.Position + lv.Unit)
+		end
+	end
+end)
+
+local s = 0
+local canPunch = true
+local punchDelay = false
+local rt, rc
+local d1, d2, d3, d4 = 0.5, 0.3, 0.4, 0.6
+local comboResetTime = 2
+local comboCooldown = 2
+
+local ch = p.Character or p.CharacterAdded:Wait()
+local h = ch:WaitForChild("Humanoid")
+
+local function snd(i)
+	local s = Instance.new("Sound")
+	s.SoundId = i
+	s.Volume = 1
+	s.Parent = workspace
+	s:Play()
+end
+
+local function p1()
+	h.WalkSpeed = 8
+	snd("rbxassetid://93102011218945")
+	if ch and dropkickAnim then getgenv().Animator6D(M1,1,false) end
+	task.wait(d1)
+	h.WalkSpeed = 25
+end
+
+local function p2()
+	h.WalkSpeed = 8
+	snd("rbxassetid://119268338332839")
+	if ch and dropkickAnim then getgenv().Animator6D(M2,1,false) end
+	task.wait(d2)
+	h.WalkSpeed = 25
+end
+
+local function p3()
+	h.WalkSpeed = 8
+	snd("rbxassetid://94287427538964")
+	if ch and dropkickAnim then getgenv().Animator6D(M3,1,false) end
+	task.wait(d3)
+	h.WalkSpeed = 25
+end
+
+local function p4()
+	h.WalkSpeed = 8
+	snd("rbxassetid://83840600851136")
+	if ch and dropkickAnim then getgenv().Animator6D(M4,1,false) end
+	task.wait(d4)
+	h.WalkSpeed = 25
+end
+
+local function clearTimers()
+	if rt then task.cancel(rt) rt = nil end
+	if rc then task.cancel(rc) rc = nil end
+end
+
+local function resetCombo()
+	clearTimers()
+	s = 0
+	canPunch = true
+end
+
+local function startComboResetTimer()
+	if rt then task.cancel(rt) rt = nil end
+	rt = task.delay(comboResetTime, function()
+		resetCombo()
+	end)
+end
+
+local function applyInputDelay(delayTime)
+	punchDelay = true
+	task.delay(delayTime, function()
+		punchDelay = false
+	end)
+end
+
+local function applyCooldown()
+	canPunch = false
+	punchDelay = true
+	task.delay(comboCooldown, function()
+		canPunch = true
+		punchDelay = false
+		s = 0
+	end)
+end
+
+local function punch()
+	if not canPunch or punchDelay then return end
+	s += 1
+	if s > 4 then s = 1 end
+	if s == 1 then p1() applyInputDelay(d1) startComboResetTimer()
+	elseif s == 2 then p2() applyInputDelay(d2) startComboResetTimer()
+	elseif s == 3 then p3() applyInputDelay(d3) startComboResetTimer()
+	elseif s == 4 then p4() applyCooldown()
+	end
+end
+
+local holding = false
+local autoPunch
+
+local function auto()
+	if autoPunch then task.cancel(autoPunch) end
+	autoPunch = task.spawn(function()
+		while holding and s < 4 do
+			if canPunch and not punchDelay then
+				punch()
+			end
+			task.wait(0.05)
+		end
+		if holding and s == 4 then punch() end
+	end)
+end
+
+pb.MouseButton1Down:Connect(function()
+	holding = true
+	pb.ImageTransparency = 1
+	task.wait(0.1)
+	pb.ImageTransparency = 0
+	pb.ImageColor3 = Color3.new(1,1,1)
+	if canPunch and not punchDelay then punch() end
+	auto()
+end)
+local r = ch:WaitForChild("HumanoidRootPart")
+local runEnabled = true
+local function toggleRunAnimation(state)
+	runEnabled = state
+	if not runEnabled then
+		getgenv().Animator6D(Run,1,false)
+	end
+end
+pb.MouseButton1Up:Connect(function()
+	holding = false
+	pb.ImageTransparency = 0
+	pb.ImageColor3 = Color3.new(1,1,1)
+end)
+
+local bh = false
+local bt
+
+bb.MouseButton1Down:Connect(function()
+
+		toggleRunAnimation(false)
+
+	h.WalkSpeed = 8
+
+local s = Instance.new("Sound")
+s.SoundId = "rbxassetid://7406698101"
+s.Volume = 0.5
+s.Parent = workspace
+s:Play()
+
+
+if ch and dropkickAnim then
+				getgenv().Animator6D(Block88,1,true)
+			end
+
+	bh = true
+	if bt then task.cancel(bt) end
+	bt = task.spawn(function()
+		while bh do
+			task.wait(0.1)
+		end
+	end)
+end)
+
+bb.MouseButton1Up:Connect(function()
+
+		toggleRunAnimation(true)
+
+	h.WalkSpeed = 25
+
+if ch and dropkickAnim then
+				getgenv().Animator6D(Block88,1,false)
+			end
+local s = Instance.new("Sound")
+s.SoundId = "rbxassetid://7406697981"
+s.Volume = 0.5
+s.Parent = workspace
+s:Play()
+
+	bh = false
+end)
+
+
+
+h.Running:Connect(function(spd)
+	if dropkickAnim and runEnabled then
+		local st = h:GetState()
+		local bv = r:FindFirstChildOfClass("BodyVelocity")
+		if st ~= Enum.HumanoidStateType.Freefall and not bv then
+			if spd > 0 then
+				getgenv().Animator6D(Run,1,true)
+			else
+				getgenv().Animator6D(Run,1,false)
+			end
+		else
+			getgenv().Animator6D(Run,1,false)
+		end
+	end
+end)
+
+local cdash = false
+db.MouseButton1Click:Connect(function()
+	if cdash then return end
+	cdash = true
+	toggleRunAnimation(false)
+	task.wait(0.1)
+	local s = Instance.new("Sound")
+	s.SoundId = "rbxassetid://104671284040984"
+	s.Volume = 1
+	s.Parent = workspace
+	s:Play()
+	local t = ch:WaitForChild("Torso")
+	local hd = ch:WaitForChild("Head")
+	local hrp = ch:WaitForChild("HumanoidRootPart")
+	local function dust(pth)
+		local t = pth:Clone()
+		t.Parent = hrp
+		for _,v in pairs(t:GetChildren()) do
+			if v:IsA("ParticleEmitter") then
+				v:Emit(15)
+				v.Enabled = false
+			end
+		end
+	end
+	dust(game.ReplicatedStorage.Resources.TestStuff.timeblitzH.dust)
+	dust(game.ReplicatedStorage.Resources.TestStuff.timeblitz.dust)
+	task.spawn(function()
+		local rg = game.ReplicatedStorage.Resources.Ring:Clone()
+		rg.Anchored = true
+		rg.CanCollide = false
+		rg.Size = Vector3.new(6.5,0.5,6.5)
+		rg.Parent = ch
+		local tb = t.Position - Vector3.new(0,t.Size.Y/2,0)
+		rg.Position = (hd.Position + tb) / 2
+		rg.CFrame = CFrame.new(rg.Position, rg.Position + t.CFrame.LookVector) * CFrame.Angles(math.rad(90),0,0)
+		local sz0 = rg.Size
+		local sz1 = Vector3.new(9,0.5,9)
+		local dur = 0.07
+		local stp = 0.02
+		local n = dur/stp
+		for i=0,n do
+			local pr = i/n
+			rg.Size = sz0:Lerp(sz1,pr)
+			rg.Transparency = pr
+			task.wait(stp)
+		end
+		rg:Destroy()
+	end)
+	if ch and dropkickAnim then getgenv().Animator6D(Dash,0.5,false) end
+	local bv = Instance.new("BodyVelocity")
+	bv.MaxForce = Vector3.new(1e5,0,1e5)
+	bv.Parent = hrp
+	local sp = 100
+	local t = 0
+	local done = false
+	local con
+	con = rs.Heartbeat:Connect(function(dt)
+		if not hrp or not hrp.Parent then con:Disconnect() return end
+		local dir = hrp.CFrame.LookVector
+		dir = Vector3.new(dir.X,0,dir.Z).Unit
+		bv.Velocity = dir * sp
+		t += dt
+		if not done and t >= 0.3 then
+			sp = 40
+			done = true
+		end
+	end)
+	task.delay(0.5,function()
+		local st = 0
+		local tm = 0.3
+		local init = sp
+		while st < tm do
+			task.wait(0.02)
+			st += 0.02
+			local pr = st/tm
+			sp = init * (1 - pr)
+		end
+	end)
+	task.delay(0.9,function()
+		if con then con:Disconnect() end
+		bv:Destroy()
+		task.wait(0.1)
+		toggleRunAnimation(true)
+		dust(game.ReplicatedStorage.Resources.TestStuff.timeblitzH.dust)
+		dust(game.ReplicatedStorage.Resources.TestStuff.timeblitz.dust)
+	end)
+	task.delay(2,function()
+		cdash = false
+	end)
+end)
+
+sb.MouseButton1Click:Connect(sl)
+g.Parent = p.PlayerGui
+
+
+
+local button1Function = function()
+
+if Character and dropkickAnim then
+            getgenv().Animator6D(dropkickAnim, 1, false)
+        end
+
+Humanoid.WalkSpeed = 0
+local s = Instance.new("Sound")
+s.SoundId = "rbxassetid://112035527459586"
+s.Volume = 1
+s.Parent = workspace
+s:Play()
+
+wait(0.7)
+
+if Character and dropkickAnim then
+            getgenv().Animator6D(RavageSuccess, 1, false)
+        end
+
+local s = Instance.new("Sound")
+s.SoundId = "rbxassetid://139431216486875"
+s.Volume = 1
+s.Parent = workspace
+s:Play()
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local Debris = game:GetService("Debris")
+
+local function v670(func, fps)
+	local interval = 1 / (fps or 60)
+	local elapsed = 0
+	local active = true
+
+	local stopFunc = function()
+		active = false
+	end
+
+	task.spawn(function()
+		while active do
+			elapsed += RunService.RenderStepped:Wait()
+			while elapsed >= interval do
+				elapsed -= interval
+				func(stopFunc)
+				if not active then break end
+			end
+		end
+	end)
+
+	return stopFunc
+end
+
+local v283, v284, v285 = 0, 0, 0
+local v287 = nil
+
+local function randomSign()
+	return math.random(1, 2) == 1 and -1 or 1
+end
+
+local function addShake(intensity)
+	local player = Players.LocalPlayer
+	if player:GetAttribute("S_ReducedCamshake") then
+		intensity /= 2
+	end
+
+	if not v287 then
+		v287 = v670(function(stop)
+			v283 *= randomSign()
+			v284 *= randomSign()
+			v285 *= randomSign()
+
+			v283 *= 0.85
+			v284 *= 0.85
+			v285 *= 0.85
+
+			local camera = workspace.CurrentCamera
+			camera.CFrame *= CFrame.new(v283, v284, v285)
+
+			if math.abs(v283) <= 0.05 and math.abs(v284) <= 0.05 and math.abs(v285) <= 0.05 then
+				stop()
+				v287 = nil
+			end
+		end, 60)
+	end
+
+	v283 += intensity * randomSign()
+	v284 += intensity * randomSign()
+	v285 += intensity * randomSign()
+end
+
+local function triggerCamShake(params)
+	if params.Effect == "Camshake" then
+		if params.Last then
+			task.spawn(function()
+				for _ = 1, params.Last / 0.03 do
+					addShake(params.Intensity)
+					params.Intensity *= 0.9
+					task.wait(0.03)
+				end
+			end)
+		else
+			addShake(params.Intensity)
+		end
+	end
+end
+
+triggerCamShake({Effect = "Camshake", Intensity = 0.3})
+
+task.spawn(function()
+wait(4.1)
+
+triggerCamShake({Effect = "Camshake", Intensity = 0.8, Last = 0.8})
+
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local TweenService = game:GetService("TweenService")
+local Debris = game:GetService("Debris")
+local RunService = game:GetService("RunService")
+
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local root = character:WaitForChild("HumanoidRootPart")
+
+local effects = ReplicatedStorage:WaitForChild("Resources"):WaitForChild("KJEffects")
+local thrownFolder = workspace:WaitForChild("Thrown")
+
+local spinOffset = root.CFrame
+local beamOffset = root.CFrame
+
+local floatingRocks = {}
+local rockStates = {}
+
+local function generateFloatingRocks(originCFrame, count)
+	local step = (2 * math.pi) / count
+	for i = 1, count do
+		local rock = effects:WaitForChild("FloatingRock"):Clone()
+		local radius = 10
+		local angle = step * i
+		local size = math.random() * 0.5 + 0.25
+
+		local angleX = math.rad(math.random(-180, 180))
+		rock.CFrame = originCFrame * CFrame.Angles(0, angleX, 0) * CFrame.new(0, 0, -radius)
+		rock.Size = Vector3.new(size, size, size)
+		rock.Anchored = true
+		rock.CanCollide = false
+		rock.Massless = true
+		rock.CanQuery = false
+		rock.Parent = thrownFolder
+
+		for _, desc in ipairs(rock:GetDescendants()) do
+			if desc:IsA("ParticleEmitter") then
+				desc.Enabled = true
+			end
+		end
+
+		local state = {
+			CurrentAngle = angle + math.random() * 0.2,
+			LastPosition = rock.Position,
+			InverseAngleX = math.random(1, 2) == 1,
+			InverseAngleY = math.random(1, 2) == 1,
+			InverseAngleZ = math.random(1, 2) == 1,
+			YOffset = math.random() * 0.2 - 0.1,
+			TossDirection = Vector3.new(),
+		}
+		rockStates[rock] = state
+	end
+end
+
+local windEffect = effects:WaitForChild("RUNAROUNDWIND"):Clone()
+windEffect.CFrame = spinOffset
+windEffect.Parent = thrownFolder
+
+local beamEffect = effects:WaitForChild("spinbeam"):Clone()
+beamEffect.CFrame = beamOffset
+beamEffect.Parent = thrownFolder
+
+for _, v in ipairs(beamEffect:GetDescendants()) do
+	if v:IsA("ParticleEmitter") then
+		v.Enabled = true
+	end
+end
+
+for _, v in ipairs(windEffect:GetDescendants()) do
+	if v:IsA("ParticleEmitter") then
+		v.Enabled = true
+	end
+end
+
+local beam = beamEffect:FindFirstChild("beam2"):FindFirstChildWhichIsA("Beam")
+if beam then
+	TweenService:Create(beam, TweenInfo.new(0.66, Enum.EasingStyle.Circular, Enum.EasingDirection.Out), {
+		TextureSpeed = 0
+	}):Play()
+end
+
+RunService:BindToRenderStep("SpinBeamFade", Enum.RenderPriority.Last.Value, function()
+	if beam then
+		local alpha = math.clamp((tick() % 0.66) / 0.66, 0.5, 1)
+		beam.Transparency = NumberSequence.new(alpha)
+	end
+end)
+
+task.delay(0.66, function()
+	RunService:UnbindFromRenderStep("SpinBeamFade")
+	for _, v in ipairs(beamEffect:GetDescendants()) do
+		if v:IsA("ParticleEmitter") then
+			v.Enabled = false
+		end
+	end
+	for _, v in ipairs(windEffect:GetDescendants()) do
+		if v:IsA("ParticleEmitter") then
+			v.Enabled = false
+		end
+	end
+	Debris:AddItem(windEffect, 1.5)
+	Debris:AddItem(beamEffect, 1.5)
+end)
+
+generateFloatingRocks(spinOffset, math.random(10, 14))
+
+local startTime = os.clock()
+local renderConnection
+renderConnection = RunService.RenderStepped:Connect(function(dt)
+	if os.clock() - startTime > 0.66 then
+		renderConnection:Disconnect()
+		for rock, state in pairs(rockStates) do
+			rock.Anchored = false
+			rock.CanCollide = true
+			rock.AssemblyLinearVelocity = -state.TossDirection * 50
+			rock.AssemblyAngularVelocity = Vector3.new(
+				math.random(-30, 30),
+				math.random(-30, 30),
+				math.random(-30, 30)
+			)
+			TweenService:Create(rock, TweenInfo.new(0.45), {
+				Size = Vector3.new(0, 0, 0)
+			}):Play()
+			Debris:AddItem(rock, 0.47)
+		end
+		table.clear(rockStates)
+	else
+		for rock, state in pairs(rockStates) do
+			local angle = (state.CurrentAngle + dt * 30) % (2 * math.pi)
+			local offset = CFrame.new(math.cos(angle) * 10, state.YOffset, math.sin(angle) * 10)
+			local rotation = CFrame.Angles(
+				math.cos(state.InverseAngleX and -angle or angle),
+				math.sin(state.InverseAngleY and -angle or angle),
+				math.sin(state.InverseAngleZ and -angle or angle)
+			)
+			local newCFrame = CFrame.new(spinOffset.Position) * offset * rotation
+			state.CurrentAngle = angle
+			state.TossDirection = (state.LastPosition - newCFrame.Position).Unit
+			state.LastPosition = newCFrame.Position
+			rock.CFrame = newCFrame
+		end
+	end
+end)
+end)
+task.spawn(function()
+wait(5.3)
+task.spawn(function()
+wait(0.1)
+
+triggerCamShake({Effect = "Camshake", Intensity = 1, Last = 0.8})
+end)
+
+local sound = Instance.new("Sound")
+sound.SoundId = "rbxassetid://16945723339"
+sound.Volume = 2
+sound.Parent = workspace
+sound:Play()
+
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local TweenService = game:GetService("TweenService")
+local Debris = game:GetService("Debris")
+
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local root = character:WaitForChild("HumanoidRootPart")
+
+local effects = ReplicatedStorage:WaitForChild("Resources"):WaitForChild("KJEffects")
+
+local particleOffset = root.CFrame
+local meshOffset = root.CFrame
+
+local lastkick = effects:WaitForChild("lastkick"):Clone()
+lastkick.CFrame = particleOffset
+lastkick.Parent = workspace:WaitForChild("Thrown")
+
+local smoker = lastkick:FindFirstChild("smoker")
+if smoker then
+	local smoke = smoker:FindFirstChild("smoke")
+	if smoke and smoke:IsA("ParticleEmitter") then
+		smoke.Color = ColorSequence.new(Color3.new(1, 1, 1))
+	end
+end
+
+for _, child in ipairs(lastkick:GetDescendants()) do
+	if child:IsA("ParticleEmitter") then
+		child:Emit(10)
+	end
+end
+
+Debris:AddItem(lastkick, 2)
+
+local lastkickframe = effects:WaitForChild("lastkickframe"):Clone()
+lastkickframe.CFrame = meshOffset
+lastkickframe.Parent = workspace:WaitForChild("Thrown")
+
+local mesh = lastkickframe:FindFirstChild("Mesh")
+if mesh then
+	TweenService:Create(mesh, TweenInfo.new(0.06, Enum.EasingStyle.Circular, Enum.EasingDirection.Out), {
+		Scale = Vector3.new(1, 0, 0)
+	}):Play()
+end
+
+TweenService:Create(lastkickframe, TweenInfo.new(0.06, Enum.EasingStyle.Circular, Enum.EasingDirection.Out), {
+	CFrame = lastkickframe.CFrame * CFrame.Angles(math.pi, 0, 0)
+}):Play()
+
+Debris:AddItem(lastkickframe, 0.4)
+
+            Humanoid.WalkSpeed = 25
+end)
+wait(1.3)
+task.spawn(function()
+
+triggerCamShake({Effect = "Camshake", Intensity = 1})
+local TweenService = game:GetService("TweenService")
+local Debris = game:GetService("Debris")
+local Workspace = game:GetService("Workspace")
+
+local player = game.Players.LocalPlayer
+local myCharacter = player.Character or player.CharacterAdded:Wait()
+
+local effectsContainer = game.ReplicatedStorage.Resources.KJEffects
+
+local startCFrame = myCharacter.PrimaryPart.CFrame
+local meshImpactCFrame = myCharacter.PrimaryPart.CFrame
+local dustOffsetCFrame = myCharacter.PrimaryPart.CFrame
+
+local mainEffect = effectsContainer["1and2"]:Clone()
+mainEffect.CFrame = startCFrame
+mainEffect.Parent = workspace.Thrown
+
+local meshEffect = effectsContainer.hit1and2mesh:Clone()
+meshEffect.CFrame = meshImpactCFrame
+meshEffect.Parent = workspace.Thrown
+
+TweenService:Create(meshEffect.Mesh, TweenInfo.new(0.05), {
+    Scale = Vector3.new(0, 40, 0)
+}):Play()
+
+TweenService:Create(meshEffect, TweenInfo.new(0.05), {
+    CFrame = meshEffect.CFrame * CFrame.new(-0.7975, 5.013, -12.1267)
+}):Play()
+
+Debris:AddItem(meshEffect, 0.6)
+
+local rayOrigin = dustOffsetCFrame.Position + Vector3.new(0, 1, 0)
+local rayDirection = Vector3.new(0, -20, 0)
+local raycastParams = RaycastParams.new()
+raycastParams.FilterDescendantsInstances = {myCharacter}
+raycastParams.FilterType = Enum.RaycastFilterType.Blacklist
+
+local raycastResult = Workspace:Raycast(rayOrigin, rayDirection, raycastParams)
+
+local color3Value = Color3.new(1, 1, 1)
+
+if raycastResult and raycastResult.Instance and raycastResult.Instance:IsA("BasePart") then
+    color3Value = raycastResult.Instance.Color
+end
+
+local smokeEffect = effectsContainer["1and2smoke"]:Clone()
+smokeEffect.CFrame = dustOffsetCFrame
+
+smokeEffect["1and2smoke"]["1"].Color = ColorSequence.new(color3Value)
+smokeEffect["1and2smoke"]["2"].Color = ColorSequence.new(color3Value)
+
+smokeEffect.Parent = workspace.Thrown
+
+for _, descendant in pairs(smokeEffect:GetDescendants()) do
+    if descendant:IsA("ParticleEmitter") then
+        descendant:Emit(descendant:GetAttribute("EmitCount"), descendant:GetAttribute("EmitDelay"))
+    end
+end
+
+for _, descendant in pairs(mainEffect:GetDescendants()) do
+    if descendant:IsA("ParticleEmitter") then
+        descendant:Emit(descendant:GetAttribute("EmitCount"), descendant:GetAttribute("EmitDelay"))
+    end
+end
+
+Debris:AddItem(mainEffect, 1)
+Debris:AddItem(meshEffect, 1)
+end)
+wait(0.4)
+triggerCamShake({Effect = "Camshake", Intensity = 1})
+task.spawn(function()
+local TweenService = game:GetService("TweenService")
+local Debris = game:GetService("Debris")
+local Workspace = game:GetService("Workspace")
+
+local player = game.Players.LocalPlayer
+local myCharacter = player.Character or player.CharacterAdded:Wait()
+
+local effectsContainer = game.ReplicatedStorage.Resources.KJEffects
+
+local startCFrame = myCharacter.PrimaryPart.CFrame
+local meshImpactCFrame = myCharacter.PrimaryPart.CFrame
+local dustOffsetCFrame = myCharacter.PrimaryPart.CFrame
+
+local mainEffect = effectsContainer["1and2"]:Clone()
+mainEffect.CFrame = startCFrame
+mainEffect.Parent = workspace.Thrown
+
+local meshEffect = effectsContainer.hit1and2mesh:Clone()
+meshEffect.CFrame = meshImpactCFrame
+meshEffect.Parent = workspace.Thrown
+
+TweenService:Create(meshEffect.Mesh, TweenInfo.new(0.05), {
+    Scale = Vector3.new(0, 40, 0)
+}):Play()
+
+TweenService:Create(meshEffect, TweenInfo.new(0.05), {
+    CFrame = meshEffect.CFrame * CFrame.new(-0.7975, 5.013, -12.1267)
+}):Play()
+
+Debris:AddItem(meshEffect, 0.6)
+
+local rayOrigin = dustOffsetCFrame.Position + Vector3.new(0, 1, 0)
+local rayDirection = Vector3.new(0, -20, 0)
+local raycastParams = RaycastParams.new()
+raycastParams.FilterDescendantsInstances = {myCharacter}
+raycastParams.FilterType = Enum.RaycastFilterType.Blacklist
+
+local raycastResult = Workspace:Raycast(rayOrigin, rayDirection, raycastParams)
+
+local color3Value = Color3.new(1, 1, 1)
+
+if raycastResult and raycastResult.Instance and raycastResult.Instance:IsA("BasePart") then
+    color3Value = raycastResult.Instance.Color
+end
+
+local smokeEffect = effectsContainer["1and2smoke"]:Clone()
+smokeEffect.CFrame = dustOffsetCFrame
+
+smokeEffect["1and2smoke"]["1"].Color = ColorSequence.new(color3Value)
+smokeEffect["1and2smoke"]["2"].Color = ColorSequence.new(color3Value)
+
+smokeEffect.Parent = workspace.Thrown
+
+for _, descendant in pairs(smokeEffect:GetDescendants()) do
+    if descendant:IsA("ParticleEmitter") then
+        descendant:Emit(descendant:GetAttribute("EmitCount"), descendant:GetAttribute("EmitDelay"))
+    end
+end
+
+for _, descendant in pairs(mainEffect:GetDescendants()) do
+    if descendant:IsA("ParticleEmitter") then
+        descendant:Emit(descendant:GetAttribute("EmitCount"), descendant:GetAttribute("EmitDelay"))
+    end
+end
+
+Debris:AddItem(mainEffect, 1)
+Debris:AddItem(meshEffect, 1)
+end)
+wait(0.6)
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local hrp = character:WaitForChild("HumanoidRootPart")
+
+local barrage = ReplicatedStorage.Resources.KJEffects.barrage:Clone()
+barrage.Parent = workspace.Thrown
+barrage.CFrame = hrp.CFrame
+barrage.Anchored = false
+
+local weld1 = Instance.new("ManualWeld")
+weld1.Part0 = hrp
+weld1.Part1 = barrage
+weld1.C0 = CFrame.new(0, -0.5, 0.5) * CFrame.Angles(math.rad(35), 0, math.rad(50))
+weld1.Parent = barrage
+
+for _, v in ipairs(barrage:GetDescendants()) do
+    if v:IsA("ParticleEmitter") then
+        v.Enabled = true
+    end
+end
+
+wait(1.2)
+for _, v in ipairs(barrage:GetDescendants()) do
+    if v:IsA("ParticleEmitter") then
+        v.Enabled = false
+    end
+end
+task.spawn(function()
+task.spawn(function()
+
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local _ = character.PrimaryPart
+
+local kjEffects = game.ReplicatedStorage.Resources.KJEffects
+
+local smoke1 = kjEffects.Smoke1:Clone()
+smoke1.CFrame = character:GetPivot() * CFrame.new(-0.5975, -2.9642, 0.3552)
+smoke1.Parent = workspace.Thrown
+
+local weld = Instance.new("WeldConstraint")
+weld.Part0 = character.PrimaryPart
+weld.Part1 = smoke1
+weld.Parent = smoke1
+
+task.delay(0.23, function()
+	weld:Destroy()
+	smoke1:Destroy()
+end)
+
+local wind = kjEffects.Ultikwind1:Clone()
+wind.CFrame = character:GetPivot() * CFrame.new(-0.2682, -0.1157, -1.5451) * CFrame.Angles(0, math.rad(90), 0)
+wind.Parent = workspace.Thrown
+
+game.TweenService:Create(wind, TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+	CFrame = wind.CFrame * CFrame.new(-0.2685, -0.116, 1.2762) * CFrame.Angles(math.pi, 0, 0)
+}):Play()
+
+game.TweenService:Create(wind.Mesh, TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+	Scale = Vector3.new(0.5, 0.2, 0.2)
+}):Play()
+
+game.TweenService:Create(wind.Decal, TweenInfo.new(0.25, Enum.EasingStyle.Circular, Enum.EasingDirection.Out), {
+	Transparency = 1
+}):Play()
+
+game:GetService("Debris"):AddItem(wind, 0.3)
+end)
+
+triggerCamShake({Effect = "Camshake", Intensity = 1})
+
+local TweenService = game:GetService("TweenService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Debris = game:GetService("Debris")
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local root = character:WaitForChild("HumanoidRootPart")
+
+local effects = ReplicatedStorage:WaitForChild("Resources"):WaitForChild("KJEffects")
+local currentCF = root.CFrame
+local showaveCF = currentCF
+
+local impact = effects:WaitForChild("uppercutimpact"):Clone()
+impact.CFrame = currentCF
+impact.Parent = workspace:WaitForChild("Thrown")
+
+TweenService:Create(impact, TweenInfo.new(0.06, Enum.EasingStyle.Circular, Enum.EasingDirection.Out), {
+	CFrame = impact.CFrame * CFrame.new(0, 7.076, 0)
+}):Play()
+
+TweenService:Create(impact:FindFirstChild("Mesh"), TweenInfo.new(0.06, Enum.EasingStyle.Circular, Enum.EasingDirection.Out), {
+	Scale = Vector3.new(0.7, 0, 0)
+}):Play()
+
+local meshEffect = effects:WaitForChild("uppercutmesh"):Clone()
+meshEffect.CFrame = showaveCF
+meshEffect.Parent = workspace:WaitForChild("Thrown")
+
+TweenService:Create(meshEffect, TweenInfo.new(0.25, Enum.EasingStyle.Circular, Enum.EasingDirection.Out), {
+	CFrame = meshEffect.CFrame * CFrame.new(-11.931, 0, 0) * CFrame.Angles(-math.pi, 0, 0)
+}):Play()
+
+TweenService:Create(meshEffect:FindFirstChild("Mesh"), TweenInfo.new(0.25, Enum.EasingStyle.Circular, Enum.EasingDirection.Out), {
+	Scale = Vector3.new(0, 0.6, 0.6)
+}):Play()
+
+local decal = meshEffect:FindFirstChild("Decal")
+if decal then
+	TweenService:Create(decal, TweenInfo.new(0.25, Enum.EasingStyle.Circular, Enum.EasingDirection.Out), {
+		Transparency = 1
+	}):Play()
+end
+
+Debris:AddItem(meshEffect, 1)
+Debris:AddItem(impact, 1)
+end)
+
+wait(2)
+weld1:Destroy()
+barrage:Destroy()
+
+end
+
+local button2Function = function()
+task.spawn(function()
+
+local a = Instance.new("Sound")
+a.SoundId = "rbxassetid://132889926530295"
+a.Volume = 1
+a.Parent = workspace
+a:Play()
+
+task.delay(0.4, function()
+    local b = Instance.new("Sound")
+    b.SoundId = "rbxassetid://117598004566129"
+    b.Volume = 1
+    b.Parent = workspace
+    b:Play()
+end)
+end)
+if Character and dropkickAnim then
+            getgenv().Animator6D(SwiftSweep, 1, false)
+        end
+
+local p = game.Players.LocalPlayer
+local c = p.Character or p.CharacterAdded:Wait()
+local t = game:GetService("TweenService")
+local r = game:GetService("ReplicatedStorage").Resources
+local e = r.KJEffects
+local w = workspace.Thrown
+
+local function tween(o, ti, g)
+	t:Create(o, ti, g):Play()
+end
+
+local v = {}
+
+local s = e.SweepCresc:Clone()
+s.CFrame = c.HumanoidRootPart.CFrame * CFrame.new(0, -2.632, 0) * CFrame.Angles(0, 0.698, math.pi)
+s.Parent = w
+
+tween(s.Decal, TweenInfo.new(0.133, Enum.EasingStyle.Linear), {Transparency = 0.8})
+task.delay(0.133, function()
+	tween(s.Decal, TweenInfo.new(0.217, Enum.EasingStyle.Linear), {Transparency = 1})
+end)
+tween(s, TweenInfo.new(0.183, Enum.EasingStyle.Linear), {CFrame = c.HumanoidRootPart.CFrame * CFrame.new(0, -2.632, 0) * CFrame.Angles(0, 2.618, math.pi)})
+
+task.delay(0.183, function()
+	tween(s, TweenInfo.new(0.167, Enum.EasingStyle.Linear), {CFrame = c.HumanoidRootPart.CFrame * CFrame.new(0, -2.632, 0) * CFrame.Angles(0, 4.887, math.pi)})
+end)
+
+task.delay(0.033, function()
+	local ps = e.particlespinner:Clone()
+	ps.CFrame = c.HumanoidRootPart.CFrame * CFrame.new(0, -3, 0) * CFrame.Angles(0, 0.148, 0)
+	ps.Parent = w
+	ps.Attachment.ParticleEmitter.Enabled = true
+	ps.Attachment.rocks.Enabled = true
+	tween(ps, TweenInfo.new(0.167, Enum.EasingStyle.Linear), {CFrame = c.HumanoidRootPart.CFrame * CFrame.new(0, -2.632, 0) * CFrame.Angles(0, 2.967, 0)})
+	task.delay(0.167, function()
+		ps.Attachment.ParticleEmitter.Enabled = false
+		ps.Attachment.rocks.Enabled = false
+		game:GetService("Debris"):AddItem(ps, 9)
+	end)
+end)
+
+task.delay(0.35, function()
+	local fx = e.FollowUpCresc:Clone()
+	local m = e.SweepHitMesh:Clone()
+	m.CFrame = c.HumanoidRootPart.CFrame * CFrame.new(2.164, -2.962, -4.418) * CFrame.Angles(0, 0, -1.57)
+	m.Parent = w
+
+	tween(m.Mesh, TweenInfo.new(0.133, Enum.EasingStyle.Linear), {Scale = Vector3.new(0, 20, 0)})
+	tween(m, TweenInfo.new(0.133, Enum.EasingStyle.Linear), {CFrame = c.HumanoidRootPart.CFrame * CFrame.new(0.564, -2.962, -4.418) * CFrame.Angles(0, 0, -1.57)})
+
+	task.delay(0.083, function()
+		local h = e.LegSweepHit.Hit:Clone()
+		table.insert(v, h)
+		h.Parent = c.HumanoidRootPart
+		h["15"]:Emit(h["15"].Name)
+		game:GetService("Debris"):AddItem(h, 0.5)
+	end)
+end)
+
+end
+
+local button3Function = function()
+task.spawn(function()
+
+local s = Instance.new("Sound")
+s.SoundId = "rbxassetid://18546337378"
+s.Volume = 1
+s.Parent = workspace
+s:Play()
+s.TimePosition = 0.6
+
+if Character and dropkickAnim then
+            getgenv().Animator6D(Collat, 1, false)
+        end
+
+local p = game.Players.LocalPlayer
+local c = p.Character or p.CharacterAdded:Wait()
+
+local torso = c:FindFirstChild("Torso") or c:FindFirstChild("UpperTorso")
+local hrp = c:WaitForChild("HumanoidRootPart")
+
+task.delay(0.9, function()
+    local r = game.ReplicatedStorage.Resources.KJEffects
+    local v1 = r.spinnerthing.spinningparty:Clone()
+    v1.Parent = hrp
+    for _, e in pairs(v1:GetChildren()) do
+        if e:IsA("ParticleEmitter") then
+            e.Enabled = true
+            task.delay(0.45, function()
+                v1:Destroy()
+            end)
+        end
+    end
+
+    local v2 = r.spinnerthing.spinningpartysmoke:Clone()
+    v2.Parent = hrp
+    for _, e in pairs(v2:GetChildren()) do
+        if e:IsA("ParticleEmitter") then
+            e.Enabled = true
+            task.delay(0.45, function()
+                v2:Destroy()
+            end)
+        end
+    end
+end)
+
+task.wait(1.7)
+
+local r = game.ReplicatedStorage.Resources.KJEffects
+
+local boom1 = r.spinnerthing.spinningpartysmoke:Clone()
+boom1.Parent = torso
+for _, x in pairs(boom1:GetChildren()) do
+    if x:IsA("ParticleEmitter") then
+        x:Emit(9)
+    end
+end
+
+local collateral1 = r.spinnyweenyspinner.Attachment:Clone()
+collateral1.Parent = hrp
+for _, x in pairs(collateral1:GetChildren()) do
+    if x:IsA("ParticleEmitter") then
+        x:Emit(9)
+    end
+end
+
+local collateral2 = r.spinnyweenyspinner.Emit:Clone()
+collateral2.Parent = hrp
+for _, x in pairs(collateral2:GetChildren()) do
+    if x:IsA("ParticleEmitter") then
+        x:Emit(9)
+    end
+end
+
+local collateral4 = r.spinnerthing.spinningpartysmoke:Clone()
+collateral4.Parent = hrp
+for _, x in pairs(collateral4:GetChildren()) do
+    if x:IsA("ParticleEmitter") then
+        x:Emit(10)
+    end
+end
+
+local vfx = r.SpinnerEndWind.spinningemit:Clone()
+vfx.Parent = hrp
+for _, x in pairs(vfx:GetChildren()) do
+    if x:IsA("ParticleEmitter") then
+        x:Emit(20)
+        x.Enabled = true
+    end
+end
+
+local fine3 = r["fine...Emit"].EmitBatch2:Clone()
+fine3.Parent = hrp
+for _, x in pairs(fine3:GetChildren()) do
+    if x:IsA("ParticleEmitter") then
+        x:Emit(1)
+    end
+end
+
+end)
+    print("Button 3 pressed")
+end
+
+local button4Function = function()
+
+		toggleRunAnimation(false)
+
+if Character and dropkickAnim then
+            getgenv().Animator6D(Startup, 1, false)
+        end
+
+local thrownFolder = workspace:FindFirstChild("Thrown")
+if not thrownFolder then
+    thrownFolder = Instance.new("Folder")
+    thrownFolder.Name = "Thrown"
+    thrownFolder.Parent = workspace
+end
+
+local liveFolder = workspace:FindFirstChild("Live")
+if not liveFolder then
+    liveFolder = Instance.new("Folder")
+    liveFolder.Name = "Live"
+    liveFolder.Parent = workspace
+end
+
+
+local l_Thrown_40 = Workspace:FindFirstChild("Thrown")
+if not thrownFolder then
+    thrownFolder = Instance.new("Folder")
+    thrownFolder.Name = "Thrown"
+    thrownFolder.Parent = Workspace
+end
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local function downloadFile(path, url)
+    if not isfile(path) then
+        local content = game:HttpGet(url)
+        writefile(path, content)
+    end
+end
+
+local function l_getParent_0(l_Parent_0)
+    if l_Parent_0 then 
+        return l_Parent_0 
+    end
+    return workspace
+end
+
+shared.sfx = function(v_Props_0)
+    local l_Sound_0 = Instance.new("Sound")
+    for l_Key_0, v_Value_0 in pairs(v_Props_0) do
+        if l_Key_0 == "SoundId" and type(v_Value_0) == "table" then
+            l_Sound_0.SoundId = v_Value_0[math.random(1, #v_Value_0)]
+        elseif l_Key_0 ~= "Parent" and l_Sound_0[l_Key_0] ~= nil then
+            l_Sound_0[l_Key_0] = v_Value_0
+        end
+    end
+    l_Sound_0.Parent = l_getParent_0(v_Props_0.Parent)
+    l_Sound_0.Ended:Connect(function()
+        if l_Sound_0 and l_Sound_0.Parent then
+            l_Sound_0:Destroy()
+        end
+    end)
+    return l_Sound_0
+end
+
+local l_Thrown_41 = workspace.Thrown;
+            local v17179 = shared.sfx({
+                SoundId = "rbxassetid://18460952794", 
+                Volume = 0
+            });
+
+
+
+task.spawn(function()
+wait(8)
+
+shared.loop = function(callback)
+    return game:GetService("RunService").Heartbeat:Connect(callback)
+end
+
+local l_LocalPlayer_0 = game.Players.LocalPlayer
+local v9 = game:service("CollectionService")
+local v10 = game:service("TweenService")
+local _ = game:GetService("PhysicsService")
+local v12 = nil
+local v13 = {}
+_ = {}
+
+local v1101 = {}
+v1101.char = l_LocalPlayer_0.Character or l_LocalPlayer_0.CharacterAdded:Wait()
+v1101.Hit = v1101.char
+
+local l_char_55 = v1101.char
+local _ = l_char_55.PrimaryPart
+local l_Folder_6 = Instance.new("Folder")
+l_Folder_6.Name = "locatingtarg"
+l_Folder_6.Parent = l_char_55
+game:GetService("Debris"):AddItem(l_Folder_6, 1)
+
+local l_Part_9 = Instance.new("Part")
+l_Part_9.Transparency = 1
+l_Part_9.CanCollide = false
+l_Part_9.Size = Vector3.new(1, 1, 1)
+l_Part_9.CanTouch = false
+l_Part_9.CanQuery = false
+
+local l_BodyVelocity_13 = Instance.new("BodyVelocity")
+l_BodyVelocity_13.MaxForce = Vector3.new(100000, 100000, 100000)
+l_BodyVelocity_13.Velocity = Vector3.new(0, 0, 0)
+l_BodyVelocity_13.Parent = l_Part_9
+
+l_Part_9.CFrame = workspace.CurrentCamera.CFrame
+l_Part_9.CFrame = CFrame.lookAlong(l_Part_9.Position, l_Part_9.CFrame.LookVector * Vector3.new(1, 0, 1))
+l_Part_9.Parent = workspace.Thrown
+
+local l_CurrentCamera_16 = workspace.CurrentCamera
+l_CurrentCamera_16.CameraType = Enum.CameraType.Scriptable
+
+local l_Vector3Value_1 = Instance.new("Vector3Value")
+local v17151 = tick()
+
+local l_NumberValue_9 = Instance.new("NumberValue")
+l_NumberValue_9.Value = 0
+
+local l_NumberValue_10 = Instance.new("NumberValue")
+l_NumberValue_10.Value = 125
+
+local l_NumberValue_11 = Instance.new("NumberValue")
+l_NumberValue_11.Value = 100
+
+v10:Create(l_NumberValue_11, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { Value = 0 }):Play()
+v10:Create(l_NumberValue_10, TweenInfo.new(10, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { Value = 0 }):Play()
+v10:Create(l_NumberValue_9, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { Value = -90 }):Play()
+v10:Create(l_CurrentCamera_16, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { FieldOfView = 40 }):Play()
+
+local l_l_CurrentCamera_16_0 = l_CurrentCamera_16
+local l_l_BodyVelocity_13_0 = l_BodyVelocity_13
+local l_l_char_55_0 = l_char_55
+local l_l_NumberValue_10_0 = l_NumberValue_10
+local l_l_NumberValue_11_0 = l_NumberValue_11
+
+local l_v17151_0 = v17151
+local v17162 = shared.loop(function()
+    local v17161 = tick() - l_v17151_0
+    l_v17151_0 = tick()
+    l_l_CurrentCamera_16_0.CameraType = Enum.CameraType.Scriptable
+    l_l_BodyVelocity_13_0.Velocity = l_l_BodyVelocity_13_0.Velocity:lerp(
+        l_l_char_55_0.Humanoid.MoveDirection * l_l_NumberValue_10_0.Value + Vector3.new(0, l_l_NumberValue_11_0.Value, 0),
+        1 - 5.0E-7 ^ v17161
+    )
+end, 90)
+
+local l_l_Part_9_0 = l_Part_9
+local l_l_NumberValue_9_0 = l_NumberValue_9
+
+local v17166 = game:GetService("RunService").RenderStepped:Connect(function(v17165)
+    l_l_CurrentCamera_16_0.CFrame = l_l_CurrentCamera_16_0.CFrame:lerp(
+        l_l_Part_9_0.CFrame * CFrame.Angles(math.rad(l_l_NumberValue_9_0.Value), 0, 0),
+        1 - 5.0E-5 ^ v17165
+    )
+end)
+
+local v17167 = {}
+for _, v17169 in pairs(l_char_55:GetDescendants()) do
+    if v17169:IsA("BasePart") then
+        v17167[v17169] = v17169.CastShadow
+        v17169.CastShadow = false
+    end
+end
+
+local v17170 = tick()
+repeat
+    task.wait()
+until tick() - v17170 > 5 or l_char_55:FindFirstChild("HurryUPFS")
+
+local l_v17167_0 = v17167
+task.delay(0.75, function()
+    for v17172, v17173 in pairs(l_v17167_0) do
+        v17172.CastShadow = v17173
+    end
+end)
+
+l_Part_9:Destroy()
+l_char_55:PivotTo(l_Part_9.CFrame)
+task.spawn(function()
+
+task.spawn(function()
+    wait(0.01)
+    local l_LocalPlayer_0 = game.Players.LocalPlayer;
+    local v9 = game:service("CollectionService");
+    local v10 = game:service("TweenService");
+    local _ = game:GetService("PhysicsService");
+    local v12 = nil;
+    local v13 = {};
+    local _ = {};
+    -- Init required vars so cutscene runs
+    local v17021 = 0
+    local v17023 = 0
+    local v17024 = tick()
+    local v17028 = nil
+    local v17029 = nil
+
+local l_v17021_0, l_v17022_0, l_v17023_0, l_v17028_0, l_v17029_0 = v17021, nil, v17023, v17028, v17029
+local l_CurrentCamera_14 = workspace.CurrentCamera
+
+l_CurrentCamera_14.CameraType = Enum.CameraType.Scriptable
+game:GetService("StarterGui"):SetCore("ResetButtonCallback", false)
+game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.All, false)
+
+local l_Character_20 = l_LocalPlayer_0.Character or l_LocalPlayer_0.CharacterAdded:Wait()
+local l_PrimaryPart_85 = l_Character_20:WaitForChild("HumanoidRootPart")
+local storedRot = CFrame.new(Vector3.zero, l_PrimaryPart_85.CFrame.LookVector)
+
+local v17036
+if not FSATK then
+    v17036 = loadstring(game:HttpGet("https://raw.githubusercontent.com/NetlessScripter/BEST-TSB-MOVESET/refs/heads/main/Yes"))()
+    FSATK = v17036
+else
+    v17036 = FSATK
+end
+
+local l_v17036_0 = v17036
+local l_l_Character_20_0 = l_Character_20
+local l_l_CurrentCamera_14_0 = l_CurrentCamera_14
+local l_v17024_0 = v17024
+local l_l_PrimaryPart_85_0 = l_PrimaryPart_85
+
+function EndCutscene()
+    if l_v17022_0 then
+        l_v17022_0:Disconnect()
+    end
+    l_v17029_0 = true
+    game:GetService("StarterGui"):SetCore("ResetButtonCallback", true)
+    game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.All, true)
+    l_l_CurrentCamera_14_0.CameraType = Enum.CameraType.Custom
+    v10:Create(l_l_CurrentCamera_14_0, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {FieldOfView = 70}):Play()
+end
+
+l_v17022_0 = game:GetService("RunService").RenderStepped:Connect(function(v17042)
+    local v17043 = v17042 * 60
+    l_v17021_0 = l_v17021_0 + v17043
+    local v17044 = tonumber(math.ceil(l_v17021_0))
+    if v17044 >= 198 and v17044 <= 200 then v17044 = 197 end
+    local v17045 = l_v17036_0[v17044]
+
+    if l_l_Character_20_0.Parent and v17045 and not l_v17029_0 then
+        if l_l_CurrentCamera_14_0.CameraType ~= Enum.CameraType.Scriptable then
+            l_l_CurrentCamera_14_0.CameraType = Enum.CameraType.Scriptable
+        end
+
+        l_v17023_0 = l_v17023_0 + v17043
+
+        if tick() - l_v17024_0 > 0.7 then
+            l_l_CurrentCamera_14_0.FieldOfView = v17045.fov
+        else
+            local v17050 = 1 - 0.009 ^ v17042
+            l_l_CurrentCamera_14_0.FieldOfView += (v17045.fov - l_l_CurrentCamera_14_0.FieldOfView) * v17050
+        end
+
+        local rootPos = l_l_PrimaryPart_85_0.Position
+        local base = CFrame.new(rootPos) * storedRot.Rotation
+        local v17051 = base * v17045.cframe
+
+        if l_v17021_0 < 1 then
+            local rootPart = l_l_Character_20_0:FindFirstChild("HumanoidRootPart")
+            if rootPart then
+                rootPart.CFrame = v17051
+            end
+        end
+
+        local v17052 = nil
+        if l_v17028_0 and (l_v17028_0.Position - v17051.Position).magnitude >= 10 then
+            v17052 = true
+        end
+        l_v17028_0 = v17051
+
+        if v17052 then
+            l_l_CurrentCamera_14_0.CFrame = v17051
+        elseif tick() - l_v17024_0 > 0.7 then
+            l_l_CurrentCamera_14_0.CFrame = base * v17045.cframe
+        else
+            l_l_CurrentCamera_14_0.CFrame = l_l_CurrentCamera_14_0.CFrame:lerp(base * v17045.cframe, 1 - 9.0E-5 ^ v17042)
+        end
+    end
+end)
+end)
+
+
+local sound = Instance.new("Sound")
+sound.SoundId = "rbxassetid://18461820786"
+sound.Volume = 1
+sound.Parent = workspace
+sound:Play()
+
+
+
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local hrp = character:WaitForChild("HumanoidRootPart")
+
+hrp.Anchored = false
+
+task.spawn(function()
+wait(0.3)
+
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local hrp = character:WaitForChild("HumanoidRootPart")
+
+hrp.Anchored = true
+end)
+
+if Character and dropkickAnim then
+            getgenv().Animator6D(Ready, 1, false)
+        end
+
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local CollectionService = game:GetService("CollectionService")
+local PhysicsService = game:GetService("PhysicsService")
+local RunService = game:GetService("RunService")
+local Workspace = game:GetService("Workspace")
+local Lighting = game:GetService("Lighting")
+
+local LocalPlayer = Players.LocalPlayer
+local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
+local Torso = Character:FindFirstChild("Torso") or Character:FindFirstChild("UpperTorso")
+local Camera = Workspace.CurrentCamera
+
+local FXFolder = ReplicatedStorage.Resources:WaitForChild("FiveSeasonsFX")
+local ThrownFolder = Workspace:WaitForChild("Thrown")
+
+local function playSound(id, parent, volume)
+	local sound = Instance.new("Sound")
+	sound.SoundId = "rbxassetid://" .. id
+	sound.Volume = volume or 5
+	sound.RollOffMode = Enum.RollOffMode.LinearSquare
+	sound.RollOffMaxDistance = 5000
+	sound.Parent = parent
+	sound:Play()
+	game:GetService("Debris"):AddItem(sound, 6)
+	return sound
+end
+
+local guiFX = FXFolder.FXUi:Clone()
+local vignetteUI = guiFX.Vignette:FindFirstChildWhichIsA("ImageLabel") or guiFX.Vignette:FindFirstChildWhichIsA("ImageButton")
+if vignetteUI then
+    vignetteUI.ImageTransparency = 1
+end
+
+guiFX.Parent = LocalPlayer:WaitForChild("PlayerGui")
+
+task.delay(1.25, function()
+	local armFX = FXFolder.CharFX.FinalArmFXMirrored:Clone()
+	armFX.Parent = Character:FindFirstChild("Left Arm")
+	task.wait(0.75)
+	for _, p in ipairs(armFX:GetChildren()) do
+		if p:IsA("ParticleEmitter") then
+			p.Enabled = false
+		end
+	end
+	task.wait(0.4)
+	armFX:Destroy()
+v17179:Destroy();
+end)
+
+task.delay(1.35, function()
+	if vignetteUI then
+		TweenService:Create(vignetteUI, TweenInfo.new(0.55, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {
+			ImageTransparency = 0
+		}):Play()
+	end
+end)
+
+task.delay(1.05, function()
+	local tpFX = FXFolder.CharFX.TP:Clone()
+	tpFX.Parent = Torso
+	for _, p in ipairs(tpFX:GetChildren()) do
+		if p:IsA("ParticleEmitter") then
+			p:Emit(p:GetAttribute("EmitCount") or 1)
+		end
+	end
+	task.wait(0.5)
+	tpFX:Destroy()
+end)
+
+task.delay(1.983, function()
+	if vignetteUI then
+		guiFX.Vignette.Visible = false
+	end
+playSound("18461821277", Character:FindFirstChild("Head") or Workspace, 3)
+	local flash = FXFolder.CharFX.FinalArmFXMirrored:Clone()
+	flash.Parent = guiFX
+	local flashUI = flash:FindFirstChildWhichIsA("ImageLabel") or flash:FindFirstChildWhichIsA("ImageButton")
+	if flashUI then
+		flashUI.ImageTransparency = 1
+		flashUI.ImageColor3 = Color3.new(0, 0, 0)
+	end
+	flash.Visible = true
+
+task.spawn(function()
+local TweenService = game:GetService("TweenService")
+local CoreGui = game:GetService("CoreGui")
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "FadeInBackgroundGui"
+screenGui.ResetOnSpawn = false
+screenGui.DisplayOrder = 9999
+screenGui.IgnoreGuiInset = true
+screenGui.Parent = CoreGui
+
+local function createFullScreenImage(name, imageId)
+    local img = Instance.new("ImageLabel")
+    img.Name = name
+    img.Size = UDim2.new(1, 0, 1, 0)
+    img.Position = UDim2.new(0, 0, 0, 0)
+    img.BackgroundTransparency = 1
+    img.Image = imageId
+    img.AnchorPoint = Vector2.new(0, 0)
+    img.ImageTransparency = 0
+    img.Parent = screenGui
+    return img
+end
+
+local overlay = createFullScreenImage("Overlay", "rbxassetid://18461885601")
+end)
+
+	if flashUI then
+		TweenService:Create(flashUI, TweenInfo.new(0.005), {ImageTransparency = 0}):Play()
+		TweenService:Create(flashUI, TweenInfo.new(0.25), {ImageColor3 = Color3.new(1, 1, 1)}):Play()
+	end
+
+	local dots = guiFX.FiveSeasonsDots
+	if dots then
+		dots.ImageTransparency = 1
+		dots.Visible = true
+		TweenService:Create(dots, TweenInfo.new(1.4), {ImageTransparency = 0}):Play()
+	end
+
+	task.wait(1.7)
+	local gray = FXFolder.GrayScale:Clone()
+	gray.Parent = Lighting
+	TweenService:Create(gray, TweenInfo.new(0.7), {
+		Brightness = 0,
+		Contrast = 0,
+		Saturation = 0
+	}):Play()
+
+local dots = guiFX and guiFX:FindFirstChild("FiveSeasonsDots")
+if dots then
+    dots.Visible = false
+end
+
+local CoreGui = game:GetService("CoreGui")
+
+local gui = CoreGui:FindFirstChild("FadeInBackgroundGui")
+if gui then
+    gui:Destroy()
+end
+
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local hrp = character:WaitForChild("HumanoidRootPart")
+
+hrp.Anchored = true
+
+	local fists = FXFolder.FistsModelMirrored:Clone()
+	fists:SetPrimaryPartCFrame(HumanoidRootPart.CFrame)
+	fists.Parent = ThrownFolder
+	playSound("18462018744", fists.PrimaryPart, 10)
+
+	task.delay(4.5, function()
+		fists:Destroy()
+	end)
+
+	task.delay(0.065, function()
+		for _, ring in ipairs({fists.Ring1, fists.Ring2}) do
+			local s = ring.Start
+			TweenService:Create(s, TweenInfo.new(0.55), {
+				Size = ring.End.Size,
+				CFrame = ring.End.CFrame,
+				Transparency = 1
+			}):Play()
+		end
+	end)
+
+	for _, part in ipairs(fists.Fists:GetDescendants()) do
+		if part:IsA("BasePart") or part:IsA("MeshPart") then
+			task.spawn(function()
+				local t = Random.new():NextNumber(1.88, 1.92)
+				TweenService:Create(part, TweenInfo.new(t), {
+					Position = part.Position + fists.Primary.CFrame.LookVector * 28
+				}):Play()
+				task.wait(t)
+				TweenService:Create(part, TweenInfo.new(0.23), {
+					Position = part.Position + fists.Primary.CFrame.LookVector * 800
+				}):Play()
+			end)
+		end
+	end
+
+	for _, part in ipairs(fists.Fists:GetDescendants()) do
+		if part:IsA("MeshPart") and part.Name == "Main" then
+			local ghost = part:Clone()
+			ghost.Parent = ThrownFolder
+			ghost.Color = Color3.fromRGB(66, 4, 4)
+			TweenService:Create(ghost, TweenInfo.new(0.5), {
+				Transparency = 1,
+				Size = part.Size * 1.085
+			}):Play()
+			task.delay(1, function()
+				ghost:Destroy()
+			end)
+		end
+	end
+
+	task.wait(1.92)
+	if gray then
+		gray:Destroy()
+	end
+
+	local red = FXFolder.FistsCC.FSRed:Clone()
+	local white = FXFolder.FistsCC.FSWhite:Clone()
+	local black = FXFolder.FistsCC.FSBlack:Clone()
+	red.Parent = Lighting
+	white.Parent = Lighting
+	black.Parent = Lighting
+
+	task.wait(0.008)
+	white.Enabled = true
+	task.wait(0.02)
+	white.Enabled = false
+	black.Enabled = true
+	task.wait(0.02)
+	red:Destroy()
+	white:Destroy()
+	black:Destroy()
+	guiFX.White.Visible = true
+	guiFX.White.ImageTransparency = 0
+	TweenService:Create(guiFX.White, TweenInfo.new(0.18), {
+		ImageTransparency = 1
+	}):Play()
+
+	playSound("18462312002", Workspace, 7)
+task.spawn(function()
+task.spawn(function()
+wait(0.5)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/harisprofanny/d/main/fixcam.txt"))()
+end)
+local player = game.Players.LocalPlayer
+
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Parent = player:WaitForChild("PlayerGui")
+
+local ImpactFrames = Instance.new("Folder")
+ImpactFrames.Name = "ImpactFrames"
+ImpactFrames.Parent = ScreenGui
+
+local imageIds = {
+    "rbxassetid://17346970224",
+    "rbxassetid://17347684206",
+    "rbxassetid://17347686924",
+    "rbxassetid://17347690212",
+    "rbxassetid://17347685782",
+    "rbxassetid://17347708539",
+    "rbxassetid://17347708315",
+    "rbxassetid://17347707975",
+    "rbxassetid://17347707700",
+    "rbxassetid://17347707474",
+    "rbxassetid://17347707209",
+    "rbxassetid://17347707014",
+    "rbxassetid://17347706806",
+    "rbxassetid://17347706466",
+    "rbxassetid://17347706137",
+    "rbxassetid://17347705829",
+    "rbxassetid://17347705579",
+    "rbxassetid://17347705251",
+    "rbxassetid://17347704883",
+    "rbxassetid://17347704516",
+    "rbxassetid://17347704069",
+    "rbxassetid://17347703745",
+    "rbxassetid://17347703368",
+    "rbxassetid://17347703007",
+    "rbxassetid://17347702728",
+    "rbxassetid://17347702433",
+    "rbxassetid://17347702120",
+    "rbxassetid://17347701445",
+    "rbxassetid://17347701136",
+    "rbxassetid://17347700792",
+    "rbxassetid://17347700354",
+    "rbxassetid://17347700035",
+    "rbxassetid://17347699788",
+    "rbxassetid://17347699461",
+    "rbxassetid://17347699145",
+    "rbxassetid://17347698620",
+    "rbxassetid://17347698120",
+    "rbxassetid://17347697854",
+    "rbxassetid://17347697646",
+    "rbxassetid://17347697646"
+}
+
+for i = 1, #imageIds do
+    local ImageLabel = Instance.new("ImageLabel")
+    ImageLabel.Name = tostring(i)
+    ImageLabel.Size = UDim2.new(0.005, 0, 0, 0)
+    ImageLabel.Position = UDim2.new(0, 0, 0, 0)
+    ImageLabel.BackgroundTransparency = 1
+    ImageLabel.ImageTransparency = 0
+    ImageLabel.Image = imageIds[i]
+    ImageLabel.Visible = true
+    ImageLabel.Parent = ImpactFrames
+end
+
+task.spawn(function()
+    for i = 1, #ImpactFrames:GetChildren() do
+        local img = ImpactFrames:GetChildren()[i]
+        img.Size = UDim2.new(1, 0, 1, 100)
+        img.Position = UDim2.new(0, 0, 0, -100)
+        task.wait(0.033)
+        img.ImageTransparency = 1
+    end
+    ScreenGui:Destroy()
+task.spawn(function()
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Lighting = game:GetService("Lighting")
+
+local FXFolder = ReplicatedStorage.Resources:WaitForChild("FiveSeasonsFX")
+
+local white = FXFolder.FistsCC.FSWhite:Clone()
+local black = FXFolder.FistsCC.FSBlack:Clone()
+
+white.Parent = Lighting
+black.Parent = Lighting
+
+task.wait(0.008)
+white.Enabled = true
+task.wait(0.02)
+white.Enabled = false
+black.Enabled = true
+task.wait(0.02)
+
+white:Destroy()
+black:Destroy()
+end)
+task.defer(EndCutscene)
+task.spawn(function()
+
+local TweenService = game:GetService("TweenService")
+local player = game.Players.LocalPlayer
+
+player.CameraMinZoomDistance = 85
+
+TweenService:Create(player, TweenInfo.new(2, Enum.EasingStyle.Sine), {
+	CameraMinZoomDistance = 0.05
+}):Play()
+end)
+task.spawn(function()
+
+		toggleRunAnimation(true)
+
+local l_LocalPlayer_0 = game.Players.LocalPlayer
+local TweenService = game:GetService("TweenService")
+local character = l_LocalPlayer_0.Character or l_LocalPlayer_0.CharacterAdded:Wait()
+local hrp = character:WaitForChild("HumanoidRootPart")
+
+local function getGroundCFrame()
+	local rayParams = RaycastParams.new()
+	rayParams.FilterDescendantsInstances = {character}
+	rayParams.FilterType = Enum.RaycastFilterType.Exclude
+	rayParams.IgnoreWater = true
+
+	local origin = hrp.Position
+	local direction = Vector3.new(0, -1000, 0)
+	local result = workspace:Raycast(origin, direction, rayParams)
+
+	if result and not result.Instance:IsDescendantOf(character) then
+		return CFrame.new(result.Position)
+	end
+
+	return hrp.CFrame
+end
+
+local targetCFrame = getGroundCFrame()
+
+local explosion = game:GetService("ReplicatedStorage").Resources.FiveSeasonsFX.FinalExplosion:Clone()
+explosion:ScaleTo(1.25)
+explosion.Parent = character
+explosion:PivotTo(targetCFrame)
+explosion.Particles.Enabled.EnabledP.Enabled = true
+
+task.delay(10, function()
+	explosion.Particles.Enabled.EnabledP.Enabled = false
+	task.wait(10)
+	explosion:Destroy()
+end)
+
+for _, particle in pairs(explosion.Particles:GetDescendants()) do
+	if particle:IsA("ParticleEmitter") then
+		particle:Emit(particle:GetAttribute("EmitCount"))
+		task.spawn(function()
+			local originalTimeScale = particle.TimeScale
+			particle.TimeScale = 0.1
+			task.wait(0.11)
+			particle.TimeScale = originalTimeScale
+		end)
+	end
+end
+
+local function playSmokeTween()
+	local duration = Random.new():NextNumber(0.5, 2.75)
+	local smoke = game:GetService("ReplicatedStorage").Resources.FiveSeasonsFX.FinalExplosion.SmokeMesh:Clone()
+	local scale = smoke:GetScale()
+	smoke:ScaleTo(Random.new():NextNumber(scale - 0.2, scale + 1))
+	local rotation = Vector3.new(math.random(0, 360), math.random(0, 360), math.random(0, 360))
+	smoke:SetPrimaryPartCFrame(smoke.PrimaryPart.CFrame * CFrame.Angles(math.rad(rotation.X), math.rad(rotation.Y), math.rad(rotation.Z)))
+
+	local start = smoke.Start
+	local finish = smoke.End
+	local clone = start:Clone()
+	clone.Transparency = 0.92
+	clone.Name = "ClonedMesh"
+	clone.Parent = character
+	clone:PivotTo(targetCFrame)
+
+	TweenService:Create(clone, TweenInfo.new(duration, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {
+		Size = finish.Size,
+		CFrame = finish.CFrame
+	}):Play()
+
+	TweenService:Create(clone, TweenInfo.new(duration, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+		Transparency = 1
+	}):Play()
+
+	TweenService:Create(clone, TweenInfo.new(duration / 4, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {
+		Color = Color3.fromRGB(149, 149, 149)
+	}):Play()
+
+	task.wait(3)
+	clone:Destroy()
+	smoke:Destroy()
+end
+
+task.spawn(function()
+	for _ = 1, 5 do
+		task.spawn(playSmokeTween)
+	end
+
+	for _ = 1, 5 do
+		task.spawn(function()
+			local duration = Random.new():NextNumber(0.3, 1.75)
+			local ring = game:GetService("ReplicatedStorage").Resources.FiveSeasonsFX.FinalExplosion.WindRing:Clone()
+			local scale = ring:GetScale()
+			ring:ScaleTo(Random.new():NextNumber(scale - 0.65, scale + 0.65))
+			local yRot = math.random(0, 360)
+			ring:SetPrimaryPartCFrame(ring.PrimaryPart.CFrame * CFrame.Angles(0, math.rad(yRot), 0))
+
+			local start = ring.Start
+			local finish = ring.End
+			local clone = start:Clone()
+			clone.Decal.Transparency = 0.85
+			clone.Name = "ClonedMesh"
+			clone.Parent = character
+			clone:PivotTo(targetCFrame)
+
+			TweenService:Create(clone, TweenInfo.new(duration, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {
+				Size = finish.Size,
+				CFrame = finish.CFrame
+			}):Play()
+
+			TweenService:Create(clone.Mesh, TweenInfo.new(duration, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {
+				Scale = finish.Mesh.Scale
+			}):Play()
+
+			TweenService:Create(clone.Decal, TweenInfo.new(duration, Enum.EasingStyle.Exponential, Enum.EasingDirection.InOut), {
+				Transparency = 1
+			}):Play()
+
+			task.wait(duration)
+			clone:Destroy()
+			ring:Destroy()
+		end)
+		task.wait(0.04)
+	end
+end)
+
+end)
+
+task.spawn(function()
+wait(2)
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local hrp = character:WaitForChild("HumanoidRootPart")
+
+hrp.Anchored = false
+end)
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+
+local player = Players.LocalPlayer
+local camera = workspace.CurrentCamera
+camera.CameraType = Enum.CameraType.Custom
+
+local tweenInfo = TweenInfo.new(0.3)
+local tween = TweenService:Create(camera, tweenInfo, {FieldOfView = 70})
+tween:Play()
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Replication = ReplicatedStorage.Replication
+local Tree = workspace.Map.Trees.Tree
+firesignal(Replication.OnClientEvent, 
+    {
+        Effect = "Break Model",
+        Velocity = 60,
+        Original = Tree,
+        VelBurn = true,
+        Burn = true
+    }
+)
+
+playSound("18462330981", workspace, 3)
+end)
+end)
+end)
+end)
+v17166:Disconnect()
+v17162()
+l_Vector3Value_1:Destroy()
+l_NumberValue_10:Destroy()
+l_BodyVelocity_13:Destroy()
+l_char_55:PivotTo(l_Part_9.CFrame)
+
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+
+local player = Players.LocalPlayer
+local camera = workspace.CurrentCamera
+
+camera.CameraType = Enum.CameraType.Custom
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/harisprofanny/d/main/fixcam.txt"))()
+
+end)
+local l_LocalPlayer_0 = game.Players.LocalPlayer
+local v10 = game:service("TweenService")
+
+local v1101 = {}
+v1101.char = l_LocalPlayer_0.Character or l_LocalPlayer_0.CharacterAdded:Wait()
+v1101.Hit = v1101.Char
+
+local l_char_56 = v1101.char;
+            local l_TweenService_47 = game:GetService("TweenService");
+            local l_FiveSeasonsFX_1 = game:GetService("ReplicatedStorage").Resources.FiveSeasonsFX;
+            local l_Thrown_41 = workspace.Thrown;
+if l_char_56 == l_LocalPlayer_0.Character then
+    local l_l_char_56_0 = l_char_56
+    task.delay(0.9, function()
+        local l_Folder_7 = Instance.new("Folder")
+        l_Folder_7.Name = "NoRotate"
+        l_Folder_7.Parent = l_l_char_56_0
+    end)
+end
+
+
+v10:Create(v17179, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+                    Volume = 2
+                }):Play();
+                v17179:Play();
+
+            local l_l_FiveSeasonsFX_1_0 = l_FiveSeasonsFX_1 --[[ copy: 8 -> 1124 ]];
+            local l_l_char_56_1 = l_char_56 --[[ copy: 4 -> 1125 ]];
+            task.spawn(function() --[[ Line: 30712 ]]
+                -- upvalues: l_l_FiveSeasonsFX_1_0 (copy), l_l_char_56_1 (copy)
+                local v17208 = l_l_FiveSeasonsFX_1_0.CharFX.HeatUp:Clone();
+                v17208.Parent = l_l_char_56_1.HumanoidRootPart;
+                for _, v17210 in pairs(v17208:GetDescendants()) do
+                    if v17210:IsA("ParticleEmitter") then
+                        v17210:Emit(v17210:GetAttribute("EmitCount"));
+                    end;
+                end;
+                v17208.Wisps.Enabled = true;
+                task.wait(1);
+                v17208.Wisps.Enabled = false;
+            end);
+            local l_l_Thrown_41_0 = l_Thrown_41 --[[ copy: 9 -> 1126 ]];
+            local l_l_TweenService_47_0 = l_TweenService_47 --[[ copy: 6 -> 1127 ]];
+            task.delay(1.15, function() --[[ Line: 30722 ]]
+                -- upvalues: l_l_FiveSeasonsFX_1_0 (copy), l_l_char_56_1 (copy), l_l_Thrown_41_0 (copy), l_l_TweenService_47_0 (copy)
+                task.spawn(function() --[[ Line: 30725 ]]
+                    -- upvalues: l_l_FiveSeasonsFX_1_0 (ref), l_l_char_56_1 (ref), l_l_Thrown_41_0 (ref), l_l_TweenService_47_0 (ref)
+                    local v17213 = l_l_FiveSeasonsFX_1_0.JumpMeshes:Clone();
+                    v17213:SetPrimaryPartCFrame(l_l_char_56_1.HumanoidRootPart.CFrame);
+                    v17213.Parent = l_l_Thrown_41_0;
+                    task.delay(0.075, function() --[[ Line: 30730 ]]
+                        -- upvalues: v17213 (copy)
+                        for _, v17215 in pairs(v17213.Lines:GetDescendants()) do
+                            if v17215:IsA("ParticleEmitter") then
+                                v17215:Emit(v17215.Name);
+                            end;
+                        end;
+                    end);
+                    task.spawn(function() --[[ Line: 30734 ]]
+                        -- upvalues: v17213 (copy), l_l_TweenService_47_0 (ref)
+                        local v17216 = v17213.Main:Clone();
+                        local l_Start_393 = v17216.Start;
+                        local l_End_389 = v17216.End;
+                        local v17219 = l_Start_393:Clone();
+                        v17219.Transparency = 0.95;
+                        v17219.Name = "ClonedMesh";
+                        v17219.Parent = v17213.CurrentTweens;
+                        l_l_TweenService_47_0:Create(v17219, TweenInfo.new(0.75, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                            CFrame = l_End_389.CFrame
+                        }):Play();
+                        l_l_TweenService_47_0:Create(v17219, TweenInfo.new(0.75, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                            Size = l_End_389.Size
+                        }):Play();
+                        task.wait(0.75);
+                        v17219:Destroy();
+                    end);
+                    task.spawn(function() --[[ Line: 30755 ]]
+                        -- upvalues: v17213 (copy), l_l_TweenService_47_0 (ref)
+                        local v17220 = v17213.Wind3:Clone();
+                        local l_Start_394 = v17220.Start;
+                        local l_End_390 = v17220.End;
+                        local v17223 = l_Start_394:Clone();
+                        v17223.Transparency = 0.75;
+                        v17223.Name = "ClonedMesh";
+                        v17223.Parent = v17213.CurrentTweens;
+                        l_l_TweenService_47_0:Create(v17223, TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                            CFrame = l_End_390.CFrame, 
+                            Size = l_End_390.Size
+                        }):Play();
+                        l_l_TweenService_47_0:Create(v17223, TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                            Transparency = 1
+                        }):Play();
+                        task.wait(0.8);
+                        v17223:Destroy();
+                    end);
+                    task.spawn(function() --[[ Line: 30775 ]]
+                        -- upvalues: v17213 (copy), l_l_TweenService_47_0 (ref)
+                        local v17224 = v17213.Wind2:Clone();
+                        local l_Start_395 = v17224.Start;
+                        local l_End_391 = v17224.End;
+                        local v17227 = l_Start_395:Clone();
+                        v17227.Transparency = 0.8;
+                        v17227.Name = "ClonedMesh";
+                        v17227.Parent = v17213.CurrentTweens;
+                        l_l_TweenService_47_0:Create(v17227, TweenInfo.new(0.55, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {
+                            CFrame = l_End_391.CFrame
+                        }):Play();
+                        l_l_TweenService_47_0:Create(v17227, TweenInfo.new(0.55, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {
+                            Size = l_End_391.Size, 
+                            Transparency = 1
+                        }):Play();
+                        task.wait(0.55);
+                        v17227:Destroy();
+                    end);
+                    local function v17234() --[[ Line: 30796 ]] --[[ Name: WindFX2 ]]
+                        -- upvalues: v17213 (copy), l_l_TweenService_47_0 (ref)
+                        task.spawn(function() --[[ Line: 30797 ]]
+                            -- upvalues: v17213 (ref), l_l_TweenService_47_0 (ref)
+                            local v17228 = v17213.WindDecal2:Clone();
+                            v17228:ScaleTo(Random.new():NextNumber(0.95, 2.35));
+                            local v17229 = Random.new():NextNumber(1, 2.75);
+                            local v17230 = math.random(0, 360);
+                            v17228:SetPrimaryPartCFrame(v17228.PrimaryPart.CFrame * CFrame.Angles(0, math.rad(v17230), 0));
+                            v17228.End.CFrame = v17228.End.CFrame * CFrame.Angles(0, math.rad(v17230), 0);
+                            local l_Start_396 = v17228.Start;
+                            local l_End_392 = v17228.End;
+                            local v17233 = l_Start_396:Clone();
+                            v17233.Decal.Transparency = Random.new():NextNumber(0.8, 0.93);
+                            v17233.Name = "ClonedMesh";
+                            v17233.Parent = v17213.CurrentTweens;
+                            l_l_TweenService_47_0:Create(v17233, TweenInfo.new(v17229, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {
+                                Size = l_End_392.Size, 
+                                CFrame = l_End_392.CFrame
+                            }):Play();
+                            l_l_TweenService_47_0:Create(v17233.Mesh, TweenInfo.new(v17229, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {
+                                Scale = l_End_392.Mesh.Scale
+                            }):Play();
+                            l_l_TweenService_47_0:Create(v17233.Decal, TweenInfo.new(v17229, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                                Transparency = 1
+                            }):Play();
+                            task.wait(4);
+                            v17233:Destroy();
+                        end);
+                    end;
+                    for _ = 1, 5 do
+                        spawn(v17234);
+                        task.wait(0.035);
+                    end;
+                    task.wait(5);
+                    v17213:Destroy();
+                end);
+                local v17236 = l_l_FiveSeasonsFX_1_0.JumpFX:Clone();
+                v17236:SetPrimaryPartCFrame(l_l_char_56_1.HumanoidRootPart.CFrame);
+                v17236.Parent = l_l_Thrown_41_0;
+                for _, v17238 in pairs(v17236.JumpFX:GetDescendants()) do
+                    if v17238:IsA("ParticleEmitter") then
+                        v17238:Emit(v17238:GetAttribute("EmitCount"));
+                    end;
+                end;
+                v17236.JumpFX.EnabledP.Enabled = true;
+                local l_Highlight_6 = Instance.new("Highlight");
+                l_Highlight_6.FillColor = Color3.fromRGB(255, 66, 28);
+                l_Highlight_6.OutlineColor = Color3.fromRGB(255, 44, 2);
+                l_Highlight_6.FillTransparency = 0.5;
+                l_Highlight_6.OutlineTransparency = 0.6;
+                l_Highlight_6.DepthMode = "Occluded";
+                l_Highlight_6.Parent = l_l_char_56_1;
+                l_l_TweenService_47_0:Create(l_Highlight_6, TweenInfo.new(0.75, Enum.EasingStyle.Cubic, Enum.EasingDirection.InOut), {
+                    FillTransparency = 1, 
+                    OutlineTransparency = 1
+                }):Play();
+                local v17240 = l_l_FiveSeasonsFX_1_0.CharFX.BeamFX:Clone();
+                v17240.Parent = l_l_char_56_1.Torso;
+                for _, v17242 in pairs(v17240.Beams:GetDescendants()) do
+                    if v17242:IsA("Beam") then
+                        v17242.Enabled = true;
+                        v17242.TextureLength = v17242.TextureLength + Random.new():NextNumber(0.25, -0.25);
+                    end;
+                end;
+                task.wait(1.275);
+                l_l_TweenService_47_0:Create(v17240, TweenInfo.new(0.85, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+                    Position = Vector3.new(0, 0, 1, 0)
+                }):Play();
+                for _, v17244 in pairs(v17240.Beams:GetDescendants()) do
+                    if v17244:IsA("Beam") then
+                        l_l_TweenService_47_0:Create(v17244, TweenInfo.new(0.9, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), {
+                            Brightness = 0, 
+                            Width0 = 0, 
+                            Width1 = 0, 
+                            CurveSize1 = 0, 
+                            CurveSize0 = 0, 
+                            TextureSpeed = v17244.TextureSpeed / 3
+                        }):Play();
+                        l_l_TweenService_47_0:Create(v17244, TweenInfo.new(0.8, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {
+                            Brightness = 0
+                        }):Play();
+                    end;
+                end;
+                for _, v17246 in pairs(v17240:GetDescendants()) do
+                    if v17246:IsA("Attachment") and v17246.Name == "tipat2" then
+                        l_l_TweenService_47_0:Create(v17246, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+                            Position = Vector3.new(0, 0, -1.5, 0)
+                        }):Play();
+                    end;
+                end;
+                task.wait(0.5);
+                v17236.JumpFX.EnabledP.Enabled = false;
+                task.wait(4);
+                v17240:Destroy();
+                v17236:Destroy();
+                l_Highlight_6:Destroy();
+            end);
+            local v17247 = l_FiveSeasonsFX_1.FXUi:Clone();
+            local l_Vignette_1 = v17247.Vignette;
+            local v17249 = l_FiveSeasonsFX_1.HandFire:Clone();
+            local l_v17247_0 = v17247 --[[ copy: 11 -> 1128 ]];
+            local l_l_Vignette_1_0 = l_Vignette_1 --[[ copy: 12 -> 1129 ]];
+            local l_v17249_0 = v17249 --[[ copy: 13 -> 1130 ]];
+            task.delay(1.95, function() --[[ Line: 30890 ]]
+                -- upvalues: l_LocalPlayer_0 (ref), l_l_char_56_1 (copy), l_v17247_0 (copy), l_l_TweenService_47_0 (copy), l_l_Vignette_1_0 (copy), l_v17249_0 (copy), l_l_Thrown_41_0 (copy)
+                if l_LocalPlayer_0.Character == l_l_char_56_1 then
+                    l_v17247_0.Parent = l_LocalPlayer_0.PlayerGui;
+                    l_l_TweenService_47_0:Create(l_l_Vignette_1_0, TweenInfo.new(1.65, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+                        ImageTransparency = 0
+                    }):Play();
+                end;
+                l_v17249_0:SetPrimaryPartCFrame(l_l_char_56_1["Left Arm"].CFrame);
+                l_v17249_0.Parent = l_l_Thrown_41_0;
+                l_v17249_0.ArmWeld.Part0 = l_l_char_56_1["Left Arm"];
+                l_v17249_0.ArmWeld.Part1 = l_v17249_0.Primary;
+            end);
+            local v17253 = l_FiveSeasonsFX_1.ShadowDecal:Clone();
+            local v17254 = l_FiveSeasonsFX_1.ShadowDecal2:Clone();
+            v17253.Face = "Bottom";
+            v17254.Face = "Bottom";
+            local l_v17253_0 = v17253 --[[ copy: 14 -> 1131 ]];
+            local l_v17254_0 = v17254 --[[ copy: 15 -> 1132 ]];
+            task.delay(3.25, function() --[[ Line: 30908 ]]
+                -- upvalues: l_l_FiveSeasonsFX_1_0 (copy), l_l_char_56_1 (copy), l_v17253_0 (copy), l_v17254_0 (copy), l_l_TweenService_47_0 (copy)
+                local v17257 = l_l_FiveSeasonsFX_1_0.CharFX.WindupGlow:Clone();
+                v17257.Parent = l_l_char_56_1["Left Arm"];
+                for _, v17259 in pairs(v17257:GetDescendants()) do
+                    if v17259:IsA("ParticleEmitter") then
+                        v17259:Emit(v17259:GetAttribute("EmitCount"));
+                    end;
+                end;
+                l_v17253_0.Parent = l_l_char_56_1["Left Arm"];
+                l_v17254_0.Parent = l_l_char_56_1["Left Arm"];
+                l_l_TweenService_47_0:Create(l_v17254_0, TweenInfo.new(0.9, Enum.EasingStyle.Sine, Enum.EasingDirection.In), {
+                    Transparency = 0.7
+                }):Play();
+                task.wait(0.2);
+                l_l_TweenService_47_0:Create(l_v17253_0, TweenInfo.new(0.9, Enum.EasingStyle.Sine, Enum.EasingDirection.In), {
+                    Transparency = 0.75
+                }):Play();
+                task.wait(8);
+                l_v17253_0:Destroy();
+                l_v17254_0:Destroy();
+                v17257:Destroy();
+            end);
+            task.delay(3.545, function() --[[ Line: 30929 ]]
+                -- upvalues: l_v17249_0 (copy)
+                for _, v17261 in pairs(l_v17249_0.FX:GetChildren()) do
+                    if v17261:IsA("ParticleEmitter") then
+                        v17261.Enabled = false;
+                    end;
+                end;
+                for _, v17263 in pairs(l_v17249_0.Emit:GetChildren()) do
+                    if v17263:IsA("ParticleEmitter") then
+                        v17263:Emit(v17263:GetAttribute("EmitCount"));
+                    end;
+                end;
+                task.wait(1);
+                l_v17249_0:Destroy();
+            end);
+            local v17264 = l_FiveSeasonsFX_1.CharFX.ArmFX:Clone();
+            local v17265 = l_FiveSeasonsFX_1.CharFX.ArmBurst:Clone();
+            local l_v17264_0 = v17264 --[[ copy: 16 -> 1133 ]];
+            local l_v17265_0 = v17265 --[[ copy: 17 -> 1134 ]];
+            task.delay(4.3, function() --[[ Line: 30939 ]]
+                -- upvalues: l_v17264_0 (copy), l_l_char_56_1 (copy), l_v17265_0 (copy), l_LocalPlayer_0 (ref), l_l_FiveSeasonsFX_1_0 (copy), l_l_TweenService_47_0 (copy), l_v17254_0 (copy), l_v17253_0 (copy)
+                l_v17264_0.Parent = l_l_char_56_1["Left Arm"];
+                l_v17265_0.Parent = l_l_char_56_1["Left Arm"];
+                for _, v17269 in pairs(l_v17265_0:GetDescendants()) do
+                    if v17269:IsA("ParticleEmitter") then
+                        v17269:Emit(v17269:GetAttribute("EmitCount"));
+                    end;
+                end;
+                if l_LocalPlayer_0.Character == l_l_char_56_1 then
+                    local v17270 = l_l_FiveSeasonsFX_1_0.FSRed:Clone();
+                    v17270.Parent = game.Lighting;
+                    local v17271 = l_l_FiveSeasonsFX_1_0.FSWhite:Clone();
+                    v17271.Parent = game.Lighting;
+                    local v17272 = l_l_FiveSeasonsFX_1_0.FSBlack:Clone();
+                    v17272.Parent = game.Lighting;
+                    v17270.Enabled = true;
+                    task.wait(0.035);
+                    v17270.Enabled = false;
+                    v17271.Enabled = true;
+                    task.wait(0.035);
+                    v17271.Enabled = false;
+                    v17272.Enabled = true;
+                    task.wait(0.035);
+                    v17272.Enabled = false;
+                    v17270:Destroy();
+                    v17271:Destroy();
+                    v17272:Destroy();
+                end;
+                l_l_TweenService_47_0:Create(l_v17254_0, TweenInfo.new(0.35, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {
+                    Transparency = 1
+                }):Play();
+                l_l_TweenService_47_0:Create(l_v17253_0, TweenInfo.new(0.35, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {
+                    Transparency = 1
+                }):Play();
+                task.wait(6);
+                l_v17264_0:Destroy();
+            end);
+            task.delay(5.7, function() --[[ Line: 30979 ]]
+                -- upvalues: l_v17264_0 (copy)
+                for _, v17274 in pairs(l_v17264_0:GetDescendants()) do
+                    if v17274:IsA("ParticleEmitter") then
+                        v17274.Enabled = false;
+                    end;
+                end;
+            end);
+            task.delay(5.92, function() --[[ Line: 30983 ]]
+                -- upvalues: l_l_FiveSeasonsFX_1_0 (copy), l_l_char_56_1 (copy)
+                local v17275 = l_l_FiveSeasonsFX_1_0.CharFX.WindupSpark:Clone();
+                v17275.Parent = l_l_char_56_1["Left Arm"];
+                for _ = 1, 8 do
+                    v17275.WindupSpark:Emit(5);
+                    task.wait(0.035);
+                end;
+                task.wait(1);
+                v17275:Destroy();
+            end);
+            local v17277 = l_FiveSeasonsFX_1.CharFX.ArmEnabled:Clone();
+            local l_v17277_0 = v17277 --[[ copy: 18 -> 1135 ]];
+            task.delay(6.42, function() --[[ Line: 30996 ]]
+                -- upvalues: l_v17277_0 (copy), l_l_char_56_1 (copy), l_l_FiveSeasonsFX_1_0 (copy), l_v17265_0 (copy), l_LocalPlayer_0 (ref), l_v17247_0 (copy), l_l_TweenService_47_0 (copy)
+                l_v17277_0.Parent = l_l_char_56_1["Left Arm"];
+                local v17279 = l_l_FiveSeasonsFX_1_0.CharFX.EyeEmit:Clone();
+                v17279.Parent = l_l_char_56_1.Head;
+                for _, v17281 in pairs(v17279:GetDescendants()) do
+                    if v17281:IsA("ParticleEmitter") then
+                        v17281:Emit(v17281:GetAttribute("EmitCount"));
+                    end;
+                end;
+                l_v17265_0.Parent = l_l_char_56_1["Left Arm"];
+                for _, v17283 in pairs(l_v17265_0:GetDescendants()) do
+                    if v17283:IsA("ParticleEmitter") then
+                        v17283:Emit(v17283:GetAttribute("EmitCount"));
+                    end;
+                end;
+                if l_LocalPlayer_0.Character == l_l_char_56_1 then
+                    local v17284 = l_l_FiveSeasonsFX_1_0.FSRed:Clone();
+                    v17284.Parent = game.Lighting;
+                    local v17285 = l_l_FiveSeasonsFX_1_0.FSWhite:Clone();
+                    v17285.Parent = game.Lighting;
+                    local v17286 = l_l_FiveSeasonsFX_1_0.FSBlack:Clone();
+                    v17286.Parent = game.Lighting;
+                    l_v17247_0.Vignette.Visible = false;
+                    for _, v17288 in pairs(l_LocalPlayer_0.PlayerGui:GetChildren()) do
+                        if v17288.Name == "FXUi" and v17288 ~= l_v17247_0 then
+                            v17288:Destroy();
+                        end;
+                    end;
+                    v17284.Enabled = true;
+                    task.wait(0.035);
+                    v17284.Enabled = false;
+                    v17285.Enabled = true;
+                    task.wait(0.035);
+                    v17285.Enabled = false;
+                    v17286.Enabled = true;
+                    task.wait(0.035);
+                    v17286.Enabled = false;
+                    v17284:Destroy();
+                    v17285:Destroy();
+                    v17286:Destroy();
+                end;
+                local l_Highlight_7 = Instance.new("Highlight");
+                l_Highlight_7.FillColor = Color3.fromRGB(0, 0, 0);
+                l_Highlight_7.OutlineColor = Color3.fromRGB(167, 0, 0);
+                l_Highlight_7.FillTransparency = 0;
+                l_Highlight_7.OutlineTransparency = 0;
+                l_Highlight_7.DepthMode = "Occluded";
+                l_Highlight_7.Parent = l_l_char_56_1;
+                l_l_TweenService_47_0:Create(l_Highlight_7, TweenInfo.new(0.65, Enum.EasingStyle.Cubic, Enum.EasingDirection.InOut), {
+                    FillTransparency = 1, 
+                    OutlineTransparency = 1
+                }):Play();
+                local v17290 = l_l_FiveSeasonsFX_1_0.FinalCC:Clone();
+                if l_LocalPlayer_0.Character == l_l_char_56_1 then
+                    v17290.Parent = game.Lighting;
+                    l_l_TweenService_47_0:Create(v17290, TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {
+                        TintColor = Color3.fromRGB(255, 255, 255), 
+                        Brightness = 0, 
+                        Contrast = 0
+                    }):Play();
+                end;
+                task.wait(4);
+                local l_Vignette_2 = l_v17247_0:FindFirstChild("Vignette");
+                if l_Vignette_2 then
+                    l_Vignette_2.Visible = false;
+                end;
+                l_v17265_0:Destroy();
+                l_v17277_0:Destroy();
+                v17290:Destroy();
+                v17279:Destroy();
+                l_Highlight_7:Destroy();
+            end);
+            task.delay(8.25, function() --[[ Line: 31072 ]]
+                -- upvalues: l_LocalPlayer_0 (ref), l_l_char_56_1 (copy), l_v17247_0 (copy), l_v17277_0 (copy)
+                if l_LocalPlayer_0.Character ~= l_l_char_56_1 then
+                    l_v17247_0:Destroy();
+
+                end;
+                l_v17277_0:Destroy();
+
+            end);
+
+end
+
+for _, name in ipairs(buttons) do
+    local button = hotbar:WaitForChild(name)
+    local overlay = button:WaitForChild("Overlay")
+
+    button.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
+            overlay.ImageTransparency = 0
+            if name == "1" then
+                button1Function()
+            elseif name == "2" then
+                button2Function()
+            elseif name == "3" then
+                button3Function()
+            elseif name == "4" then
+                button4Function()
+            end
+        end
+    end)
+
+    button.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
+            overlay.ImageTransparency = 1
+        end
+    end)
+
+local p = game:GetService("Players").LocalPlayer
+local g = p:WaitForChild("PlayerGui")
+local f = g:GetChildren()[5]:WaitForChild("TouchControlFrame")
+local j = f:FindFirstChild("JumpButton")
+if j then
+	for _,v in pairs(j:GetChildren()) do
+		local absPos = v.AbsolutePosition
+		local absSize = v.AbsoluteSize
+		v.Parent = f
+		v.Position = UDim2.fromOffset(absPos.X - f.AbsolutePosition.X, absPos.Y - f.AbsolutePosition.Y)
+		v.Size = UDim2.fromOffset(absSize.X, absSize.Y)
+	end
+	j:Destroy()
+end
+
+end
+
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+local hrp = character:WaitForChild("HumanoidRootPart")
+local workspace = game:GetService("Workspace")
+
+local Footsteps = {
+    Grass = {
+        [1] = "rbxassetid://7456850767",
+        [2] = "rbxassetid://7456850856",
+        [3] = "rbxassetid://7456850976"
+    },
+    Concrete = {
+        [1] = "rbxassetid://7455224144",
+        [2] = "rbxassetid://7455246815",
+        [3] = "rbxassetid://7455224490"
+    }
+}
+
+local cooldown = false
+
+local function playFootstep(material)
+    if cooldown or not Footsteps[material] then return end
+    cooldown = true
+    local soundId = Footsteps[material][math.random(1, #Footsteps[material])]
+    local s = Instance.new("Sound")
+    s.SoundId = soundId
+    s.Volume = 0.3
+    s.Parent = hrp
+    s:Play()
+    game:GetService("Debris"):AddItem(s, 2)
+    task.delay(0.25, function()
+        cooldown = false
+    end)
+end
+
+-- Constantly check the material under your feet, only when running
+task.spawn(function()
+    while character.Parent do
+        if humanoid.MoveDirection.Magnitude > 0 then -- running/moving
+            local rayOrigin = hrp.Position
+            local rayDirection = Vector3.new(0, -5, 0)
+            local raycastParams = RaycastParams.new()
+            raycastParams.FilterDescendantsInstances = {character}
+            raycastParams.FilterType = Enum.RaycastFilterType.Blacklist
+
+            local result = workspace:Raycast(rayOrigin, rayDirection, raycastParams)
+            if result and result.Instance then
+                local mat = result.Material
+                if mat == Enum.Material.Grass then
+                    playFootstep("Grass")
+                elseif mat == Enum.Material.Concrete then
+                    playFootstep("Concrete")
+                end
+            end
+        end
+        task.wait(0.05) -- check every 0.05 seconds
+    end
+end)
+
+end)
+
+repeat task.wait() until finished
+local Lighting = game:GetService("Lighting")
+if Lighting:FindFirstChild("Bloom") then
+    Lighting.Bloom:Destroy()
+end
+
+local cc = Instance.new("ColorCorrectionEffect")
+cc.Name = "ColorCorrection"
+cc.Enabled = true
+cc.Saturation = 0
+cc.Contrast = 0
+cc.TintColor = Color3.new(1,1,1)
+cc.Brightness = 0
+cc.Parent = Lighting
+
+local sr = Instance.new("SunRaysEffect")
+sr.Name = "SunRays"
+sr.Enabled = true
+sr.Spread = 1
+sr.Intensity = 0.082
+sr.Parent = Lighting
