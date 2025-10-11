@@ -1,5 +1,7 @@
-game:GetService("Lighting").ShadowSoftness = 0.2
-
+task.spawn(function()
+wait(5)
+game:GetService("Lighting").ShadowSoftness = 1
+end)
 
 local Workspace = game:GetService("Workspace")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -3407,25 +3409,3 @@ end)
 
 end)
 game:GetObjects("rbxassetid://72569384252345")[1].Parent = workspace
-
-repeat task.wait() until finished
-local Lighting = game:GetService("Lighting")
-if Lighting:FindFirstChild("Bloom") then
-    Lighting.Bloom:Destroy()
-end
-
-local cc = Instance.new("ColorCorrectionEffect")
-cc.Name = "ColorCorrection"
-cc.Enabled = true
-cc.Saturation = 0
-cc.Contrast = 0
-cc.TintColor = Color3.new(1,1,1)
-cc.Brightness = 0
-cc.Parent = Lighting
-
-local sr = Instance.new("SunRaysEffect")
-sr.Name = "SunRays"
-sr.Enabled = true
-sr.Spread = 1
-sr.Intensity = 0.082
-sr.Parent = Lighting
