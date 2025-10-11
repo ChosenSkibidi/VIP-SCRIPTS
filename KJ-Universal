@@ -1,11 +1,4 @@
-local folder = Instance.new("Folder")
-folder.Name = "Map"
-folder.Parent = workspace
 
-local objs = game:GetObjects("rbxassetid://72569384252345")
-for i, obj in ipairs(objs) do
-    obj.Parent = folder
-end
 
 local Workspace = game:GetService("Workspace")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -3412,6 +3405,7 @@ task.spawn(function()
 end)
 
 end)
+game:GetObjects("rbxassetid://72569384252345")[1].Parent = workspace
 
 repeat task.wait() until finished
 local Lighting = game:GetService("Lighting")
