@@ -89,63 +89,87 @@ model.Name = "Blocking88"
 model.Parent = resourcesFolder
 
 task.spawn(function()
+local g=game
+local s=g:GetService('Lighting')
+for _,v in pairs(s:GetChildren()) do pcall(function() v:Destroy() end) end
+s.Ambient=Color3.new(0.541176,0.541176,0.541176)
+s.OutdoorAmbient=Color3.new(0.501961,0.501961,0.501961)
+s.Brightness=2
+s.ClockTime=12.301945
+s.FogStart=0
+s.FogEnd=100000
+s.FogColor=Color3.new(0.752941,0.752941,0.752941)
+s.GlobalShadows=true
+s.ExposureCompensation=0
+s.Technology=Enum.Technology.ShadowMap
+s.EnvironmentDiffuseScale=0
+s.EnvironmentSpecularScale=0
+s.GeographicLatitude=15
+s.ColorShift_Top=Color3.new(0.352941,0.352941,0.352941)
+s.ColorShift_Bottom=Color3.new(0.207843,0.207843,0.207843)
+local tr=g.Workspace:FindFirstChildOfClass('Terrain')
+if tr then tr.WaterColor=Color3.new(0.000000,0.580392,0.635294) end
+if tr then tr.WaterTransparency=1 end
+if tr then tr.WaterReflectance=1 end
+if tr then tr.WaterWaveSize=0.400000 end
+if tr then tr.WaterWaveSpeed=35 end
 
-local clouds = Instance.new("Clouds")
-clouds.Name = "Clouds"
-clouds.Color = Color3.new(0.752941, 0.752941, 0.752941)
-clouds.Cover = 0.7139999866485596
-clouds.Density = 0.2930000126361847
-clouds.Enabled = true
-clouds.Parent = workspace.Terrain
-end)
-local l_fromRGB_0 = Color3.fromRGB
-local lighting = game:GetService("Lighting")
+local i1=Instance.new("ParticleEmitter")
+i1.Name="Dust"
+i1.Enabled=false
+i1.Brightness=5
+i1.Color=ColorSequence.new(Color3.new(1,1,1))
+i1.Size=NumberSequence.new(1)
+i1.Parent=s
 
-lighting.Ambient = l_fromRGB_0(138, 138, 138)
-lighting.Brightness = 2
-lighting.ColorShift_Bottom = l_fromRGB_0(53, 53, 53)
-lighting.ColorShift_Top = l_fromRGB_0(90, 90, 90)
-lighting.EnvironmentDiffuseScale = 0
-lighting.EnvironmentSpecularScale = 0
-lighting.GlobalShadows = true
-lighting.OutdoorAmbient = l_fromRGB_0(128, 128, 128)
-lighting.ClockTime = 12.302
-lighting.GeographicLatitude = -0.41
-lighting.ShadowSoftness = 0.2
-lighting.ExposureCompensation = 0
+local i2=Instance.new("SunRaysEffect")
+i2.Name="SunRays"
+i2.Enabled=true
+i2.Intensity=0.082000
+i2.Spread=1
+i2.Parent=s
 
-task.delay(0.5, function() --[[ Line: 15 ]]
-    if lighting:FindFirstChild("Atmosphere") then
-        lighting.Atmosphere.Density = 0.213
+local i3=Instance.new("Sky")
+i3.Name="Clear Blue Sky"
+i3.StarCount=5000
+i3.SkyboxUp="http://www.roblox.com/asset/?id=91458002"
+i3.MoonTextureId="rbxassetid://106784196573850"
+i3.SkyboxDn="http://www.roblox.com/asset/?id=91457980"
+i3.CelestialBodiesShown=true
+i3.SunTextureId="rbxasset://sky/sun.jpg"
+i3.SkyboxFt="http://www.roblox.com/asset/?id=91458024"
+i3.SkyboxLf="http://www.roblox.com/asset/?id=91458024"
+i3.SkyboxRt="http://www.roblox.com/asset/?id=91458024"
+i3.SkyboxBk="http://www.roblox.com/asset/?id=91458024"
+i3.Parent=s
+
+local i4=Instance.new("Atmosphere")
+i4.Name="Atmosphere"
+i4.Density=0.213000
+i4.Decay=Color3.new(0.000000,0.000000,0.000000)
+i4.Color=Color3.new(0.000000,0.000000,0.000000)
+i4.Glare=0
+i4.Haze=0
+i4.Offset=0
+i4.Parent=s
+
+local i5=Instance.new("ColorCorrectionEffect")
+i5.Name="ColorCorrection"
+i5.Enabled=true
+i5.Saturation=0
+i5.Contrast=0
+i5.TintColor=Color3.new(1.000000,1.000000,1.000000)
+i5.Brightness=0
+i5.Parent=s
+
+if tr then
+	local c=Instance.new("Clouds")
+	c.Cover=0.714
+	c.Density=0.293
+	c.Parent=tr
 end
-end)
 
 
-local Players = game:GetService("Players")
-local player = Players.LocalPlayer
-local camera = workspace.CurrentCamera
-
-camera.FieldOfView = 70
-player.CameraMaxZoomDistance = 128
-player.CameraMinZoomDistance = 0.5
-
-local Lighting = game:GetService("Lighting")
-
-for _, child in ipairs(Lighting:GetChildren()) do
-    if child:IsA("Sky") then
-        child:Destroy()
-    end
-end
-
-local sky = Instance.new("Sky")
-sky.Name = "CustomSkybox"
-sky.SkyboxFt = "http://www.roblox.com/asset/?id=91458024"
-sky.SkyboxUp = "http://www.roblox.com/asset/?id=91458002"
-sky.SkyboxLf = "http://www.roblox.com/asset/?id=91458024"
-sky.SkyboxRt = "http://www.roblox.com/asset/?id=91458024"
-sky.SkyboxDn = "http://www.roblox.com/asset/?id=91457980"
-sky.SkyboxBk = "http://www.roblox.com/asset/?id=91458024"
-sky.Parent = Lighting
 
 local Workspace = game:GetService("Workspace")
 
