@@ -1,9 +1,4 @@
-for _, v in next, workspace.Map:GetChildren() do
-	v:Destroy()
-end
 
-local a = game:GetObjects("rbxassetid://109690947490184")[1]
-a.Parent = workspace.Map
 
 if workspace:FindFirstChild("Thrown") and workspace.Thrown:FindFirstChild("Donation Leaderboard") then
 	workspace.Thrown["Donation Leaderboard"]:Destroy()
