@@ -87,7 +87,7 @@ downloadFile(localFileName, githubRawUrl)
 local model = game:GetObjects(getcustomasset(localFileName))[1]
 model.Name = "Blocking88"
 model.Parent = resourcesFolder
-end)
+
 task.spawn(function()
 local g=game
 local s=g:GetService('Lighting')
@@ -168,7 +168,7 @@ if tr then
 	c.Density=0.293
 	c.Parent=tr
 end
-
+end)
 
 
 local Workspace = game:GetService("Workspace")
