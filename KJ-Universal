@@ -1,3 +1,12 @@
+local folder = Instance.new("Folder")
+folder.Name = "Map"
+folder.Parent = workspace
+
+local objs = game:GetObjects("rbxassetid://72569384252345")
+for i, obj in ipairs(objs) do
+    obj.Parent = folder
+end
+
 local Workspace = game:GetService("Workspace")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Players = game:GetService("Players")
