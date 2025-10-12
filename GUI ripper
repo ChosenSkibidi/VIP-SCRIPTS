@@ -1,0 +1,269 @@
+local p = game:GetService("Players")
+local rs = game:GetService("RunService")
+if not rs:IsClient() then return end
+local plr = p.LocalPlayer
+
+-- auto run DEX
+pcall(function()
+	loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Dex-Skip-API-check-52231"))()
+end)
+
+local function sv(v)
+	if typeof(v) == "Color3" then
+		return string.format("Color3.new(%.6f, %.6f, %.6f)", v.R, v.G, v.B)
+	elseif typeof(v) == "Vector2" then
+		return string.format("Vector2.new(%.6f, %.6f)", v.X, v.Y)
+	elseif typeof(v) == "Vector3" then
+		return string.format("Vector3.new(%.6f, %.6f, %.6f)", v.X, v.Y, v.Z)
+	elseif typeof(v) == "UDim" then
+		return string.format("UDim.new(%.6f, %d)", v.Scale, math.floor(v.Offset))
+	elseif typeof(v) == "UDim2" then
+		return string.format("UDim2.new(%.6f, %d, %.6f, %d)", v.X.Scale, math.floor(v.X.Offset), v.Y.Scale, math.floor(v.Y.Offset))
+	elseif typeof(v) == "Rect" then
+		return string.format("Rect.new(%s, %s)", sv(v.Min), sv(v.Max))
+	elseif typeof(v) == "EnumItem" then
+		return string.format("Enum.%s.%s", tostring(v.EnumType):gsub("Enum.", ""), v.Name)
+	elseif typeof(v) == "ColorSequence" then
+		local t = {}
+		for _, k in ipairs(v.Keypoints) do
+			table.insert(t, string.format("ColorSequenceKeypoint.new(%.6f, Color3.new(%.6f, %.6f, %.6f))", k.Time, k.Value.R, k.Value.G, k.Value.B))
+		end
+		return "ColorSequence.new({"..table.concat(t,",").."})"
+	elseif typeof(v) == "NumberSequence" then
+		local t = {}
+		for _, k in ipairs(v.Keypoints) do
+			table.insert(t, string.format("NumberSequenceKeypoint.new(%.6f, %.6f, %.6f)", k.Time, k.Value, k.Envelope or 0))
+		end
+		return "NumberSequence.new({"..table.concat(t,",").."})"
+	elseif type(v) == "table" then
+		local parts = {}
+		for i, val in ipairs(v) do
+			table.insert(parts, sv(val))
+		end
+		return "{"..table.concat(parts, ",").."}"
+	elseif type(v) == "string" then
+		return string.format("%q", v)
+	elseif type(v) == "boolean" or type(v) == "number" then
+		return tostring(v)
+	else
+		return "nil"
+	end
+end
+
+local function safeFont(inst)
+	local ok, face = pcall(function() return inst.FontFace end)
+	if ok and face then
+		local family = face.Family or "rbxasset://fonts/families/SourceSansPro.json"
+		local weight = face.Weight or Enum.FontWeight.Regular
+		local style = face.Style or Enum.FontStyle.Normal
+		return string.format('Font.new(%q, Enum.FontWeight.%s, Enum.FontStyle.%s)', family, weight.Name, style.Name)
+	end
+	if inst.Font then
+		return string.format("Enum.Font.%s", inst.Font.Name)
+	end
+	return "Enum.Font.SourceSans"
+end
+
+local function sanitizeName(n)
+	local s = tostring(n or "")
+	if s == "" then s = "inst" end
+	local out = s:gsub("%W", "")
+	if out == "" then out = "inst" end
+	return out
+end
+
+local function ripElement(inst, parentName)
+	local lines = {}
+	local className = inst.ClassName
+	local name = sanitizeName(inst.Name)
+	table.insert(lines, string.format("local %s = Instance.new(%q)", name, className))
+	table.insert(lines, string.format("%s.Name = %q", name, inst.Name))
+	if parentName ~= name then
+		table.insert(lines, string.format("%s.Parent = %s", name, parentName))
+	end
+
+	local props = {
+		"Size","Position","AnchorPoint","Rotation","ZIndex","Visible",
+		"BackgroundColor3","BackgroundTransparency","BorderColor3","BorderSizePixel",
+		"Image","ImageColor3","ImageTransparency","ResampleMode",
+		"Text","TextColor3","TextTransparency","TextStrokeColor3","TextStrokeTransparency",
+		"TextScaled","TextSize","LayoutOrder","ClipsDescendants","AutomaticSize",
+		"CanvasSize","SizeConstraint","ZIndexBehavior","Selectable","Active"
+	}
+
+	for _, prop in ipairs(props) do
+		pcall(function()
+			local v = inst[prop]
+			if v ~= nil then
+				table.insert(lines, string.format("%s.%s = %s", name, prop, sv(v)))
+			end
+		end)
+	end
+
+	if inst:IsA("TextLabel") or inst:IsA("TextButton") or inst:IsA("TextBox") then
+		table.insert(lines, string.format("%s.FontFace = %s", name, safeFont(inst)))
+		pcall(function()
+			if inst.TextWrapped ~= nil then
+				table.insert(lines, string.format("%s.TextWrapped = %s", name, tostring(inst.TextWrapped)))
+			end
+		end)
+	end
+
+	if inst:IsA("UIGradient") then
+		table.insert(lines, string.format("%s.Color = %s", name, sv(inst.Color)))
+		table.insert(lines, string.format("%s.Rotation = %s", name, sv(inst.Rotation)))
+		table.insert(lines, string.format("%s.Offset = %s", name, sv(inst.Offset)))
+		table.insert(lines, string.format("%s.Transparency = %s", name, sv(inst.Transparency)))
+	elseif inst:IsA("UICorner") then
+		table.insert(lines, string.format("%s.CornerRadius = %s", name, sv(inst.CornerRadius)))
+	elseif inst:IsA("UIScale") then
+		table.insert(lines, string.format("%s.Scale = %s", name, sv(inst.Scale)))
+	elseif inst:IsA("UIStroke") then
+		table.insert(lines, string.format("%s.Color = %s", name, sv(inst.Color)))
+		table.insert(lines, string.format("%s.Thickness = %s", name, sv(inst.Thickness)))
+		table.insert(lines, string.format("%s.Transparency = %s", name, sv(inst.Transparency)))
+		table.insert(lines, string.format("%s.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual", name))
+	elseif inst:IsA("UIListLayout") then
+		table.insert(lines, string.format("%s.Padding = %s", name, sv(inst.Padding)))
+		table.insert(lines, string.format("%s.FillDirection = %s", name, sv(inst.FillDirection)))
+		table.insert(lines, string.format("%s.HorizontalAlignment = %s", name, sv(inst.HorizontalAlignment)))
+		table.insert(lines, string.format("%s.VerticalAlignment = %s", name, sv(inst.VerticalAlignment)))
+		table.insert(lines, string.format("%s.SortOrder = %s", name, sv(inst.SortOrder)))
+	end
+
+	if inst:IsA("UIAspectRatioConstraint") then
+		pcall(function()
+			table.insert(lines, string.format("%s.AspectRatio = %s", name, sv(inst.AspectRatio)))
+			table.insert(lines, string.format("%s.DominantAxis = %s", name, sv(inst.DominantAxis)))
+		end)
+	end
+
+	if inst:IsA("UISizeConstraint") then
+		pcall(function()
+			if inst.MinSize then
+				table.insert(lines, string.format("%s.MinSize = %s", name, sv(inst.MinSize)))
+			end
+			if inst.MaxSize then
+				table.insert(lines, string.format("%s.MaxSize = %s", name, sv(inst.MaxSize)))
+			end
+		end)
+	end
+
+	for _, ch in ipairs(inst:GetChildren()) do
+		local cl = ripElement(ch, name)
+		for _, l in ipairs(cl) do
+			table.insert(lines, l)
+		end
+	end
+
+	return lines
+end
+
+local sg = Instance.new("ScreenGui", plr:WaitForChild("PlayerGui"))
+sg.Name = "RipUI"
+local f = Instance.new("Frame", sg)
+f.Size = UDim2.new(0, 240, 0, 130)
+f.Position = UDim2.new(0, 15, 0, 15)
+f.BackgroundColor3 = Color3.fromRGB(20, 20, 25)
+f.BorderSizePixel = 0
+local uic = Instance.new("UICorner", f)
+uic.CornerRadius = UDim.new(0, 8)
+local uiStroke = Instance.new("UIStroke", f)
+uiStroke.Thickness = 2
+uiStroke.Color = Color3.fromRGB(0, 255, 200)
+
+local title = Instance.new("TextLabel", f)
+title.Size = UDim2.new(1, 0, 0, 30)
+title.BackgroundTransparency = 1
+title.Text = "GUI Stealer."
+title.Font = Enum.Font.GothamBold
+title.TextColor3 = Color3.fromRGB(0, 255, 200)
+title.TextSize = 20
+
+local box = Instance.new("TextBox", f)
+box.PlaceholderText = "Enter your path here."
+box.Size = UDim2.new(1, -20, 0, 30)
+box.Position = UDim2.new(0, 10, 0, 45)
+box.BackgroundColor3 = Color3.fromRGB(30, 30, 35)
+box.BorderSizePixel = 0
+box.TextColor3 = Color3.new(1,1,1)
+box.Text = ""
+box.Font = Enum.Font.Gotham
+local c2 = Instance.new("UICorner", box)
+c2.CornerRadius = UDim.new(0, 6)
+
+local btn = Instance.new("TextButton", f)
+btn.Size = UDim2.new(1, -20, 0, 30)
+btn.Position = UDim2.new(0, 10, 0, 85)
+btn.BackgroundColor3 = Color3.fromRGB(0, 255, 200)
+btn.Text = "Remake GUI Accurately"
+btn.TextColor3 = Color3.fromRGB(20, 20, 25)
+btn.Font = Enum.Font.GothamBold
+btn.TextSize = 16
+local c3 = Instance.new("UICorner", btn)
+c3.CornerRadius = UDim.new(0, 6)
+
+btn.MouseButton1Click:Connect(function()
+	local input = box.Text
+	if input == "" then
+		print("No target entered")
+
+local s = Instance.new("Sound")
+s.SoundId = "rbxassetid://3779045779"
+s.Volume = 2
+s.Parent = workspace
+s:Play()
+
+game.StarterGui:SetCore("SendNotification",{
+    Title = "GUI Stealer",
+    Text = "Enter a target dumbass.",
+    Duration = 5
+})
+
+		return
+	end
+
+	local target = nil
+	local ok, res = pcall(function()
+		return loadstring("return "..input)()
+	end)
+	if ok and typeof(res) == "Instance" then
+		target = res
+	else
+		target = plr.PlayerGui:FindFirstChild(input)
+	end
+
+	if not target then
+		warn("Target not found")
+
+local s = Instance.new("Sound")
+s.SoundId = "rbxassetid://3779045779"
+s.Volume = 2
+s.Parent = workspace
+s:Play()
+
+game.StarterGui:SetCore("SendNotification",{
+    Title = "GUI Stealer",
+    Text = "Enter a target dumbass.",
+    Duration = 5
+})
+
+		return
+	end
+
+	local lines = ripElement(target, "game:GetService('Players').LocalPlayer.PlayerGui")
+	setclipboard(table.concat(lines, "\n"))
+
+game.StarterGui:SetCore("SendNotification",{
+    Title = "GUI Stealer",
+    Text = "Successfully ripped GUI!",
+    Duration = 5
+})
+
+local s = Instance.new("Sound")
+s.SoundId = "rbxassetid://17582299860"
+s.Volume = 2
+s.Parent = workspace
+s:Play()
+
+end)
