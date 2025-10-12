@@ -1,5 +1,3 @@
-Fix the textLabel size issue don’t think just do it full scirpt no comments
-Fix it not using the right textLabel size
 local p = game:GetService("Players")
 local rs = game:GetService("RunService")
 if not rs:IsClient() then return end
