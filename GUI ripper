@@ -1,9 +1,10 @@
+Fix the textLabel size issue don’t think just do it full scirpt no comments
+Fix it not using the right textLabel size
 local p = game:GetService("Players")
 local rs = game:GetService("RunService")
 if not rs:IsClient() then return end
 local plr = p.LocalPlayer
 
--- auto run DEX
 pcall(function()
 	loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Dex-Skip-API-check-52231"))()
 end)
@@ -32,7 +33,8 @@ local function sv(v)
 	elseif typeof(v) == "NumberSequence" then
 		local t = {}
 		for _, k in ipairs(v.Keypoints) do
-			table.insert(t, string.format("NumberSequenceKeypoint.new(%.6f, %.6f, %.6f)", k.Time, k.Value, k.Envelope or 0))
+			local env = (k.Envelope ~= nil) and k.Envelope or 0
+			table.insert(t, string.format("NumberSequenceKeypoint.new(%.6f, %.6f, %.6f)", k.Time, k.Value, env))
 		end
 		return "NumberSequence.new({"..table.concat(t,",").."})"
 	elseif type(v) == "table" then
@@ -67,8 +69,9 @@ end
 local function sanitizeName(n)
 	local s = tostring(n or "")
 	if s == "" then s = "inst" end
-	local out = s:gsub("%W", "")
+	local out = s:gsub("[^%w_]", "")
 	if out == "" then out = "inst" end
+	if out:match("^%d") then out = "i"..out end
 	return out
 end
 
@@ -206,20 +209,16 @@ c3.CornerRadius = UDim.new(0, 6)
 btn.MouseButton1Click:Connect(function()
 	local input = box.Text
 	if input == "" then
-		print("No target entered")
-
-local s = Instance.new("Sound")
-s.SoundId = "rbxassetid://3779045779"
-s.Volume = 2
-s.Parent = workspace
-s:Play()
-
-game.StarterGui:SetCore("SendNotification",{
-    Title = "GUI Stealer",
-    Text = "Enter a target dumbass.",
-    Duration = 5
-})
-
+		local s = Instance.new("Sound")
+		s.SoundId = "rbxassetid://3779045779"
+		s.Volume = 2
+		s.Parent = workspace
+		s:Play()
+		game.StarterGui:SetCore("SendNotification",{
+			Title = "GUI Stealer",
+			Text = "Enter a target dumbass.",
+			Duration = 5
+		})
 		return
 	end
 
@@ -234,36 +233,31 @@ game.StarterGui:SetCore("SendNotification",{
 	end
 
 	if not target then
-		warn("Target not found")
-
-local s = Instance.new("Sound")
-s.SoundId = "rbxassetid://3779045779"
-s.Volume = 2
-s.Parent = workspace
-s:Play()
-
-game.StarterGui:SetCore("SendNotification",{
-    Title = "GUI Stealer",
-    Text = "Enter a target dumbass.",
-    Duration = 5
-})
-
+		local s = Instance.new("Sound")
+		s.SoundId = "rbxassetid://3779045779"
+		s.Volume = 2
+		s.Parent = workspace
+		s:Play()
+		game.StarterGui:SetCore("SendNotification",{
+			Title = "GUI Stealer",
+			Text = "Enter a target dumbass.",
+			Duration = 5
+		})
 		return
 	end
 
 	local lines = ripElement(target, "game:GetService('Players').LocalPlayer.PlayerGui")
-	setclipboard(table.concat(lines, "\n"))
+	pcall(function() setclipboard(table.concat(lines, "\n")) end)
 
-game.StarterGui:SetCore("SendNotification",{
-    Title = "GUI Stealer",
-    Text = "Successfully ripped GUI!",
-    Duration = 5
-})
+	game.StarterGui:SetCore("SendNotification",{
+		Title = "GUI Stealer",
+		Text = "Successfully ripped GUI!",
+		Duration = 5
+	})
 
-local s = Instance.new("Sound")
-s.SoundId = "rbxassetid://17582299860"
-s.Volume = 2
-s.Parent = workspace
-s:Play()
-
+	local s2 = Instance.new("Sound")
+	s2.SoundId = "rbxassetid://17582299860"
+	s2.Volume = 2
+	s2.Parent = workspace
+	s2:Play()
 end)
