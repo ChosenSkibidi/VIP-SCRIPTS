@@ -21,7 +21,8 @@ local function sv(v)
 	elseif typeof(v) == "Rect" then
 		return string.format("Rect.new(%s, %s)", sv(v.Min), sv(v.Max))
 	elseif typeof(v) == "EnumItem" then
-		return string.format("Enum.%s.%s", tostring(v.EnumType):gsub("Enum.", ""), v.Name)
+		local et = tostring(v.EnumType):gsub("Enum.", "")
+		return string.format("Enum.%s.%s", et, v.Name)
 	elseif typeof(v) == "ColorSequence" then
 		local t = {}
 		for _, k in ipairs(v.Keypoints) do
@@ -86,7 +87,7 @@ local function ripElement(inst, parentName)
 	local props = {
 		"Size","Position","AnchorPoint","Rotation","ZIndex","Visible",
 		"BackgroundColor3","BackgroundTransparency","BorderColor3","BorderSizePixel",
-		"Image","ImageColor3","ImageTransparency","ResampleMode",
+		"Image","ImageColor3","ImageTransparency","ResampleMode","ScaleType","SliceCenter","SliceScale","ImageRectOffset","ImageRectSize",
 		"Text","TextColor3","TextTransparency","TextStrokeColor3","TextStrokeTransparency",
 		"TextScaled","TextSize","LayoutOrder","ClipsDescendants","AutomaticSize",
 		"CanvasSize","SizeConstraint","ZIndexBehavior","Selectable","Active"
@@ -94,8 +95,8 @@ local function ripElement(inst, parentName)
 
 	for _, prop in ipairs(props) do
 		pcall(function()
-			local v = inst[prop]
-			if v ~= nil then
+			local ok, v = pcall(function() return inst[prop] end)
+			if ok and v ~= nil then
 				table.insert(lines, string.format("%s.%s = %s", name, prop, sv(v)))
 			end
 		end)
@@ -106,6 +107,26 @@ local function ripElement(inst, parentName)
 		pcall(function()
 			if inst.TextWrapped ~= nil then
 				table.insert(lines, string.format("%s.TextWrapped = %s", name, tostring(inst.TextWrapped)))
+			end
+		end)
+	end
+
+	if inst:IsA("ImageLabel") or inst:IsA("ImageButton") then
+		pcall(function()
+			if inst.ScaleType then
+				table.insert(lines, string.format("%s.ScaleType = Enum.ScaleType.%s", name, tostring(inst.ScaleType):gsub("Enum.ScaleType.", "")))
+			end
+			if inst.SliceCenter then
+				table.insert(lines, string.format("%s.SliceCenter = %s", name, sv(inst.SliceCenter)))
+			end
+			if inst.SliceScale then
+				table.insert(lines, string.format("%s.SliceScale = %s", name, sv(inst.SliceScale)))
+			end
+			if inst.ImageRectOffset then
+				table.insert(lines, string.format("%s.ImageRectOffset = %s", name, sv(inst.ImageRectOffset)))
+			end
+			if inst.ImageRectSize then
+				table.insert(lines, string.format("%s.ImageRectSize = %s", name, sv(inst.ImageRectSize)))
 			end
 		end)
 	end
