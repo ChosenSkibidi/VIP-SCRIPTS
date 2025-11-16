@@ -308,19 +308,6 @@ Run = game:GetService("ReplicatedStorage").Resources.GhostBusters
 Blocking88 = game:GetService("ReplicatedStorage").Resources.Blocking88
 Awakening = game:GetService("ReplicatedStorage")["KJ anims"].AnimSaves["KJ awakening"]
     finished = true
-local plr = game.Players.LocalPlayer
-local char = plr.Character or plr.CharacterAdded:Wait()
-local hrp = char:WaitForChild("HumanoidRootPart")
-
-
-local targetCFrame = CFrame.new(
-    -601.744446, 468.623077, -262.755981,
-    -0.942698121, -2.38420288e-08, 0.333646983,
-    -5.09155695e-09, 1, 5.70729846e-08,
-    -0.333646983, 5.2103811e-08, -0.942698121
-)
-
-hrp.CFrame = targetCFrame
 
 local player = game.Players.LocalPlayer
 local asset = game:GetObjects("rbxassetid://90459108159873")[1]
@@ -3408,4 +3395,3 @@ task.spawn(function()
 end)
 
 end)
-game:GetObjects("rbxassetid://72569384252345")[1].Parent = workspace
