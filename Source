@@ -3,7 +3,7 @@
 if workspace:FindFirstChild("Thrown") and workspace.Thrown:FindFirstChild("Donation Leaderboard") then
 	workspace.Thrown["Donation Leaderboard"]:Destroy()
 end
-local targetName = "Hitmeforgamepass"
+local targetName = "bigboi247"
 local player = game.Players:FindFirstChild(targetName)
 
 if player and player.Character then
